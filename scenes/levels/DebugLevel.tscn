@@ -1,30 +1,83 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
+[ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/greenSquare1-1.png" type="Texture" id=4]
+[ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
+[ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
 
-[node name="DebugLevel" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
 
-[node name="YSort" type="YSort" parent="."]
+[node name="GameManager" type="Node2D"]
+script = ExtResource( 1 )
 
-[node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 72, 88 )
+[node name="WaveCountdown" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameplayUI" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 5 )
+
+[node name="TotalRunTime" type="RichTextLabel" parent="CanvasLayer/GameplayUI"]
+margin_left = 603.0
+margin_top = 32.0
+margin_right = 728.0
+margin_bottom = 71.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "TOTAL RUN TIME:"
+
+[node name="LoopTimeLeft" type="RichTextLabel" parent="CanvasLayer/GameplayUI"]
+margin_left = 603.0
+margin_top = 65.0
+margin_right = 805.0
+margin_bottom = 105.0
+custom_colors/default_color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
+text = "LOOP TIME LEFT"
+
+[node name="AnalogueClock" parent="CanvasLayer/GameplayUI" instance=ExtResource( 6 )]
+position = Vector2( 508, 59 )
+
+[node name="DebugLevel" type="Node2D" parent="."]
+
+[node name="YSort" type="YSort" parent="DebugLevel"]
+
+[node name="Player" parent="DebugLevel/YSort" instance=ExtResource( 2 )]
+position = Vector2( 350, 242 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DebugLevel/YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
 update_rotation = false
 update_scale = false
 
-[node name="Enemy" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 80, 160 )
+[node name="Enemy" parent="DebugLevel/YSort" instance=ExtResource( 3 )]
+position = Vector2( 316, 311 )
 
-[node name="Enemy2" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 120, 160 )
+[node name="Enemy2" parent="DebugLevel/YSort" instance=ExtResource( 3 )]
+position = Vector2( 393, 313 )
 
-[node name="GrassBackground" type="Sprite" parent="."]
-position = Vector2( -2488, -2488 )
-scale = Vector2( 5, 5 )
+[node name="Camera2D" type="Camera2D" parent="DebugLevel"]
+position = Vector2( 350, 242 )
+current = true
+smoothing_enabled = true
+smoothing_speed = 10.0
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="Map" type="Node2D" parent="DebugLevel"]
+
+[node name="GrassBackground" type="Sprite" parent="DebugLevel/Map"]
+scale = Vector2( 2, 2 )
 z_index = -2
 z_as_relative = false
 texture = ExtResource( 4 )
@@ -32,13 +85,48 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 1000, 1000 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 72, 88 )
-current = true
-smoothing_enabled = true
-drag_margin_left = 0.1
-drag_margin_top = 0.1
-drag_margin_right = 0.1
-drag_margin_bottom = 0.1
-editor_draw_limits = true
-editor_draw_drag_margin = true
+[node name="Obstacle" type="StaticBody2D" parent="DebugLevel/Map"]
+position = Vector2( -10, 0 )
+scale = Vector2( 1, 1000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DebugLevel/Map/Obstacle"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="DebugLevel/Map/Obstacle"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 7 )
+
+[node name="Obstacle2" type="StaticBody2D" parent="DebugLevel/Map"]
+position = Vector2( 2000, 0 )
+scale = Vector2( 1, 1000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DebugLevel/Map/Obstacle2"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="DebugLevel/Map/Obstacle2"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 7 )
+
+[node name="Obstacle3" type="StaticBody2D" parent="DebugLevel/Map"]
+position = Vector2( 2000, -10 )
+rotation = 1.5708
+scale = Vector2( 1, 1000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DebugLevel/Map/Obstacle3"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="DebugLevel/Map/Obstacle3"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 7 )
+
+[node name="Obstacle4" type="StaticBody2D" parent="DebugLevel/Map"]
+position = Vector2( 2000, 2000 )
+rotation = 1.5708
+scale = Vector2( 1, 1000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DebugLevel/Map/Obstacle4"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="DebugLevel/Map/Obstacle4"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 7 )

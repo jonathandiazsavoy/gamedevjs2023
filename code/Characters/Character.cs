@@ -14,6 +14,10 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
     [Export]
     public CharacterStats CurrentStats { get; protected set; }
 
+    // Custom properties
+    [Export]
+    public bool Invulnerable { get; set; }
+
     protected CharacterState currentState;
     protected Attack currentAttack;
 
