@@ -1,8 +1,9 @@
-﻿public interface IObtainer
+﻿using code.Items;
+
+public interface IObtainer
 {
-    void ObtainItem();
-    void AddToInventory();
-    void DropItem();
+    void ObtainItem(Item item);
+    void AddToInventory(Item item);
+    void DropItem(Item item);
     bool IsInventoryFull();
 }
-
