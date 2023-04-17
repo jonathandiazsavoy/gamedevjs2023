@@ -11,8 +11,8 @@ public class ItemBox : Area2D
         if (Parent == null) GD.PushWarning("ITEMBOX AT " + this.GlobalPosition + " COULD NOT GET PARENT THAT IS AN ITEM");
     }
 
-    public void OnItemBoxAreaEntered(GrabberBox grabberBox)
+    public void OnItemBoxAreaEntered(Area2D area2d)
     {
-        grabberBox.GrabItem(Parent);
+        if (area2d is GrabberBox grabberBox) grabberBox.GrabItem(Parent);
     }
 }

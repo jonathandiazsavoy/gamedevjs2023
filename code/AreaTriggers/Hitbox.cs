@@ -10,8 +10,8 @@ public class Hitbox : Area2D
         if (Parent == null) GD.PushWarning("HITBOX AT "+this.GlobalPosition+" COULD NOT GET PARENT THAT IS AN IATTACKER");
     }
 
-    public void OnHitboxAreaEntered(Hurtbox hurtbox)
+    public void OnHitboxAreaEntered(Area2D area2d)
     {
-        hurtbox.ApplyAttack(this);
+        if (area2d is Hurtbox hurtbox) hurtbox.ApplyAttack(this);
     }
 }
