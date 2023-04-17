@@ -1,3 +1,4 @@
+using code.Items.TimeItems;
 using Godot;
 
 public class GameManager : Node2D
@@ -15,7 +16,6 @@ public class GameManager : Node2D
         }
     }
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         WaveCountdown = this.GetNode<Timer>("WaveCountdown");
@@ -30,21 +30,12 @@ public class GameManager : Node2D
         //TODO remove this test stuff
         if (Input.IsActionJustPressed("test1"))
         {
-            IncreaseWaveCountdown();
+            
         }
         if (Input.IsActionJustPressed("test2"))
         {
-            DecreaseWaveCountdown();
+            
         }
-    }
-
-    public void IncreaseWaveCountdown(float increaseAmount = 1)
-    {
-        WaveCountdown.Start(Mathf.Clamp(WaveCountdown.TimeLeft + increaseAmount, 0, WAVE_COUNTDOWN_MAX_START));
-    }
-    public void DecreaseWaveCountdown(float decreaseAmount = 1)
-    {
-        WaveCountdown.Start(Mathf.Clamp(WaveCountdown.TimeLeft - decreaseAmount, 0, WAVE_COUNTDOWN_MAX_START));
     }
 
     private void StartNewRun()
@@ -54,5 +45,16 @@ public class GameManager : Node2D
     private void StartNewLoop()
     {
         WaveCountdown.Start(WAVE_COUNTDOWN_MAX_START);
+    }
+
+    private void AdjustWaveCountdown(float adjustAmount)
+    {
+        WaveCountdown.Start(Mathf.Clamp(WaveCountdown.TimeLeft + adjustAmount, 0, WAVE_COUNTDOWN_MAX_START));
+    }
+
+    // Signal listeners
+    public void OnCountDownModifierItemUsed(CountDownModifier countdownModifier)
+    {
+        AdjustWaveCountdown(countdownModifier.CountDownChange);
     }
 }

@@ -1,6 +1,7 @@
+using code.Items;
 using Godot;
 
-public class Player : Character
+public class Player : Character, IObtainer
 {
 	private new PlayerState currentState;
 
@@ -8,7 +9,7 @@ public class Player : Character
 	{
         this.InitNodes();
 
-		this.BaseStats = new CharacterStats(3, 0, 1, 0, 5);
+		this.BaseStats = new CharacterStats(3, 0, 1, 0, 1.5f);
 		this.CurrentStats = this.BaseStats;
 
 		
@@ -20,4 +21,24 @@ public class Player : Character
 	{
 		currentState = (PlayerState)currentState.HandleInputAndUpdate(delta);
 	}
+
+    public void ObtainItem(Item item)
+    {
+        item.PickUp();
+    }
+
+    public void AddToInventory(Item item)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void DropItem(Item item)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public bool IsInventoryFull()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
+[ext_resource path="res://scenes/items/countdown_modifiers/Plus3Seconds.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/items/countdown_modifiers/Plus1Seconds.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -56,18 +58,31 @@ remote_path = NodePath("../../../Camera2D")
 update_rotation = false
 update_scale = false
 
-[node name="Enemy" parent="DebugLevel/YSort" instance=ExtResource( 3 )]
-position = Vector2( 1006, 118 )
+[node name="Wave" type="YSort" parent="DebugLevel/YSort"]
 
-[node name="Enemy2" parent="DebugLevel/YSort" instance=ExtResource( 3 )]
-position = Vector2( 1877, 108 )
+[node name="Enemies" type="YSort" parent="DebugLevel/YSort/Wave"]
 
-[node name="Enemy3" parent="DebugLevel/YSort" instance=ExtResource( 3 )]
-position = Vector2( 1834, 1914 )
+[node name="Enemy" parent="DebugLevel/YSort/Wave/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 2076, 151 )
+
+[node name="Enemy2" parent="DebugLevel/YSort/Wave/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 3816, 144 )
+
+[node name="Enemy3" parent="DebugLevel/YSort/Wave/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 3667, 3004 )
+
+[node name="Items" type="YSort" parent="DebugLevel/YSort/Wave"]
+
+[node name="Plus3Seconds" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 8 )]
+position = Vector2( 2000, 1649 )
+
+[node name="Plus1Seconds" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2000, 1812 )
 
 [node name="Camera2D" type="Camera2D" parent="DebugLevel"]
 position = Vector2( 2000, 2000 )
 current = true
+zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 smoothing_speed = 10.0
 drag_margin_left = 0.1
@@ -133,3 +148,6 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="DebugLevel/Map/Obstacle4"]
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 7 )
+
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus3Seconds" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds" to="." method="OnCountDownModifierItemUsed"]
