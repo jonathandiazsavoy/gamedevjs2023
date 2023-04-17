@@ -1,10 +1,16 @@
-﻿namespace code.StateMachines.CharacterStates.NPCStates.EnemyStates
+﻿using code.Items;
+using Godot;
+
+namespace code.StateMachines.CharacterStates.NPCStates.EnemyStates
 {
     public class Dying : EnemyState
     {
-        public Dying(Character character) : base(character)
+        public Dying(Enemy enemy) : base(enemy)
         {
         }
+
+        [Signal]
+        public delegate void EnemyDied(Item item);
 
         public override BaseFSMState Update(float delta)
         {

@@ -2,13 +2,13 @@
 {
     public class TakingDamage : EnemyState
     {
-        public TakingDamage(Character character) : base(character)
+        public TakingDamage(Enemy enemy) : base(enemy)
         {
         }
 
         public override BaseFSMState Update(float delta)
         {
-            if (!character.AnimationPlayer.IsPlaying()) return this.SwitchState(new Idle(character));
+            if (!character.AnimationPlayer.IsPlaying()) return this.SwitchState(new Idle(enemy));
             return this;
         }
 

@@ -4,7 +4,7 @@ namespace code.StateMachines.CharacterStates.NPCStates.EnemyStates
 {
     public class Sleeping : EnemyState
     {
-        public Sleeping(Character character) : base(character)
+        public Sleeping(Enemy enemy) : base(enemy)
         {
         }
 

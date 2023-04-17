@@ -2,7 +2,7 @@
 {
     public class Idle : EnemyState
     {
-        public Idle(Character character) : base(character)
+        public Idle(Enemy enemy) : base(enemy)
         {
         }
 
