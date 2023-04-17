@@ -6,20 +6,31 @@ public class GameplayUIManager : Control
     private GameManager gameManager;
     protected RichTextLabel TotalRunTime { get; set; }
     protected RichTextLabel LoopTimeLeft { get; set; }
+    protected RichTextLabel EnemiesLeft { get; set; }
     protected AnalogueClock WaveClock { get; set; }
 
-    // Called when the node enters the scene tree for the first time.
+    private string initialTotalRunTimeText;
+    private string initialLoopTimeLeftText;
+    private string initialEnemiesLeftText;
+
     public override void _Ready()
     {
         gameManager = this.GetNode<GameManager>("/root/GameManager");
+
         TotalRunTime = this.GetNode<RichTextLabel>("TotalRunTime");
         LoopTimeLeft = this.GetNode<RichTextLabel>("LoopTimeLeft");
+        EnemiesLeft = this.GetNode<RichTextLabel>("EnemiesLeft");
         WaveClock = this.GetNode<AnalogueClock>("AnalogueClock");
+
+        initialTotalRunTimeText = TotalRunTime.Text;
+        initialLoopTimeLeftText= LoopTimeLeft.Text;
+        initialEnemiesLeftText= EnemiesLeft.Text;
     }
     public override void _Process(float delta)
     {
-        TotalRunTime.Text = "Total run time: "+Math.Floor(gameManager.TotalRunTime).ToString();
-        LoopTimeLeft.Text = "Time till next wave: " + Math.Ceiling(gameManager.WaveCountdown.TimeLeft).ToString();
+        TotalRunTime.Text = initialTotalRunTimeText + Math.Floor(gameManager.TotalRunTime).ToString();
+        LoopTimeLeft.Text = initialLoopTimeLeftText + Math.Ceiling(gameManager.WaveCountdown.TimeLeft).ToString();
+        EnemiesLeft.Text = initialEnemiesLeftText + gameManager.EnemyCount;
 
         WaveClock.TimeUnit = gameManager.WaveClockTotal * 60;
     }

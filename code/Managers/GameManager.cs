@@ -6,6 +6,7 @@ public class GameManager : Node2D
     const float WAVE_COUNTDOWN_MAX_START = 60;
 
     public Timer WaveCountdown { get; private set; }
+    public WaveManager WaveManager { get; private set; }
 
     public float TotalRunTime { get; private set; }
     public float WaveClockTotal
@@ -15,13 +16,16 @@ public class GameManager : Node2D
             return Mathf.Abs(WaveCountdown.TimeLeft - WAVE_COUNTDOWN_MAX_START);
         }
     }
+    public int EnemyCount { get; private set; }
 
     public override void _Ready()
     {
         WaveCountdown = this.GetNode<Timer>("WaveCountdown");
+        WaveManager = this.GetNode<WaveManager>("Level/Objects/WaveManager");
         
         StartNewRun();
         StartNewLoop();
+        EnemyCount = WaveManager.EnemyCount;
     }
     public override void _Process(float delta)
     {
@@ -52,7 +56,9 @@ public class GameManager : Node2D
         WaveCountdown.Start(Mathf.Clamp(WaveCountdown.TimeLeft + adjustAmount, 0, WAVE_COUNTDOWN_MAX_START));
     }
 
+    // **************************************************
     // Signal listeners
+    // **************************************************
     public void OnCountDownModifierItemUsed(CountDownModifier countdownModifier)
     {
         AdjustWaveCountdown(countdownModifier.CountDownChange);
