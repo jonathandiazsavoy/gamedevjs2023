@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://temp_assets/visuals/dev_graphics/greenSquare1-1.png" type="Texture" id=4]
+[ext_resource path="res://assets/visuals/textures/backgrounds/GrassBackground.png" type="Texture" id=4]
 [ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
 [ext_resource path="res://scenes/items/countdown_modifiers/Plus3Seconds.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/items/countdown_modifiers/Plus1Seconds.tscn" type="PackedScene" id=9]
+
+[sub_resource type="ImageTexture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -79,6 +81,54 @@ position = Vector2( 2000, 1649 )
 [node name="Plus1Seconds" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
 position = Vector2( 2000, 1812 )
 
+[node name="Plus1Seconds2" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2000, 1722 )
+
+[node name="Plus1Seconds3" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 1995, 1581 )
+
+[node name="Plus1Seconds4" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 1999, 1509 )
+
+[node name="Plus1Seconds5" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2001, 1412 )
+
+[node name="Plus1Seconds6" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 1998, 1294 )
+
+[node name="Plus1Seconds7" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2000, 1219 )
+
+[node name="Plus1Seconds8" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 1998, 1181 )
+
+[node name="Plus1Seconds9" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2003, 1147 )
+
+[node name="Plus1Seconds10" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2001, 1073 )
+
+[node name="Plus1Seconds11" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 1999, 991 )
+
+[node name="Plus1Seconds12" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 1999, 890 )
+
+[node name="Plus1Seconds13" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2002, 782 )
+
+[node name="Plus1Seconds14" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2005, 746 )
+
+[node name="Plus1Seconds15" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2007, 662 )
+
+[node name="Plus1Seconds16" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2008, 605 )
+
+[node name="Plus1Seconds17" parent="DebugLevel/YSort/Wave/Items" instance=ExtResource( 9 )]
+position = Vector2( 2008, 536 )
+
 [node name="Camera2D" type="Camera2D" parent="DebugLevel"]
 position = Vector2( 2000, 2000 )
 current = true
@@ -95,13 +145,13 @@ editor_draw_drag_margin = true
 [node name="Map" type="Node2D" parent="DebugLevel"]
 
 [node name="GrassBackground" type="Sprite" parent="DebugLevel/Map"]
-scale = Vector2( 4, 4 )
 z_index = -2
 z_as_relative = false
 texture = ExtResource( 4 )
+normal_map = SubResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 1000, 1000 )
+region_rect = Rect2( 0, 0, 4000, 4000 )
 
 [node name="Obstacle" type="StaticBody2D" parent="DebugLevel/Map"]
 position = Vector2( -10, 0 )
@@ -151,3 +201,19 @@ texture = ExtResource( 7 )
 
 [connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus3Seconds" to="." method="OnCountDownModifierItemUsed"]
 [connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds2" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds3" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds4" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds5" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds6" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds7" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds8" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds9" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds10" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds11" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds12" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds13" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds14" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds15" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds16" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="ItemUsed" from="DebugLevel/YSort/Wave/Items/Plus1Seconds17" to="." method="OnCountDownModifierItemUsed"]
