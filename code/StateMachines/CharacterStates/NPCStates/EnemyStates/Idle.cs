@@ -1,6 +1,6 @@
-﻿namespace code.StateMachines.CharacterStates.NPCStates
+﻿namespace code.StateMachines.CharacterStates.NPCStates.EnemyStates
 {
-    public class Idle : NPCState
+    public class Idle : EnemyState
     {
         public Idle(Character character) : base(character)
         {

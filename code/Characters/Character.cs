@@ -1,3 +1,4 @@
+using code.StateMachines.CharacterStates.NPCStates;
 using Godot;
 
 public class Character : KinematicBody2D, IHurtable, IAttacker
@@ -18,7 +19,7 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
     [Export]
     public bool Invulnerable { get; set; }
 
-    protected CharacterState currentState;
+    protected BaseFSMState currentState;
     protected Attack currentAttack;
 
     public override void _Ready()

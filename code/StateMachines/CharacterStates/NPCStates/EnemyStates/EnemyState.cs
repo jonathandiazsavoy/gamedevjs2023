@@ -1,21 +1,32 @@
-using Godot;
-using System;
+﻿using Godot;
 
-public class EnemyState : Node
+namespace code.StateMachines.CharacterStates.NPCStates.EnemyStates
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
+    public abstract class EnemyState : NPCState, IHurtable
     {
-        
-    }
+        protected EnemyState(Character character) : base(character)
+        {
+        }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+        public void ApplyIncomingAttack(Node2D attacker, Attack attack)
+        {
+            this.SwitchState(new TakingDamage(character));
+            int damage = attack.Damage - character.CurrentStats.Defense;
+            character.TakeDamage(damage);
+            if (attack.PushForce > 0)
+            {
+                Vector2 hitDirection = (character.GlobalPosition - attacker.GlobalPosition).Normalized();
+                character.MoveAndSlide(hitDirection * attack.PushForce);
+            }
+        }
+
+        public void TakeDamage(int hpAmount)
+        {
+            if (character.CurrentStats.ApplyDamage(hpAmount))
+            {
+                // When hp is depleted
+                this.SwitchState(new Dying(character));
+            }
+        }
+    }
 }

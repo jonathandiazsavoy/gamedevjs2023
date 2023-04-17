@@ -1,6 +1,4 @@
-﻿using System.Runtime.Remoting.Messaging;
-
-public abstract class BaseFSMState
+﻿public abstract class BaseFSMState
 {
     /// <summary>
     ///     Update the current state.

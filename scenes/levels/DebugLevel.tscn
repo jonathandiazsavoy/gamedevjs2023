@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/items/countdown_modifiers/Plus3Seconds.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/items/countdown_modifiers/Plus1Seconds.tscn" type="PackedScene" id=9]
 [ext_resource path="res://code/Managers/WaveManager.cs" type="Script" id=10]
+[ext_resource path="res://code/Characters/Enemy.cs" type="Script" id=11]
 
 [sub_resource type="ImageTexture" id=2]
 
@@ -74,13 +75,16 @@ script = ExtResource( 10 )
 [node name="Enemies" type="YSort" parent="Level/Objects/WaveManager"]
 
 [node name="Enemy" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 159, 200 )
+position = Vector2( 856, 1288 )
+script = ExtResource( 11 )
 
 [node name="Enemy2" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 1899, 193 )
+position = Vector2( 792, 1296 )
+script = ExtResource( 11 )
 
 [node name="Enemy3" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 1714, 1500 )
+position = Vector2( 840, 1224 )
+script = ExtResource( 11 )
 
 [node name="Items" type="YSort" parent="Level/Objects/WaveManager"]
 

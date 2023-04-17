@@ -1,10 +1,8 @@
 using code.Items;
-using Godot;
+using code.StateMachines.CharacterStates.PlayerStates;
 
 public class Player : Character, IObtainer
 {
-	private new PlayerState currentState;
-
 	public override void _Ready()
 	{
         this.InitNodes();
@@ -13,13 +11,17 @@ public class Player : Character, IObtainer
 		this.CurrentStats = this.BaseStats;
 
 		
-        currentState = new IdleState(this);
+        currentState = new Idle(this);
 		currentAttack = new Attack(1, 100);
 	}
 
-	public override void _PhysicsProcess(float delta)
+    public override void _Process(float delta)
+    {
+        currentState = ((PlayerState)currentState).HandleInput(delta);
+    }
+    public override void _PhysicsProcess(float delta)
 	{
-		currentState = (PlayerState)currentState.HandleInputAndUpdate(delta);
+		currentState = (PlayerState)currentState.Update(delta);
 	}
 
     public void ObtainItem(Item item)
