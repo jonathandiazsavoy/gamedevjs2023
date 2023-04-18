@@ -1,5 +1,6 @@
 using code.Items;
 using code.StateMachines.CharacterStates.PlayerStates;
+using Godot;
 
 public class Player : Character, IObtainer
 {
@@ -26,6 +27,8 @@ public class Player : Character, IObtainer
 
     public void ObtainItem(Item item)
     {
+        AudioPlayer.Stream = ResourceLoader.Load<AudioStream>(PATH_TO_SOUNDS+"pickup item"+AUDIO_SUFFIX);
+        AudioPlayer.Play();
         item.PickUp();
     }
 

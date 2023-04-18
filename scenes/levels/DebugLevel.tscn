@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://scenes/items/countdown_modifiers/Plus3Seconds.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/items/countdown_modifiers/Plus1Seconds.tscn" type="PackedScene" id=9]
 [ext_resource path="res://code/Managers/WaveManager.cs" type="Script" id=10]
-[ext_resource path="res://code/Characters/Enemy.cs" type="Script" id=11]
 
 [sub_resource type="ImageTexture" id=2]
 
@@ -75,72 +74,42 @@ script = ExtResource( 10 )
 [node name="Enemies" type="YSort" parent="Level/Objects/WaveManager"]
 
 [node name="Enemy" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 856, 1288 )
-script = ExtResource( 11 )
+position = Vector2( 840, 1280 )
 
 [node name="Enemy2" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 792, 1296 )
-script = ExtResource( 11 )
+position = Vector2( 632, 1360 )
 
 [node name="Enemy3" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 840, 1224 )
-script = ExtResource( 11 )
+position = Vector2( 944, 1480 )
+
+[node name="Enemy4" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 1088, 1304 )
+
+[node name="Enemy5" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 840, 904 )
 
 [node name="Items" type="YSort" parent="Level/Objects/WaveManager"]
 
 [node name="Plus3Seconds" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 8 )]
-position = Vector2( 961, 1192 )
+position = Vector2( 976, 1408 )
 
 [node name="Plus1Seconds" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 961, 1355 )
+position = Vector2( 808, 1416 )
 
 [node name="Plus1Seconds2" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 961, 1265 )
+position = Vector2( 864, 1176 )
 
 [node name="Plus1Seconds3" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 956, 1124 )
+position = Vector2( 864, 1064 )
 
 [node name="Plus1Seconds4" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 960, 1052 )
+position = Vector2( 752, 1304 )
 
 [node name="Plus1Seconds5" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
 position = Vector2( 962, 955 )
 
 [node name="Plus1Seconds6" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 959, 837 )
-
-[node name="Plus1Seconds7" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 961, 762 )
-
-[node name="Plus1Seconds8" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 959, 724 )
-
-[node name="Plus1Seconds9" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 964, 690 )
-
-[node name="Plus1Seconds10" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 962, 616 )
-
-[node name="Plus1Seconds11" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 960, 534 )
-
-[node name="Plus1Seconds12" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 960, 433 )
-
-[node name="Plus1Seconds13" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 963, 325 )
-
-[node name="Plus1Seconds14" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 966, 289 )
-
-[node name="Plus1Seconds15" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 968, 205 )
-
-[node name="Plus1Seconds16" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 969, 148 )
-
-[node name="Plus1Seconds17" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 969, 79 )
+position = Vector2( 864, 992 )
 
 [node name="Map" type="Node2D" parent="Level"]
 
@@ -212,6 +181,11 @@ drag_margin_bottom = 0.1
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
+[connection signal="EnemyDied" from="Level/Objects/WaveManager/Enemies/Enemy" to="." method="OnEnemyDied"]
+[connection signal="EnemyDied" from="Level/Objects/WaveManager/Enemies/Enemy2" to="." method="OnEnemyDied"]
+[connection signal="EnemyDied" from="Level/Objects/WaveManager/Enemies/Enemy3" to="." method="OnEnemyDied"]
+[connection signal="EnemyDied" from="Level/Objects/WaveManager/Enemies/Enemy4" to="." method="OnEnemyDied"]
+[connection signal="EnemyDied" from="Level/Objects/WaveManager/Enemies/Enemy5" to="." method="OnEnemyDied"]
 [connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus3Seconds" to="." method="OnCountDownModifierItemUsed"]
 [connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds" to="." method="OnCountDownModifierItemUsed"]
 [connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds2" to="." method="OnCountDownModifierItemUsed"]
@@ -219,14 +193,3 @@ editor_draw_drag_margin = true
 [connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds4" to="." method="OnCountDownModifierItemUsed"]
 [connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds5" to="." method="OnCountDownModifierItemUsed"]
 [connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds6" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds7" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds8" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds9" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds10" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds11" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds12" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds13" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds14" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds15" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds16" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds17" to="." method="OnCountDownModifierItemUsed"]

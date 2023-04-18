@@ -1,4 +1,6 @@
-﻿namespace code.StateMachines.CharacterStates.PlayerStates
+﻿using Godot;
+
+namespace code.StateMachines.CharacterStates.PlayerStates
 {
     public class Attacking : PlayerState
     {
@@ -23,11 +25,8 @@
         protected override void EnterState()
         {
             player.AnimationPlayer.Play("Attack");
-        }
-
-        protected override void ExitState()
-        {
-            //throw new NotImplementedException();
+            player.AudioPlayer.Stream = ResourceLoader.Load<AudioStream>(Character.PATH_TO_SOUNDS + "melee attack" + Character.AUDIO_SUFFIX);
+            player.AudioPlayer.Play();
         }
     }
 }
