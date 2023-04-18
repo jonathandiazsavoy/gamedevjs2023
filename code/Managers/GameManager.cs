@@ -3,24 +3,24 @@ using Godot;
 
 public class GameManager : Node2D
 {
-    const float WAVE_COUNTDOWN_MAX_START = 60;
+    const float ALARM_COUNTDOWN_MAX_START = 60;
 
-    public Timer WaveCountdown { get; private set; }
+    public Timer AlarmCountdown { get; private set; }
     public WaveManager WaveManager { get; private set; }
 
     public float TotalRunTime { get; private set; }
-    public float WaveClockTotal
+    public float CenterClockTotal
     {
         get 
         {
-            return Mathf.Abs(WaveCountdown.TimeLeft - WAVE_COUNTDOWN_MAX_START);
+            return Mathf.Abs(AlarmCountdown.TimeLeft - ALARM_COUNTDOWN_MAX_START);
         }
     }
     public int EnemyCount { get; private set; }
 
     public override void _Ready()
     {
-        WaveCountdown = this.GetNode<Timer>("WaveCountdown");
+        AlarmCountdown = this.GetNode<Timer>("AlarmCountdown");
         WaveManager = this.GetNode<WaveManager>("Level/Objects/WaveManager");
         
         StartNewRun();
@@ -48,12 +48,12 @@ public class GameManager : Node2D
     }
     private void StartNewLoop()
     {
-        WaveCountdown.Start(WAVE_COUNTDOWN_MAX_START);
+        AlarmCountdown.Start(ALARM_COUNTDOWN_MAX_START);
     }
 
-    private void AdjustWaveCountdown(float adjustAmount)
+    private void AdjustAlarmCountdown(float adjustAmount)
     {
-        WaveCountdown.Start(Mathf.Clamp(WaveCountdown.TimeLeft + adjustAmount, 0, WAVE_COUNTDOWN_MAX_START));
+        AlarmCountdown.Start(Mathf.Clamp(AlarmCountdown.TimeLeft + adjustAmount, 0, ALARM_COUNTDOWN_MAX_START));
     }
 
     // **************************************************
@@ -61,10 +61,13 @@ public class GameManager : Node2D
     // **************************************************
     public void OnCountDownModifierItemUsed(CountDownModifier countdownModifier)
     {
-        AdjustWaveCountdown(countdownModifier.CountDownChange);
+        AdjustAlarmCountdown(countdownModifier.CountDownChange);
     }
     public void OnEnemyDied(Enemy enemy)
     {
         this.EnemyCount--;
+    }
+    public void OnAlarmCountdownTimeout()
+    {
     }
 }

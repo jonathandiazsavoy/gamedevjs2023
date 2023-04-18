@@ -4,7 +4,7 @@ using Godot;
 public class Character : KinematicBody2D, IHurtable, IAttacker
 {
     const string ANIMATION_PLAYER_NAME = "AnimationPlayer";
-    const string AUDIO_PLAYER_NAME = "AudioStreamPlayer2D";
+    const string AUDIO_STREAM_PLAYER_NAME = "AudioStreamPlayer2D";
 
     public const string PATH_TO_SOUNDS = "res://assets/audio/sounds/character/";
     public const string AUDIO_SUFFIX = ".wav";
@@ -44,7 +44,7 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
     protected void InitNodes()
     {
         this.AnimationPlayer = this.GetNode<AnimationPlayer>(ANIMATION_PLAYER_NAME);
-        this.AudioPlayer = this.GetNode<AudioStreamPlayer2D>(AUDIO_PLAYER_NAME);
+        this.AudioPlayer = this.GetNode<AudioStreamPlayer2D>(AUDIO_STREAM_PLAYER_NAME);
     }
 
     public void SetCharacterOrientation(Vector2 moveDirection)

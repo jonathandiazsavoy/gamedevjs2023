@@ -29,9 +29,9 @@ public class GameplayUIManager : Control
     public override void _Process(float delta)
     {
         TotalRunTime.Text = initialTotalRunTimeText + Math.Floor(gameManager.TotalRunTime).ToString();
-        LoopTimeLeft.Text = initialLoopTimeLeftText + Math.Ceiling(gameManager.WaveCountdown.TimeLeft).ToString();
+        LoopTimeLeft.Text = initialLoopTimeLeftText + Math.Ceiling(gameManager.AlarmCountdown.TimeLeft).ToString();
         EnemiesLeft.Text = initialEnemiesLeftText + gameManager.EnemyCount;
 
-        WaveClock.TimeUnit = gameManager.WaveClockTotal * AnalogueClock.SECONDS_IN_MINUTE;
+        WaveClock.TimeUnit = gameManager.CenterClockTotal * AnalogueClock.SECONDS_IN_MINUTE;
     }
 }

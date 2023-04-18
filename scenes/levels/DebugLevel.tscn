@@ -52,7 +52,7 @@ text = "ENEMIES LEFT: X "
 [node name="AnalogueClock" parent="CanvasLayer/GameplayUI" instance=ExtResource( 6 )]
 position = Vector2( 508, 59 )
 
-[node name="WaveCountdown" type="Timer" parent="."]
+[node name="AlarmCountdown" type="Timer" parent="."]
 wait_time = 60.0
 one_shot = true
 
