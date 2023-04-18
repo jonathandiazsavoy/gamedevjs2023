@@ -19,7 +19,7 @@
 
         protected override void EnterState()
         {
-            //
+            player.SoundPlayer.Play("take damage");
         }
     }
 }

@@ -25,8 +25,7 @@ namespace code.StateMachines.CharacterStates.PlayerStates
         protected override void EnterState()
         {
             player.AnimationPlayer.Play("Attack");
-            player.AudioPlayer.Stream = ResourceLoader.Load<AudioStream>(Character.PATH_TO_SOUNDS + "melee attack" + Character.AUDIO_SUFFIX);
-            player.AudioPlayer.Play();
+            player.SoundPlayer.Play("melee attack");
         }
     }
 }

@@ -14,7 +14,7 @@
 
         protected override void EnterState()
         {
-            //
+            enemy.SoundPlayer.Play("take damage");
         }
     }
 }

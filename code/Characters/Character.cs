@@ -1,3 +1,4 @@
+using code.Helpers;
 using code.StateMachines.CharacterStates.NPCStates;
 using Godot;
 
@@ -7,7 +8,6 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
     const string AUDIO_STREAM_PLAYER_NAME = "AudioStreamPlayer2D";
 
     public const string PATH_TO_SOUNDS = "res://assets/audio/sounds/character/";
-    public const string AUDIO_SUFFIX = ".wav";
 
     public Vector2 currentMoveDirection;
 
@@ -19,6 +19,7 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
     public CharacterStats BaseStats { get; protected set; }
     [Export]
     public CharacterStats CurrentStats { get; protected set; }
+    public SoundPlayer SoundPlayer;
 
     // Custom properties
     [Export]
@@ -45,6 +46,8 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
     {
         this.AnimationPlayer = this.GetNode<AnimationPlayer>(ANIMATION_PLAYER_NAME);
         this.AudioPlayer = this.GetNode<AudioStreamPlayer2D>(AUDIO_STREAM_PLAYER_NAME);
+
+        SoundPlayer = new SoundPlayer(AudioPlayer, PATH_TO_SOUNDS);
     }
 
     public void SetCharacterOrientation(Vector2 moveDirection)
