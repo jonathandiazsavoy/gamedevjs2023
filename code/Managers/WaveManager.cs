@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class WaveManager : YSort
 {
@@ -11,14 +10,6 @@ public class WaveManager : YSort
     public override void _Ready()
     {
         Enemies = this.GetNode<YSort>("Enemies");
-
-        //Enemies.RequestReady();
         EnemyCount = Enemies.GetChildCount();
     }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }

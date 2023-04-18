@@ -32,6 +32,6 @@ public class GameplayUIManager : Control
         LoopTimeLeft.Text = initialLoopTimeLeftText + Math.Ceiling(gameManager.WaveCountdown.TimeLeft).ToString();
         EnemiesLeft.Text = initialEnemiesLeftText + gameManager.EnemyCount;
 
-        WaveClock.TimeUnit = gameManager.WaveClockTotal * 60;
+        WaveClock.TimeUnit = gameManager.WaveClockTotal * AnalogueClock.SECONDS_IN_MINUTE;
     }
 }

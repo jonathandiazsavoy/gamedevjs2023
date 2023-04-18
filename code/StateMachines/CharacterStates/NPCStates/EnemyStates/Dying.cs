@@ -10,7 +10,7 @@ namespace code.StateMachines.CharacterStates.NPCStates.EnemyStates
         }
 
         [Signal]
-        public delegate void EnemyDied(Item item);
+        public delegate void EnemyDied(Enemy enemy);
 
         public override BaseFSMState Update(float delta)
         {

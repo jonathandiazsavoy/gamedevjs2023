@@ -1,7 +1,11 @@
 using code.StateMachines.CharacterStates.NPCStates.EnemyStates;
+using Godot;
 
 public class Enemy : Character
 {
+    [Signal]
+    public delegate void EnemyDied(Enemy enemy);
+
     public override void _Ready()
     {
         this.InitNodes();
@@ -17,5 +21,11 @@ public class Enemy : Character
     public override void _PhysicsProcess(float delta)
     {
         currentState = (EnemyState)currentState.Update(delta);
+    }
+
+    public void Die()
+    {
+        EmitSignal(nameof(EnemyDied), this);
+        this.QueueFree();
     }
 }

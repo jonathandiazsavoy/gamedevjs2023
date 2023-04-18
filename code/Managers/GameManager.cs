@@ -63,4 +63,8 @@ public class GameManager : Node2D
     {
         AdjustWaveCountdown(countdownModifier.CountDownChange);
     }
+    public void OnEnemyDied(Enemy enemy)
+    {
+        this.EnemyCount--;
+    }
 }

@@ -2,10 +2,10 @@ using Godot;
 
 public class AnalogueClock : Node2D
 {
-    const float DEGREES_IN_CIRCLE = 360;
-    const float SECONDS_IN_MINUTE = 60;
-    const float MINUTES_IN_HOUR = 60;
-    const float HOURS_IN_CLOCK = 12;
+    public const float DEGREES_IN_CIRCLE = 360;
+    public const float SECONDS_IN_MINUTE = 60;
+    public const float MINUTES_IN_HOUR = 60;
+    public const float HOURS_IN_CLOCK = 12;
 
     // Node members
     private Position2D secondHand;
