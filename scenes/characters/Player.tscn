@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/visuals/sprite_sheets/characters/Player.png" type="Texture" id=1]
-[ext_resource path="res://scenes/area_triggers/GrabberBox.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/area_triggers/Hitbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/area_triggers/Hurtbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/area_triggers/generics/GrabberBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/area_triggers/generics/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/area_triggers/generics/Hurtbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/audio/sounds/character/melee attack.wav" type="AudioStream" id=5]
 [ext_resource path="res://code/Characters/Player.cs" type="Script" id=6]
 

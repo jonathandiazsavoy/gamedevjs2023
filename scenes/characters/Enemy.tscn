@@ -3,7 +3,7 @@
 [ext_resource path="res://temp_assets/visuals/dev_graphics/redSquareWOrientation1-1.png" type="Texture" id=1]
 [ext_resource path="res://code/Characters/Enemy.cs" type="Script" id=2]
 [ext_resource path="res://animations/generic/DEATH.tres" type="Animation" id=3]
-[ext_resource path="res://scenes/area_triggers/Hurtbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/area_triggers/generics/Hurtbox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 
