@@ -42,7 +42,7 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
     /// <summary>
     ///     Inits node members according to expected default names.
     /// </summary>
-    protected void InitNodes()
+    protected virtual void InitNodes()
     {
         this.AnimationPlayer = this.GetNode<AnimationPlayer>(ANIMATION_PLAYER_NAME);
         this.AudioPlayer = this.GetNode<AudioStreamPlayer2D>(AUDIO_STREAM_PLAYER_NAME);
@@ -56,6 +56,11 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
         {
             this.Rotation = moveDirection.Angle();
         }
+    }
+
+    public int GetPointValue()
+    {
+        return (int)(BaseStats.MaxHp + BaseStats.MaxMp + BaseStats.Strength + BaseStats.Defense + BaseStats.Speed);
     }
 
     public void ApplyIncomingAttack(Node2D attacker, Attack attack)

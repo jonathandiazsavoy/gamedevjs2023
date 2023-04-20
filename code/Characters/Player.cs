@@ -1,12 +1,15 @@
 using code.Helpers;
 using code.Items;
+using code.Items.TimeItems;
 using code.StateMachines.CharacterStates.PlayerStates;
-using Godot;
 
 public class Player : Character, IObtainer
 {
+    private GameManager gameManager;
+
 	public override void _Ready()
 	{
+        base.InitNodes();
         this.InitNodes();
 
 		this.BaseStats = new CharacterStats(3, 0, 1, 0, 1.5f);
@@ -26,11 +29,19 @@ public class Player : Character, IObtainer
 		currentState = (PlayerState)currentState.Update(delta);
 	}
 
+    protected override void InitNodes()
+    {
+        gameManager = this.GetNode<GameManager>("/root/GameManager");
+    }
     public void ObtainItem(Item item)
     {
-        // TODO add time items values to the score and currency
         SoundPlayer.Play("pickup item");
         item.PickUp();
+        if (item is CountDownModifier countDownModifier)
+        {
+            // Add time item value as money
+            gameManager.AdjustMoney((int)countDownModifier.CountDownChange);
+        }
     }
 
     public void AddToInventory(Item item)

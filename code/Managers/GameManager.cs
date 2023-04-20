@@ -37,7 +37,7 @@ public class GameManager : Node2D
     private float initialMusicPitchScale;
     public bool AlarmTriggered;
     public int Score;
-    public int Currency;
+    public int Money;
 
     [Signal]
     public delegate void AllEnemiesKilled();
@@ -49,7 +49,6 @@ public class GameManager : Node2D
         AudioStreamPlayer = this.GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         Level = this.GetNode<Node2D>("Level");
         MusicPlayer = new MusicPlayer(AudioStreamPlayer, PATH_TO_SOUNDS);
-
 
         StartNewRun();
         StartNewLoop();
@@ -75,6 +74,19 @@ public class GameManager : Node2D
         {
             AdjustAlarmCountdown(-5);
             GetTree().Paused = false;
+        }
+    }
+
+    public void AdjustMoney(int adjustmentAmount)
+    {
+        if(adjustmentAmount > 0)
+        {
+            this.Money += adjustmentAmount;
+            this.Score += adjustmentAmount;
+        }
+        else
+        {
+            this.Money += adjustmentAmount;
         }
     }
 
@@ -122,7 +134,8 @@ public class GameManager : Node2D
     }
     public void OnEnemyDied(Enemy enemy)
     {
-        // TODO add enemy stat values to the score and currency
+        // Add enemy point value as money
+        AdjustMoney(enemy.GetPointValue());
         if (this.EnemyCount-1 > 0)
         {
             this.EnemyCount--;
