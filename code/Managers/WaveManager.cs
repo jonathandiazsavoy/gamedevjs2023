@@ -1,3 +1,4 @@
+using code.Items;
 using Godot;
 
 public class WaveManager : YSort
@@ -6,7 +7,7 @@ public class WaveManager : YSort
     public const string WAVE_FILE_NAME_PREFIX = "wave";
 
     private GameManager gameManager;
-    private Wave Wave 
+    public Wave Wave 
     { get 
         {
             return this.GetNode<Wave>("Wave");
@@ -42,6 +43,15 @@ public class WaveManager : YSort
     {
         PackedScene packedWave = GD.Load<PackedScene>(PATH_TO_WAVES + WAVE_FILE_NAME_PREFIX + waveNumber + ".tscn");
         Wave.Free();
-        this.AddChild(packedWave.Instance<Wave>());
+        //this.CallDeferred("AddChild", packedWave.Instance<Wave>());
+        this.AddChild(packedWave.Instance<Wave>()); // TODO loading this way throws errors
+        foreach (Enemy enemy in Wave.Enemies.GetChildren())
+        {
+            enemy.Connect("EnemyDied", gameManager, "OnEnemyDied");
+        }
+        foreach (Item item in Wave.Items.GetChildren())
+        { 
+            item.Connect("ItemUsed", gameManager, "OnCountDownModifierItemUsed");
+        }
     }   
 }

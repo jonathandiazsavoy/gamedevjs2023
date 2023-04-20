@@ -36,6 +36,8 @@ public class GameManager : Node2D
 
     private float initialMusicPitchScale;
     public bool AlarmTriggered;
+    public int Score;
+    public int Currency;
 
     [Signal]
     public delegate void AllEnemiesKilled();
@@ -51,7 +53,7 @@ public class GameManager : Node2D
 
         StartNewRun();
         StartNewLoop();
-        EnemyCount = WaveManager.EnemyCount;
+        
         initialMusicPitchScale = AudioStreamPlayer.PitchScale;
     }
     public override void _Process(float delta)
@@ -88,6 +90,7 @@ public class GameManager : Node2D
         MusicPlayer.Play("calm_phase");
 
         WaveManager.LoadWave(CurrentWaveNumber);
+        EnemyCount = WaveManager.EnemyCount;
     }
 
     private void AdjustAlarmCountdown(float adjustAmount)
@@ -101,7 +104,7 @@ public class GameManager : Node2D
         float adjustTo = Mathf.Clamp(SecondsUntilNextWave - 45, 0, 20);
         if (adjustTo != 0)
         {
-            // increase speed and pitch as countdown gets closer to 0
+            // Increase speed and pitch exponentially as countdown gets closer to 0
             AudioStreamPlayer.PitchScale = initialMusicPitchScale + (adjustTo / 25) * (adjustTo / 25);
         }
         else

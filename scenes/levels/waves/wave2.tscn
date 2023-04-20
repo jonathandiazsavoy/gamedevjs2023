@@ -22,9 +22,6 @@ position = Vector2( 944, 1480 )
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( 856, 1384 )
 
-[node name="Enemy5" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 840, 904 )
-
 [node name="Items" type="YSort" parent="."]
 
 [node name="Plus3Seconds" parent="Items" instance=ExtResource( 4 )]
