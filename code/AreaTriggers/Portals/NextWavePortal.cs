@@ -7,7 +7,6 @@ public class NextWavePortal : Area2D
 
     public void OnPortalEntered(Node body)
     {
-        GD.Print("portal entered: "+body.GetType());
         if (body is Player player) EmitSignal(nameof(GoToNextWave), player);
     }
 }
