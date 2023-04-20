@@ -28,6 +28,7 @@ public class Player : Character, IObtainer
 
     public void ObtainItem(Item item)
     {
+        // TODO add time items values to the score and currency
         SoundPlayer.Play("pickup item");
         item.PickUp();
     }

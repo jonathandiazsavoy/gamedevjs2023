@@ -2,15 +2,16 @@
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/levels/waves/wave1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/visuals/textures/backgrounds/GrassBackground.png" type="Texture" id=4]
 [ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
-[ext_resource path="res://scenes/items/countdown_modifiers/Plus3Seconds.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/items/countdown_modifiers/Plus1Seconds.tscn" type="PackedScene" id=9]
 [ext_resource path="res://code/Managers/WaveManager.cs" type="Script" id=10]
 [ext_resource path="res://assets/audio/music/calm_phase.wav" type="AudioStream" id=11]
+[ext_resource path="res://code/AreaTriggers/Portals/NextWavePortal.cs" type="Script" id=12]
+
+[sub_resource type="RectangleShape2D" id=3]
 
 [sub_resource type="ImageTexture" id=2]
 
@@ -72,45 +73,25 @@ update_scale = false
 [node name="WaveManager" type="YSort" parent="Level/Objects"]
 script = ExtResource( 10 )
 
-[node name="Enemies" type="YSort" parent="Level/Objects/WaveManager"]
+[node name="Wave" parent="Level/Objects/WaveManager" instance=ExtResource( 3 )]
 
-[node name="Enemy" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 840, 1280 )
+[node name="NextWavePortal" type="Area2D" parent="Level/Objects"]
+position = Vector2( 816, 1360 )
+script = ExtResource( 12 )
 
-[node name="Enemy2" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 632, 1360 )
+[node name="RichTextLabel" type="RichTextLabel" parent="Level/Objects/NextWavePortal"]
+margin_left = -24.0
+margin_top = -24.0
+margin_right = 40.0
+margin_bottom = -8.0
+text = "PORTAL"
 
-[node name="Enemy3" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 944, 1480 )
+[node name="Sprite" type="Sprite" parent="Level/Objects/NextWavePortal"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 7 )
 
-[node name="Enemy4" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 1088, 1304 )
-
-[node name="Enemy5" parent="Level/Objects/WaveManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 840, 904 )
-
-[node name="Items" type="YSort" parent="Level/Objects/WaveManager"]
-
-[node name="Plus3Seconds" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 8 )]
-position = Vector2( 976, 1408 )
-
-[node name="Plus1Seconds" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 808, 1416 )
-
-[node name="Plus1Seconds2" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 864, 1176 )
-
-[node name="Plus1Seconds3" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 864, 1064 )
-
-[node name="Plus1Seconds4" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 752, 1304 )
-
-[node name="Plus1Seconds5" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 962, 955 )
-
-[node name="Plus1Seconds6" parent="Level/Objects/WaveManager/Items" instance=ExtResource( 9 )]
-position = Vector2( 864, 992 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Objects/NextWavePortal"]
+shape = SubResource( 3 )
 
 [node name="Map" type="Node2D" parent="Level"]
 
@@ -187,17 +168,8 @@ stream = ExtResource( 11 )
 volume_db = -3.0
 autoplay = true
 
+[connection signal="AllEnemiesKilled" from="." to="Level/Objects/WaveManager" method="OnAllEnemiesKilled"]
 [connection signal="timeout" from="AlarmCountdown" to="." method="OnAlarmCountdownTimeout"]
 [connection signal="timeout" from="AlarmCountdown" to="Level/Objects/WaveManager" method="OnAlarmCountdownTimeout"]
-[connection signal="EnemyDied" from="Level/Objects/WaveManager/Enemies/Enemy" to="." method="OnEnemyDied"]
-[connection signal="EnemyDied" from="Level/Objects/WaveManager/Enemies/Enemy2" to="." method="OnEnemyDied"]
-[connection signal="EnemyDied" from="Level/Objects/WaveManager/Enemies/Enemy3" to="." method="OnEnemyDied"]
-[connection signal="EnemyDied" from="Level/Objects/WaveManager/Enemies/Enemy4" to="." method="OnEnemyDied"]
-[connection signal="EnemyDied" from="Level/Objects/WaveManager/Enemies/Enemy5" to="." method="OnEnemyDied"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus3Seconds" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds2" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds3" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds4" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds5" to="." method="OnCountDownModifierItemUsed"]
-[connection signal="ItemUsed" from="Level/Objects/WaveManager/Items/Plus1Seconds6" to="." method="OnCountDownModifierItemUsed"]
+[connection signal="GoToNextWave" from="Level/Objects/NextWavePortal" to="." method="OnGoToNextWave"]
+[connection signal="body_entered" from="Level/Objects/NextWavePortal" to="Level/Objects/NextWavePortal" method="OnPortalEntered"]

@@ -5,6 +5,7 @@ using Godot;
 public class GameManager : Node2D
 {
     const float ALARM_COUNTDOWN_MAX_START = 60;
+    const int FINAL_WAVE_NUMBER = 12;
 
     public const string PATH_TO_SOUNDS = "res://assets/audio/music/";
 
@@ -20,13 +21,24 @@ public class GameManager : Node2D
     {
         get 
         {
-            return Mathf.Abs(AlarmCountdown.TimeLeft - ALARM_COUNTDOWN_MAX_START);
+            return (Mathf.Abs(AlarmCountdown.TimeLeft - ALARM_COUNTDOWN_MAX_START)) + (CurrentWaveNumber-1)*AnalogueClock.MINUTES_IN_HOUR;
+        }
+    }
+    public float SecondsUntilNextWave
+    {
+        get
+        {
+            return (Mathf.Abs(AlarmCountdown.TimeLeft - ALARM_COUNTDOWN_MAX_START));
         }
     }
     public int EnemyCount { get; private set; }
+    public int CurrentWaveNumber { get; private set; }
 
     private float initialMusicPitchScale;
     public bool AlarmTriggered;
+
+    [Signal]
+    public delegate void AllEnemiesKilled();
 
     public override void _Ready()
     {
@@ -46,25 +58,16 @@ public class GameManager : Node2D
     {
         TotalRunTime += delta;
 
-        // increease speed as timer ticks
         if (!AlarmTriggered) 
-        { 
-            if (Mathf.Clamp(CenterClockTotal - 45, 0, 20) != 0)
-            {
-
-                AudioStreamPlayer.PitchScale = initialMusicPitchScale + (Mathf.Clamp(CenterClockTotal - 45, 0, 20) / 25) * (Mathf.Clamp(CenterClockTotal - 45, 0, 20) / 25);
-            }
-            else
-            {
-                AudioStreamPlayer.PitchScale = initialMusicPitchScale;
-            }
+        {
+            AdjustMusicAccordingToAlarmCountdown();
         }
 
         //TODO remove this test stuff
         if (Input.IsActionJustPressed("test1"))
         {
-            //AdjustAlarmCountdown(5);
-            Level.GetTree().Paused= !Level.GetTree().Paused;
+            AdjustAlarmCountdown(5);
+            //Level.GetTree().Paused= !Level.GetTree().Paused;
         }
         if (Input.IsActionJustPressed("test2"))
         {
@@ -76,17 +79,35 @@ public class GameManager : Node2D
     private void StartNewRun()
     {
         TotalRunTime = 0;
+        CurrentWaveNumber = 1;
     }
     private void StartNewLoop()
     {
         AlarmTriggered = false;
         AlarmCountdown.Start(ALARM_COUNTDOWN_MAX_START);
+        MusicPlayer.Play("calm_phase");
+
+        WaveManager.LoadWave(CurrentWaveNumber);
     }
 
     private void AdjustAlarmCountdown(float adjustAmount)
     {
-        // this is bugged if you get a negative adjustment when the timer is near 0 - it goes back up to 3
+        // TODO this is bugged if you get a negative adjustment when the timer is near 0 - it goes back up to 3
         if (!AlarmTriggered) AlarmCountdown.Start(Mathf.Clamp(AlarmCountdown.TimeLeft + adjustAmount, 0, ALARM_COUNTDOWN_MAX_START));
+    }
+    private void AdjustMusicAccordingToAlarmCountdown()
+    {
+        // TODO refactor later
+        float adjustTo = Mathf.Clamp(SecondsUntilNextWave - 45, 0, 20);
+        if (adjustTo != 0)
+        {
+            // increase speed and pitch as countdown gets closer to 0
+            AudioStreamPlayer.PitchScale = initialMusicPitchScale + (adjustTo / 25) * (adjustTo / 25);
+        }
+        else
+        {
+            AudioStreamPlayer.PitchScale = initialMusicPitchScale;
+        }
     }
 
     // **************************************************
@@ -98,11 +119,28 @@ public class GameManager : Node2D
     }
     public void OnEnemyDied(Enemy enemy)
     {
-        this.EnemyCount--;
+        // TODO add enemy stat values to the score and currency
+        if (this.EnemyCount-1 > 0)
+        {
+            this.EnemyCount--;
+        }
+        else
+        {
+            this.EnemyCount=0;
+            EmitSignal(nameof(AllEnemiesKilled));
+        }
     }
     public void OnAlarmCountdownTimeout()
     {
         AlarmTriggered = true;
         MusicPlayer.Play("alert_phase");
+    }
+    public void OnGoToNextWave(Player player)
+    {
+        CurrentWaveNumber++;
+        if (CurrentWaveNumber > FINAL_WAVE_NUMBER) { 
+            // TODO go to you win screen
+        }
+        StartNewLoop();
     }
 }
