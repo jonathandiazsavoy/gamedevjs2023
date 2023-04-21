@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
@@ -7,14 +7,12 @@
 [ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
-[ext_resource path="res://code/AreaTriggers/Portals/ShopPortal.cs" type="Script" id=8]
+[ext_resource path="res://scenes/area_triggers/portals/ShopPortal.tscn" type="PackedScene" id=8]
 [ext_resource path="res://code/Managers/Master.cs" type="Script" id=9]
 [ext_resource path="res://code/Managers/WaveManager.cs" type="Script" id=10]
 [ext_resource path="res://assets/audio/music/calm_phase.wav" type="AudioStream" id=11]
-[ext_resource path="res://code/AreaTriggers/Portals/NextWavePortal.cs" type="Script" id=12]
+[ext_resource path="res://scenes/area_triggers/portals/NextWavePortal.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/audio/sounds/Reference/Pause.wav" type="AudioStream" id=13]
-
-[sub_resource type="RectangleShape2D" id=3]
 
 [sub_resource type="ImageTexture" id=2]
 
@@ -76,15 +74,6 @@ margin_bottom = 105.0
 custom_colors/default_color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
 text = "LOOP TIME LEFT: "
 
-[node name="ShopUI" type="Control" parent="GameManager/CanvasLayer"]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="GameManager/CanvasLayer/ShopUI"]
-margin_right = 1280.0
-margin_bottom = 900.0
-
 [node name="AlarmCountdown" type="Timer" parent="GameManager"]
 wait_time = 60.0
 one_shot = true
@@ -106,41 +95,9 @@ script = ExtResource( 10 )
 
 [node name="Wave" parent="GameManager/Level/Objects/WaveManager" instance=ExtResource( 3 )]
 
-[node name="NextWavePortal" type="Area2D" parent="GameManager/Level/Objects"]
-position = Vector2( 816, 1360 )
-script = ExtResource( 12 )
+[node name="NextWavePortal" parent="GameManager/Level/Objects" instance=ExtResource( 12 )]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameManager/Level/Objects/NextWavePortal"]
-margin_left = -24.0
-margin_top = -24.0
-margin_right = 40.0
-margin_bottom = -8.0
-text = "PORTAL"
-
-[node name="Sprite" type="Sprite" parent="GameManager/Level/Objects/NextWavePortal"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 7 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level/Objects/NextWavePortal"]
-shape = SubResource( 3 )
-
-[node name="ShopPortal" type="Area2D" parent="GameManager/Level/Objects"]
-position = Vector2( 968, 1360 )
-script = ExtResource( 8 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GameManager/Level/Objects/ShopPortal"]
-margin_left = -24.0
-margin_top = -24.0
-margin_right = 40.0
-margin_bottom = -8.0
-text = "SHOP"
-
-[node name="Sprite" type="Sprite" parent="GameManager/Level/Objects/ShopPortal"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 7 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level/Objects/ShopPortal"]
-shape = SubResource( 3 )
+[node name="ShopPortal" parent="GameManager/Level/Objects" instance=ExtResource( 8 )]
 
 [node name="Map" type="Node2D" parent="GameManager/Level"]
 
@@ -223,6 +180,3 @@ stream = ExtResource( 13 )
 [connection signal="AllEnemiesKilled" from="GameManager" to="GameManager/Level/Objects/WaveManager" method="OnAllEnemiesKilled"]
 [connection signal="timeout" from="GameManager/AlarmCountdown" to="GameManager" method="OnAlarmCountdownTimeout"]
 [connection signal="timeout" from="GameManager/AlarmCountdown" to="GameManager/Level/Objects/WaveManager" method="OnAlarmCountdownTimeout"]
-[connection signal="GoToNextWave" from="GameManager/Level/Objects/NextWavePortal" to="GameManager" method="OnGoToNextWave"]
-[connection signal="body_entered" from="GameManager/Level/Objects/NextWavePortal" to="GameManager/Level/Objects/NextWavePortal" method="OnPortalEntered"]
-[connection signal="body_entered" from="GameManager/Level/Objects/ShopPortal" to="GameManager/Level/Objects/ShopPortal" method="OnPortalEntered"]
