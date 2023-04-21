@@ -19,7 +19,7 @@ public class GameplayUIManager : Control
 
     public override void _Ready()
     {
-        gameManager = this.GetNode<GameManager>("/root/GameManager");
+        gameManager = this.GetNode<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER);
 
         EnemiesLeft = this.GetNode<RichTextLabel>("EnemiesLeft");
         Score = this.GetNode<RichTextLabel>("Score");

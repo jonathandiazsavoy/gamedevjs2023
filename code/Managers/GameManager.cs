@@ -7,7 +7,7 @@ public class GameManager : Node2D
     const float ALARM_COUNTDOWN_MAX_START = 60;
     const int FINAL_WAVE_NUMBER = 12;
 
-    public const string PATH_TO_SOUNDS = "res://assets/audio/music/";
+    public const string PATH_TO_MUSIC = "res://assets/audio/music/";
 
     public Timer AlarmCountdown { get; private set; }
     public WaveManager WaveManager { get; private set; }
@@ -48,7 +48,7 @@ public class GameManager : Node2D
         WaveManager = this.GetNode<WaveManager>("Level/Objects/WaveManager");
         AudioStreamPlayer = this.GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         Level = this.GetNode<Node2D>("Level");
-        MusicPlayer = new MusicPlayer(AudioStreamPlayer, PATH_TO_SOUNDS);
+        MusicPlayer = new MusicPlayer(AudioStreamPlayer, PATH_TO_MUSIC);
 
         StartNewRun();
         StartNewLoop();
@@ -62,18 +62,6 @@ public class GameManager : Node2D
         if (!AlarmTriggered) 
         {
             AdjustMusicAccordingToAlarmCountdown();
-        }
-
-        //TODO remove this test stuff
-        if (Input.IsActionJustPressed("test1"))
-        {
-            AdjustAlarmCountdown(5);
-            //Level.GetTree().Paused= !Level.GetTree().Paused;
-        }
-        if (Input.IsActionJustPressed("test2"))
-        {
-            AdjustAlarmCountdown(-5);
-            GetTree().Paused = false;
         }
     }
 
@@ -105,7 +93,7 @@ public class GameManager : Node2D
         EnemyCount = WaveManager.EnemyCount;
     }
 
-    private void AdjustAlarmCountdown(float adjustAmount)
+    public void AdjustAlarmCountdown(float adjustAmount)
     {
         // TODO this is bugged if you get a negative adjustment when the timer is near 0 - it goes back up to 3
         if (!AlarmTriggered) AlarmCountdown.Start(Mathf.Clamp(AlarmCountdown.TimeLeft + adjustAmount, 0, ALARM_COUNTDOWN_MAX_START));
@@ -158,5 +146,9 @@ public class GameManager : Node2D
             // TODO go to you win screen
         }
         StartNewLoop();
+    }
+    public void OnGoToShop(Player player)
+    {
+
     }
 }

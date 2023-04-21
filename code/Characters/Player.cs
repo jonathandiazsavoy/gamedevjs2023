@@ -31,7 +31,7 @@ public class Player : Character, IObtainer
 
     protected override void InitNodes()
     {
-        gameManager = this.GetNode<GameManager>("/root/GameManager");
+        gameManager = this.GetNode<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER);
     }
     public void ObtainItem(Item item)
     {
