@@ -147,8 +147,4 @@ public class GameManager : Node2D
         }
         StartNewLoop();
     }
-    public void OnGoToShop(Player player)
-    {
-
-    }
 }

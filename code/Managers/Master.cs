@@ -5,7 +5,9 @@ using Godot;
 // need to rethink tree structure is accordance what shoudl be paused when "Game" is paused
 public class Master : Node
 {
+    public const string NODE_PATH_TO_MASTER = "/root/Master";
     public const string NODE_PATH_TO_GAME_MANAGER = "/root/Master/GameManager";
+    public const string PATH_TO_SCREENS = "res://scenes/screens/";
     public const string PATH_TO_SOUNDS = "res://assets/audio/sounds/";
 
     public AudioStreamPlayer2D AudioStreamPlayer { get; private set; }
@@ -16,7 +18,7 @@ public class Master : Node
     public override void _Ready()
     {
         gameManager = this.GetNode<GameManager>(NODE_PATH_TO_GAME_MANAGER);
-        AudioStreamPlayer = this.GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
+        AudioStreamPlayer = this.GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D"); // TODO make it not 2d
         SoundPlayer = new SoundPlayer(AudioStreamPlayer, PATH_TO_SOUNDS);
     }
 
@@ -42,5 +44,15 @@ public class Master : Node
         {
             gameManager.AdjustMoney(100);
         }
+    }
+
+    // **************************************************
+    // Signal listeners
+    // **************************************************
+    public void OnGoToShop(Player player)
+    {
+        gameManager.GetTree().Paused = true;
+        PackedScene packedshop = GD.Load<PackedScene>(PATH_TO_SCREENS + "shop" + ".tscn");
+        this.AddChild(packedshop.Instance());
     }
 }
