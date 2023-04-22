@@ -10,7 +10,7 @@ public class Master : Node
     public const string PATH_TO_SCREENS = "res://scenes/screens/";
     public const string PATH_TO_SOUNDS = "res://assets/audio/sounds/";
 
-    public AudioStreamPlayer2D AudioStreamPlayer { get; private set; }
+    public AudioStreamPlayer AudioStreamPlayer { get; private set; }
     public SoundPlayer SoundPlayer;
 
     private GameManager gameManager;
@@ -18,7 +18,7 @@ public class Master : Node
     public override void _Ready()
     {
         gameManager = this.GetNode<GameManager>(NODE_PATH_TO_GAME_MANAGER);
-        AudioStreamPlayer = this.GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D"); // TODO make it not 2d
+        AudioStreamPlayer = this.GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         SoundPlayer = new SoundPlayer(AudioStreamPlayer, PATH_TO_SOUNDS);
     }
 

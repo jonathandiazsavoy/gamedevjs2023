@@ -2,14 +2,14 @@
 
 namespace code.Helpers
 {
-    public class SoundPlayer
+    public class PositionalSoundPlayer
     {
-        private AudioStreamPlayer audioPlayer;
+        private AudioStreamPlayer2D audioPlayer;
         private string pathToSoundFolder;
         private string soundFileExtension;
 
-        public SoundPlayer(AudioStreamPlayer audioPlayer, string pathToSoundFolder, string soundFileExtension = ".wav")
-        {
+        public PositionalSoundPlayer(AudioStreamPlayer2D audioPlayer, string pathToSoundFolder, string soundFileExtension=".wav") 
+        { 
             this.audioPlayer = audioPlayer;
             this.pathToSoundFolder = pathToSoundFolder;
             this.soundFileExtension = soundFileExtension;
@@ -20,7 +20,7 @@ namespace code.Helpers
             audioPlayer.Stream = ResourceLoader.Load<AudioStream>(pathToSoundFolder + fileName + soundFileExtension);
             audioPlayer.Play();
         }
-        public void Play()
+        public void Play() 
         {
             audioPlayer.Play();
         }

@@ -19,7 +19,7 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
     public CharacterStats BaseStats { get; protected set; }
     [Export]
     public CharacterStats CurrentStats { get; protected set; }
-    public SoundPlayer SoundPlayer;
+    public PositionalSoundPlayer SoundPlayer;
 
     // Custom properties
     [Export]
@@ -47,7 +47,7 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
         this.AnimationPlayer = this.GetNode<AnimationPlayer>(ANIMATION_PLAYER_NAME);
         this.AudioPlayer = this.GetNode<AudioStreamPlayer2D>(AUDIO_STREAM_PLAYER_NAME);
 
-        SoundPlayer = new SoundPlayer(AudioPlayer, PATH_TO_SOUNDS);
+        SoundPlayer = new PositionalSoundPlayer(AudioPlayer, PATH_TO_SOUNDS);
     }
 
     public void SetCharacterOrientation(Vector2 moveDirection)

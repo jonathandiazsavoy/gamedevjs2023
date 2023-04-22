@@ -3,6 +3,7 @@ using System;
 
 namespace code.Helpers
 {
+    // Just keep misc usful functions in here for later
     public static class HelperFunctions
     {
         public static void PrintChildrenNames(Node node)

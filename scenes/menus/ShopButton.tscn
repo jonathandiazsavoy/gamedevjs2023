@@ -24,7 +24,6 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 2 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
-expand_icon = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 300.0
