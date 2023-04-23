@@ -44,7 +44,7 @@ public class Player : Character, IHurtable, IObtainer
             if (attack.PushForce > 0)
             {
                 Vector2 hitDirection = (this.GlobalPosition - attacker.GlobalPosition).Normalized();
-                this.MoveAndSlide(hitDirection * attack.PushForce);
+                this.incomingAttackForce = hitDirection * attack.PushForce;
             }
         }
     }

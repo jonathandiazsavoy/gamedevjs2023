@@ -1,11 +1,12 @@
 using code.StateMachines.CharacterStates.EnemyStates;
 using Godot;
-using System;
 
 public class Enemy : Character, IHurtable
 {
     [Signal]
     public delegate void EnemyDied(Enemy enemy);
+
+    public NavigationAgent2D NavigationAgent;
 
     public override void _Ready()
     {
@@ -17,6 +18,7 @@ public class Enemy : Character, IHurtable
 
         currentState = new Idle(this);
         currentAttack = new Attack(1, 50);
+        //NavigationAgent.SetTargetLocation
     }
 
     public override void _PhysicsProcess(float delta)
