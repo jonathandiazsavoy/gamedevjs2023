@@ -14,62 +14,67 @@ margin_right = 1280.0
 margin_bottom = 900.0
 color = Color( 1, 1, 1, 0.764706 )
 
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopScreen"]
+margin_left = 447.0
+margin_top = 40.0
+margin_right = 747.0
+margin_bottom = 140.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "WELCOME TO THE SHOP"
+
 [node name="GridContainer" type="GridContainer" parent="ShopScreen"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -328.0
-margin_top = -394.0
-margin_right = 472.0
-margin_bottom = 206.0
+margin_left = -568.0
+margin_top = -336.0
+margin_right = 232.0
+margin_bottom = 264.0
 custom_constants/vseparation = 30
 custom_constants/hseparation = 30
 columns = 2
 
 [node name="MarginContainer" parent="ShopScreen/GridContainer" instance=ExtResource( 1 )]
 margin_right = 385.0
-margin_bottom = 180.0
+margin_bottom = 128.0
 
 [node name="MarginContainer2" parent="ShopScreen/GridContainer" instance=ExtResource( 1 )]
 margin_left = 415.0
 margin_right = 800.0
-margin_bottom = 180.0
+margin_bottom = 128.0
 
 [node name="MarginContainer3" parent="ShopScreen/GridContainer" instance=ExtResource( 1 )]
-margin_top = 210.0
+margin_top = 158.0
 margin_right = 385.0
-margin_bottom = 390.0
+margin_bottom = 286.0
 
 [node name="MarginContainer4" parent="ShopScreen/GridContainer" instance=ExtResource( 1 )]
 margin_left = 415.0
-margin_top = 210.0
+margin_top = 158.0
 margin_right = 800.0
-margin_bottom = 390.0
+margin_bottom = 286.0
 
 [node name="MarginContainer5" parent="ShopScreen/GridContainer" instance=ExtResource( 1 )]
-margin_top = 420.0
+margin_top = 316.0
 margin_right = 385.0
-margin_bottom = 600.0
+margin_bottom = 443.0
 
 [node name="MarginContainer6" parent="ShopScreen/GridContainer" instance=ExtResource( 1 )]
 margin_left = 415.0
-margin_top = 420.0
+margin_top = 316.0
 margin_right = 800.0
+margin_bottom = 443.0
+
+[node name="ShopButton" parent="ShopScreen/GridContainer" instance=ExtResource( 1 )]
+margin_top = 473.0
+margin_right = 385.0
 margin_bottom = 600.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ShopScreen"]
-margin_left = 32.0
-margin_top = 56.0
-margin_right = 332.0
-margin_bottom = 156.0
-custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "WELCOME TO THE SHOP"
-
 [node name="Button" parent="ShopScreen" instance=ExtResource( 2 )]
-margin_left = 864.0
-margin_top = 728.0
-margin_right = 1064.0
-margin_bottom = 828.0
+margin_left = 968.0
+margin_top = 744.0
+margin_right = 1168.0
+margin_bottom = 844.0
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 text = "BACK"
