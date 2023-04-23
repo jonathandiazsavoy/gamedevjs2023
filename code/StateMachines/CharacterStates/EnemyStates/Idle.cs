@@ -1,4 +1,4 @@
-﻿namespace code.StateMachines.CharacterStates.NPCStates.EnemyStates
+﻿namespace code.StateMachines.CharacterStates.EnemyStates
 {
     public class Idle : EnemyState
     {

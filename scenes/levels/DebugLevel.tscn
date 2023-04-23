@@ -3,7 +3,6 @@
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/waves/wave1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/visuals/textures/backgrounds/GrassBackground.png" type="Texture" id=4]
 [ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
@@ -14,8 +13,8 @@
 [ext_resource path="res://scenes/area_triggers/portals/NextWavePortal.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/audio/sounds/menu/pause.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/ui_elements/AppendableRichTextLabel.tscn" type="PackedScene" id=14]
-
-[sub_resource type="ImageTexture" id=2]
+[ext_resource path="res://assets/visuals/textures/tile_sets/middle_grass.png" type="Texture" id=15]
+[ext_resource path="res://assets/visuals/textures/tile_sets/outer_grass.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -96,9 +95,10 @@ one_shot = true
 [node name="Level" type="Node2D" parent="GameManager"]
 
 [node name="Objects" type="YSort" parent="GameManager/Level"]
+z_index = 1
 
 [node name="Player" parent="GameManager/Level/Objects" instance=ExtResource( 2 )]
-position = Vector2( 865, 1352 )
+position = Vector2( 1280, 900 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="GameManager/Level/Objects/Player"]
 remote_path = NodePath("../../../Camera2D")
@@ -111,22 +111,33 @@ script = ExtResource( 10 )
 [node name="Wave" parent="GameManager/Level/Objects/WaveManager" instance=ExtResource( 3 )]
 
 [node name="NextWavePortal" parent="GameManager/Level/Objects" instance=ExtResource( 12 )]
+position = Vector2( 1203, 800 )
 
 [node name="ShopPortal" parent="GameManager/Level/Objects" instance=ExtResource( 8 )]
+position = Vector2( 1355, 800 )
 
 [node name="Map" type="Node2D" parent="GameManager/Level"]
-
-[node name="GrassBackground" type="Sprite" parent="GameManager/Level/Map"]
-z_index = -2
-z_as_relative = false
-texture = ExtResource( 4 )
-normal_map = SubResource( 2 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 4000, 4000 )
+z_index = -1
 
 [node name="Center" type="Position2D" parent="GameManager/Level/Map"]
 position = Vector2( 1280, 900 )
+
+[node name="BackGround2" type="Sprite" parent="GameManager/Level/Map"]
+scale = Vector2( 0.5, 0.5 )
+z_index = -1
+texture = ExtResource( 15 )
+offset = Vector2( 2560, 1800 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5120, 3600 )
+
+[node name="BackGround1" type="Sprite" parent="GameManager/Level/Map"]
+position = Vector2( -64, 0 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -1
+texture = ExtResource( 16 )
+offset = Vector2( 2560, 1800 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 2560, 1800 )
 
 [node name="Obstacle" type="StaticBody2D" parent="GameManager/Level/Map"]
 position = Vector2( -10, 0 )
@@ -175,7 +186,7 @@ scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="GameManager/Level"]
-position = Vector2( 865, 1352 )
+position = Vector2( 1280, 900 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true

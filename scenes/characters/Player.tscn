@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://assets/visuals/sprite_sheets/characters/Player.png" type="Texture" id=1]
+[ext_resource path="res://assets/visuals/characters/Player.png" type="Texture" id=1]
 [ext_resource path="res://scenes/area_triggers/generics/GrabberBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/area_triggers/generics/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/area_triggers/generics/Hurtbox.tscn" type="PackedScene" id=4]

@@ -18,7 +18,7 @@ public abstract class BaseFSMState
     public BaseFSMState SwitchState(BaseFSMState newState)
     {
         //TODO debug
-        //GD.Print("switch state from: " + this+" to: " + newState);
+        GD.Print("switch state from: " + this+" to: " + newState);
         this.ExitState();
         newState.EnterState();
         return newState;

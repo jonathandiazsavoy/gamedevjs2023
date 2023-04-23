@@ -1,9 +1,9 @@
-using code.Helpers;
 using code.Items;
 using code.Items.TimeItems;
 using code.StateMachines.CharacterStates.PlayerStates;
+using Godot;
 
-public class Player : Character, IObtainer
+public class Player : Character, IHurtable, IObtainer
 {
     private GameManager gameManager;
 
@@ -17,7 +17,7 @@ public class Player : Character, IObtainer
 
 		
         currentState = new Idle(this);
-		currentAttack = new Attack(1, 100);
+		currentAttack = new Attack(1, 50);
 	}
 
     public override void _Process(float delta)
@@ -33,6 +33,30 @@ public class Player : Character, IObtainer
     {
         gameManager = this.GetNode<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER);
     }
+
+    public void ApplyIncomingAttack(Node2D attacker, Attack attack)
+    {
+        if (!Invulnerable)
+        {
+            currentState = currentState.SwitchState(new TakingDamage(this));
+            int damage = attack.Damage - this.CurrentStats.Defense;
+            this.TakeDamage(damage);
+            if (attack.PushForce > 0)
+            {
+                Vector2 hitDirection = (this.GlobalPosition - attacker.GlobalPosition).Normalized();
+                this.MoveAndSlide(hitDirection * attack.PushForce);
+            }
+        }
+    }
+    public void TakeDamage(int hpAmount)
+    {
+        if (this.CurrentStats.ApplyDamage(hpAmount))
+        {
+            // When hp is depleted
+            currentState = currentState.SwitchState(new Dying(this));
+        }
+    }
+
     public void ObtainItem(Item item)
     {
         SoundPlayer.Play("pickup item");

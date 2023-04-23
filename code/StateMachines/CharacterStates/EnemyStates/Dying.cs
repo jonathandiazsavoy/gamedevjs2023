@@ -1,7 +1,6 @@
-﻿using code.Items;
-using Godot;
+﻿using Godot;
 
-namespace code.StateMachines.CharacterStates.NPCStates.EnemyStates
+namespace code.StateMachines.CharacterStates.EnemyStates
 {
     public class Dying : EnemyState
     {
@@ -14,12 +13,13 @@ namespace code.StateMachines.CharacterStates.NPCStates.EnemyStates
 
         public override BaseFSMState Update(float delta)
         {
+            enemy.MoveAndSlide(enemy.incomingAttackForce);
             return this;
         }
 
         protected override void EnterState()
         {
-            character.AnimationPlayer.Play("DEATH");
+            enemy.AnimationPlayer.Play("DEATH");
         }
     }
 }

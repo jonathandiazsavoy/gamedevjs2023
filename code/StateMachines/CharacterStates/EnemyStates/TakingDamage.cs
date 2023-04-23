@@ -1,4 +1,6 @@
-﻿namespace code.StateMachines.CharacterStates.NPCStates.EnemyStates
+﻿using Godot;
+
+namespace code.StateMachines.CharacterStates.EnemyStates
 {
     public class TakingDamage : EnemyState
     {
@@ -8,13 +10,15 @@
 
         public override BaseFSMState Update(float delta)
         {
-            if (!character.AnimationPlayer.IsPlaying()) return this.SwitchState(new Idle(enemy));
+            if (!enemy.AnimationPlayer.IsPlaying()) return this.SwitchState(new Idle(enemy));
+            enemy.MoveAndSlide(enemy.incomingAttackForce);
             return this;
         }
 
         protected override void EnterState()
         {
-            enemy.SoundPlayer.Play("take damage");
+            enemy.AnimationPlayer.Play("take_damage");
+            enemy.SoundPlayer.Play("take_damage");
         }
     }
 }

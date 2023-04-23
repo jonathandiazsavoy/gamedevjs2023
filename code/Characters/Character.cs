@@ -2,7 +2,7 @@ using code.Helpers;
 using code.StateMachines.CharacterStates.NPCStates;
 using Godot;
 
-public class Character : KinematicBody2D, IHurtable, IAttacker
+public class Character : KinematicBody2D, IAttacker
 {
     const string ANIMATION_PLAYER_NAME = "AnimationPlayer";
     const string AUDIO_STREAM_PLAYER_NAME = "AudioStreamPlayer2D";
@@ -10,6 +10,7 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
     public const string PATH_TO_SOUNDS = "res://assets/audio/sounds/character/";
 
     public Vector2 currentMoveDirection;
+    public Vector2 incomingAttackForce;
 
     // Node members
     public AnimationPlayer AnimationPlayer { get; protected set; }
@@ -61,16 +62,6 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
     public int GetPointValue()
     {
         return (int)(BaseStats.MaxHp + BaseStats.MaxMp + BaseStats.Strength + BaseStats.Defense + BaseStats.Speed);
-    }
-
-    public void ApplyIncomingAttack(Node2D attacker, Attack attack)
-    {
-        if (currentState is IHurtable hurtable) hurtable.ApplyIncomingAttack(attacker, attack);
-    }
-
-    public void TakeDamage(int hpAmount)
-    {
-        if (currentState is IHurtable hurtable) hurtable.TakeDamage(hpAmount);
     }
 
     public Attack Attack => currentAttack;
