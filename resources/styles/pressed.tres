@@ -1,6 +1,6 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=2]
 
-[ext_resource path="res://assets/visuals/ui/controls/buttons/generics/large_default.png" type="Texture" id=1]
+[ext_resource path="res://assets/visuals/ui/controls/buttons/generics/large_active.png" type="Texture" id=1]
 
 [resource]
 texture = ExtResource( 1 )

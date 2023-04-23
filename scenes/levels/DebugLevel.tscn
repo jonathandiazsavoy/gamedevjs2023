@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/waves/wave1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
@@ -15,6 +16,7 @@
 [ext_resource path="res://scenes/ui_elements/AppendableRichTextLabel.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/visuals/textures/tile_sets/middle_grass.png" type="Texture" id=15]
 [ext_resource path="res://assets/visuals/textures/tile_sets/outer_grass.png" type="Texture" id=16]
+[ext_resource path="res://assets/visuals/textures/backgrounds/GrassBackground.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -116,6 +118,9 @@ position = Vector2( 1203, 800 )
 [node name="ShopPortal" parent="GameManager/Level/Objects" instance=ExtResource( 8 )]
 position = Vector2( 1355, 800 )
 
+[node name="Enemy" parent="GameManager/Level/Objects" instance=ExtResource( 4 )]
+position = Vector2( 1184, 912 )
+
 [node name="Map" type="Node2D" parent="GameManager/Level"]
 z_index = -1
 
@@ -131,13 +136,20 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 5120, 3600 )
 
 [node name="BackGround1" type="Sprite" parent="GameManager/Level/Map"]
-position = Vector2( -64, 0 )
 scale = Vector2( 0.5, 0.5 )
 z_index = -1
 texture = ExtResource( 16 )
 offset = Vector2( 2560, 1800 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 2560, 1800 )
+
+[node name="GoodBackground" type="Sprite" parent="GameManager/Level/Map"]
+scale = Vector2( 0.5, 0.5 )
+z_index = -1
+texture = ExtResource( 17 )
+offset = Vector2( 2560, 1800 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5120, 3600 )
 
 [node name="Obstacle" type="StaticBody2D" parent="GameManager/Level/Map"]
 position = Vector2( -10, 0 )
