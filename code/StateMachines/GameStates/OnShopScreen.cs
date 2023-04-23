@@ -30,7 +30,10 @@ namespace code.StateMachines.GameStates
         }
         protected override void ExitState()
         {
-            masterNode.Ren
+            GD.Print("exiting on shop screen state");
+            masterNode.GetNode<CanvasLayer>(Master.NODE_PATH_TO_SHOP_SCREEN).Free();
+            GD.Print("shop node killed");
+            masterNode.GameManager.GetTree().Paused = false;
             // unpause game and remove screen
             // retyurn to previous state
         }

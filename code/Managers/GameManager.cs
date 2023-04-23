@@ -15,6 +15,7 @@ public class GameManager : Node2D
     public Node2D Level { get; private set; }
     
     public MusicPlayer MusicPlayer;
+    public Player Player; // Player gets set between waves and when entering shop
 
     public float TotalRunTime { get; private set; }
     public float CenterClockTotal
@@ -141,6 +142,7 @@ public class GameManager : Node2D
     }
     public void OnGoToNextWave(Player player)
     {
+        this.Player = player;
         CurrentWaveNumber++;
         if (CurrentWaveNumber > FINAL_WAVE_NUMBER) { 
             // TODO go to you win screen

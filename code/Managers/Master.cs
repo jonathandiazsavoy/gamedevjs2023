@@ -55,7 +55,16 @@ public class Master : Node
     // **************************************************
     public void OnGoToShop(Player player)
     {
+        GameManager.Player = player;
         // if game is not paused, then go to shop
         if (currentState is Running) currentState = (GameState)currentState.SwitchState(new OnShopScreen(this, currentState));
     }
+    public void OnExitShop(Player player)
+    {
+        GD.Print("On exit shop called in master");
+        GameManager.Player = player;
+        // if game is not paused, then go to shop
+        if (currentState is OnShopScreen) currentState = (GameState)currentState.SwitchState(new Running(this));
+    }
+    // TODO find a better way to get signals sent through state machines
 }
