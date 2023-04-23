@@ -1,4 +1,6 @@
-﻿public abstract class BaseFSMState
+﻿using Godot;
+
+public abstract class BaseFSMState
 {
     /// <summary>
     ///     Update the current state.
@@ -13,8 +15,10 @@
     /// </summary>
     /// <param name="newState">State to switch to.</param>
     /// <returns>Newly switched state.</returns>
-    protected BaseFSMState SwitchState(BaseFSMState newState)
+    public BaseFSMState SwitchState(BaseFSMState newState)
     {
+        //TODO debug
+        GD.Print("switch state from: " + this+" to: " + newState);
         this.ExitState();
         newState.EnterState();
         return newState;

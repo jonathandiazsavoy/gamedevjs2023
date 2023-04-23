@@ -1,6 +1,4 @@
-﻿using Godot;
-
-namespace code.StateMachines.CharacterStates.PlayerStates
+﻿namespace code.StateMachines.CharacterStates.PlayerStates
 {
     public class Attacking : PlayerState
     {

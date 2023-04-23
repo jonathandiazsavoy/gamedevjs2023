@@ -1,4 +1,6 @@
 using code.Helpers;
+using code.StateMachines.GameStates;
+using code.StateMachines.GameStates.GamePlay;
 using Godot;
 
 // TODO need to reorganize tree hierarchy entirely - the game game manager should be moved up to this master node later on
@@ -7,43 +9,45 @@ public class Master : Node
 {
     public const string NODE_PATH_TO_MASTER = "/root/Master";
     public const string NODE_PATH_TO_GAME_MANAGER = "/root/Master/GameManager";
+    public const string NODE_PATH_TO_SHOP_SCREEN = "/root/Master/ShopScreen";
     public const string PATH_TO_SCREENS = "res://scenes/screens/";
     public const string PATH_TO_SOUNDS = "res://assets/audio/sounds/";
 
     public AudioStreamPlayer AudioStreamPlayer { get; private set; }
     public SoundPlayer SoundPlayer;
 
-    private GameManager gameManager;
+    public GameManager GameManager;
+    private GameState currentState;
 
     public override void _Ready()
     {
-        gameManager = this.GetNode<GameManager>(NODE_PATH_TO_GAME_MANAGER);
+        GameManager = this.GetNode<GameManager>(NODE_PATH_TO_GAME_MANAGER);
         AudioStreamPlayer = this.GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         SoundPlayer = new SoundPlayer(AudioStreamPlayer, PATH_TO_SOUNDS);
+        currentState = new Running(this);
     }
 
     public override void _Process(float delta)
     {
-        if (Input.IsActionJustPressed("pause"))
-        {
-            // TODO fix audio steup
-            if (!gameManager.GetTree().Paused) SoundPlayer.Play();
-            gameManager.GetTree().Paused= !gameManager.GetTree().Paused;
-        }
+        currentState = (GameState)currentState.HandleInput(delta);
 
         //TODO remove this test stuff
         if (Input.IsActionJustPressed("test1"))
         {
-            gameManager.AdjustAlarmCountdown(5);
+            GameManager.AdjustAlarmCountdown(5);
         }
         if (Input.IsActionJustPressed("test2"))
         {
-            gameManager.AdjustAlarmCountdown(-5);
+            GameManager.AdjustAlarmCountdown(-5);
         }
         if (Input.IsActionJustPressed("test2"))
         {
-            gameManager.AdjustMoney(100);
+            GameManager.AdjustMoney(100);
         }
+    }
+    public override void _PhysicsProcess(float delta)
+    {
+        currentState = (GameState)currentState.Update(delta);
     }
 
     // **************************************************
@@ -51,8 +55,7 @@ public class Master : Node
     // **************************************************
     public void OnGoToShop(Player player)
     {
-        gameManager.GetTree().Paused = true;
-        PackedScene packedshop = GD.Load<PackedScene>(PATH_TO_SCREENS + "shop" + ".tscn");
-        this.AddChild(packedshop.Instance());
+        // if game is not paused, then go to shop
+        if (currentState is Running) currentState = (GameState)currentState.SwitchState(new OnShopScreen(this, currentState));
     }
 }
