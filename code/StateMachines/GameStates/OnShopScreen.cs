@@ -23,19 +23,14 @@ namespace code.StateMachines.GameStates
 
         protected override void EnterState()
         {
-            // move shop instance stuff here
             masterNode.GameManager.GetTree().Paused = true;
             PackedScene packedshop = GD.Load<PackedScene>(Master.PATH_TO_SCREENS + "shop" + ".tscn");
             masterNode.AddChild(packedshop.Instance());
         }
         protected override void ExitState()
         {
-            GD.Print("exiting on shop screen state");
             masterNode.GetNode<CanvasLayer>(Master.NODE_PATH_TO_SHOP_SCREEN).Free();
-            GD.Print("shop node killed");
             masterNode.GameManager.GetTree().Paused = false;
-            // unpause game and remove screen
-            // retyurn to previous state
         }
     }
 }

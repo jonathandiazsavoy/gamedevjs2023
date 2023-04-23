@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/audio/music/calm_phase.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/area_triggers/portals/NextWavePortal.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/audio/sounds/menu/pause.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/ui_elements/AppendableRichTextLabel.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ImageTexture" id=2]
 
@@ -74,6 +75,20 @@ margin_bottom = 105.0
 custom_colors/default_color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
 text = "LOOP TIME LEFT: "
 
+[node name="Hp" parent="GameManager/CanvasLayer/GameplayUI" instance=ExtResource( 14 )]
+margin_left = 40.0
+margin_top = 768.0
+margin_right = 256.0
+margin_bottom = 808.0
+text = "HP: "
+
+[node name="Mp" parent="GameManager/CanvasLayer/GameplayUI" instance=ExtResource( 14 )]
+margin_left = 40.0
+margin_top = 808.0
+margin_right = 256.0
+margin_bottom = 848.0
+text = "MP: "
+
 [node name="AlarmCountdown" type="Timer" parent="GameManager"]
 wait_time = 60.0
 one_shot = true
@@ -110,6 +125,9 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 4000, 4000 )
 
+[node name="Center" type="Position2D" parent="GameManager/Level/Map"]
+position = Vector2( 1280, 900 )
+
 [node name="Obstacle" type="StaticBody2D" parent="GameManager/Level/Map"]
 position = Vector2( -10, 0 )
 scale = Vector2( 1, 1000 )
@@ -122,7 +140,7 @@ scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 7 )
 
 [node name="Obstacle2" type="StaticBody2D" parent="GameManager/Level/Map"]
-position = Vector2( 2010, 0 )
+position = Vector2( 2570, 0 )
 scale = Vector2( 1, 1000 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level/Map/Obstacle2"]
@@ -145,7 +163,7 @@ scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 7 )
 
 [node name="Obstacle4" type="StaticBody2D" parent="GameManager/Level/Map"]
-position = Vector2( 2000, 2010 )
+position = Vector2( 2000, 1810 )
 rotation = 1.5708
 scale = Vector2( 1, 1000 )
 

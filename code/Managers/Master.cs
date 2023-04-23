@@ -40,7 +40,7 @@ public class Master : Node
         {
             GameManager.AdjustAlarmCountdown(-5);
         }
-        if (Input.IsActionJustPressed("test2"))
+        if (Input.IsActionJustPressed("test3"))
         {
             GameManager.AdjustMoney(100);
         }
@@ -61,10 +61,11 @@ public class Master : Node
     }
     public void OnExitShop(Player player)
     {
-        GD.Print("On exit shop called in master");
         GameManager.Player = player;
         // if game is not paused, then go to shop
         if (currentState is OnShopScreen) currentState = (GameState)currentState.SwitchState(new Running(this));
+        // TODO is bugged since exit uses same button as pasue - need a cooldown to prevent pausing
+
     }
     // TODO find a better way to get signals sent through state machines
 }

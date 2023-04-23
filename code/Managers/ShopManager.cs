@@ -25,7 +25,6 @@ public class ShopManager : Control
     // **************************************************
     public void OnExitButtonPressed()
     {
-        GD.Print("On exit pressed in shop manger");
         EmitSignal(nameof(ExitShop), gameManager.Player);
     }
 }
