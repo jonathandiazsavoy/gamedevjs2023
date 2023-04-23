@@ -14,12 +14,14 @@
         public override BaseFSMState Update(float delta)
         {
             if (!player.AnimationPlayer.IsPlaying()) return this.SwitchState(new Idle(player));
+            player.MoveAndSlide(player.incomingAttackForce);
             return this;
         }
 
         protected override void EnterState()
         {
-            player.SoundPlayer.Play("take damage");
+            player.AnimationPlayer.Play("take_damage");
+            player.SoundPlayer.Play("take_damage");
         }
     }
 }

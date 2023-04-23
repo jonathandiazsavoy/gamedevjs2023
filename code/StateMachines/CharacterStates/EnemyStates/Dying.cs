@@ -19,7 +19,8 @@ namespace code.StateMachines.CharacterStates.EnemyStates
 
         protected override void EnterState()
         {
-            enemy.AnimationPlayer.Play("DEATH");
+            enemy.AnimationPlayer.Play("death");
+            enemy.SoundPlayer.Play("enemy_death");
         }
     }
 }

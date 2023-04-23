@@ -22,8 +22,8 @@
 
         protected override void EnterState()
         {
-            player.AnimationPlayer.Play("Attack");
-            player.SoundPlayer.Play("melee attack");
+            player.AnimationPlayer.Play("Attack"); //TODO rename
+            player.SoundPlayer.Play("melee_attack");
         }
     }
 }

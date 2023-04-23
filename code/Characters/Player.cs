@@ -1,3 +1,4 @@
+using code.Helpers;
 using code.Items;
 using code.Items.TimeItems;
 using code.StateMachines.CharacterStates.PlayerStates;
@@ -7,18 +8,19 @@ public class Player : Character, IHurtable, IObtainer
 {
     private GameManager gameManager;
 
-	public override void _Ready()
-	{
-        base.InitNodes();
-        this.InitNodes();
+    protected override void InitNodes()
+    {
+        this.AnimationPlayer = this.GetNode<AnimationPlayer>(Character.ANIMATION_PLAYER_NAME);
+        this.AudioPlayer = this.GetNode<AudioStreamPlayer2D>(Character.AUDIO_STREAM_PLAYER_NAME);
 
-		this.BaseStats = new CharacterStats(3, 0, 1, 0, 1.5f);
-		this.CurrentStats = this.BaseStats;
+        SoundPlayer = new PositionalSoundPlayer(AudioPlayer, PATH_TO_SOUNDS);
 
-		
-        currentState = new Idle(this);
-		currentAttack = new Attack(1, 50);
-	}
+        gameManager = this.GetNode<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER);
+    }
+    protected override void InitState()
+    {
+        this.currentState = new Idle(this);
+    }
 
     public override void _Process(float delta)
     {
@@ -28,11 +30,6 @@ public class Player : Character, IHurtable, IObtainer
 	{
 		currentState = (PlayerState)currentState.Update(delta);
 	}
-
-    protected override void InitNodes()
-    {
-        gameManager = this.GetNode<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER);
-    }
 
     public void ApplyIncomingAttack(Node2D attacker, Attack attack)
     {
@@ -59,7 +56,7 @@ public class Player : Character, IHurtable, IObtainer
 
     public void ObtainItem(Item item)
     {
-        SoundPlayer.Play("pickup item");
+        SoundPlayer.Play("pickup_item");
         item.PickUp();
         if (item is CountDownModifier countDownModifier)
         {

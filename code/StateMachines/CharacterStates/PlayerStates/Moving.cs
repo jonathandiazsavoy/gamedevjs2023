@@ -34,7 +34,7 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 
         protected override void EnterState()
         {
-            player.AnimationPlayer.Play("Run");
+            player.AnimationPlayer.Play("Run"); // TODO rename
         }
 
         protected override void ExitState()

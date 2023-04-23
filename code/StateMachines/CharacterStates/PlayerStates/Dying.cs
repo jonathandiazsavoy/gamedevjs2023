@@ -18,7 +18,8 @@
 
         protected override void EnterState()
         {
-            player.AnimationPlayer.Play("DEATH");
+            player.AnimationPlayer.Play("death");
+            player.SoundPlayer.Play("death");
         }
     }
 }

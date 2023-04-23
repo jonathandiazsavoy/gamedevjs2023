@@ -4,8 +4,8 @@ using Godot;
 
 public class Character : KinematicBody2D, IAttacker
 {
-    const string ANIMATION_PLAYER_NAME = "AnimationPlayer";
-    const string AUDIO_STREAM_PLAYER_NAME = "AudioStreamPlayer2D";
+    public const string ANIMATION_PLAYER_NAME = "AnimationPlayer";
+    public const string AUDIO_STREAM_PLAYER_NAME = "AudioStreamPlayer2D";
 
     public const string PATH_TO_SOUNDS = "res://assets/audio/sounds/character/";
 
@@ -32,12 +32,8 @@ public class Character : KinematicBody2D, IAttacker
     public override void _Ready()
     {
         this.InitNodes();
-
-        this.BaseStats = new CharacterStats(3, 0, 1, 0, 5);
-        this.CurrentStats = this.BaseStats;
-
-        this.currentState = new Idle(this);
-        this.currentAttack = new Attack(1, 0);
+        this.InitDefaultProperties();
+        this.InitState();
     }
 
     /// <summary>
@@ -49,6 +45,18 @@ public class Character : KinematicBody2D, IAttacker
         this.AudioPlayer = this.GetNode<AudioStreamPlayer2D>(AUDIO_STREAM_PLAYER_NAME);
 
         SoundPlayer = new PositionalSoundPlayer(AudioPlayer, PATH_TO_SOUNDS);
+    }
+    protected virtual void InitDefaultProperties()
+    {
+        // For this game default mp and defense to 0 - attack will always be determined by stength
+        this.BaseStats = new CharacterStats(3, 0, 1, 0, 1.5f);
+        this.CurrentStats = this.BaseStats;
+
+        this.currentAttack = new Attack(this, CurrentStats.Strength, 50);
+    }
+    protected virtual void InitState()
+    {
+        this.currentState = new Idle(this);
     }
 
     public void SetCharacterOrientation(Vector2 moveDirection)

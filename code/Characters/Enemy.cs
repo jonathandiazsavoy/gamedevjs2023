@@ -6,19 +6,12 @@ public class Enemy : Character, IHurtable
     [Signal]
     public delegate void EnemyDied(Enemy enemy);
 
-    public NavigationAgent2D NavigationAgent;
+    public NavigationAgent2D NavigationAgent { get { return this.GetNode<NavigationAgent2D>("NavigationAgent2D"); } }
+    public Character currentTarget;
 
-    public override void _Ready()
+    protected override void InitState()
     {
-        this.InitNodes();
-
-        this.BaseStats = new CharacterStats(3, 0, 1, 0, 1.5f);
-        this.CurrentStats = this.BaseStats;
-
-
-        currentState = new Idle(this);
-        currentAttack = new Attack(1, 50);
-        //NavigationAgent.SetTargetLocation
+        this.currentState = new Idle(this);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -39,6 +32,7 @@ public class Enemy : Character, IHurtable
                 this.incomingAttackForce = hitDirection * attack.PushForce;
             }
         }
+        currentTarget = attack.Owner;
     }
     public void TakeDamage(int hpAmount)
     {
