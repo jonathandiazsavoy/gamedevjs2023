@@ -9,6 +9,7 @@ namespace code.Helpers
         private AudioStreamPlayer audioPlayer;
         private string pathToMusicFolder;
         private string musicFileExtension;
+        private string currentlyPlaying; // Name of song being played already
 
         public MusicPlayer(AudioStreamPlayer audioPlayer, string pathToSoundFolder, string soundFileExtension = ".wav")
         {
@@ -20,8 +21,12 @@ namespace code.Helpers
         public void Play(string fileName)
         {
             audioPlayer.PitchScale = DEFAULT_PITCH_SCALE; // By default reset pitch scale
-            audioPlayer.Stream = ResourceLoader.Load<AudioStream>(pathToMusicFolder + fileName + musicFileExtension);
-            audioPlayer.Play();
+            if (!fileName.Equals(currentlyPlaying))
+            {
+                audioPlayer.Stream = ResourceLoader.Load<AudioStream>(pathToMusicFolder + fileName + musicFileExtension);
+                audioPlayer.Play();
+                currentlyPlaying= fileName;
+            }
         }
         public void Play()
         {
