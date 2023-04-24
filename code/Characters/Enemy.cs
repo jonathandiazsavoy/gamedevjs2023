@@ -11,10 +11,12 @@ public class Enemy : Character, IHurtable
 
     public NavigationAgent2D NavigationAgent { get { return this.GetNode<NavigationAgent2D>("NavigationAgent2D"); } }
     public Character currentTarget;
+    public bool Alerted;
 
     protected override void InitState()
     {
         this.currentState = new Idle(this);
+        Alerted= false;
     }
 
     public override void _PhysicsProcess(float delta)

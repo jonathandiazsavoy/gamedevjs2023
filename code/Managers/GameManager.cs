@@ -8,13 +8,17 @@ public class GameManager : Node2D
     const int FINAL_WAVE_NUMBER = 12;
 
     public const string PATH_TO_MUSIC = "res://assets/audio/music/";
+    public const string PATH_TO_SOUNDS = "res://assets/audio/sounds/events/";
 
     public Timer AlarmCountdown { get; private set; }
     public WaveManager WaveManager { get; private set; }
-    public AudioStreamPlayer AudioStreamPlayer { get; private set; }
+    public AudioStreamPlayer MusicStreamPlayer { get; private set; }
+    public AudioStreamPlayer SoundStreamPlayer { get; private set; }
     public Node2D Level { get; private set; }
+    public Position2D MapCenter { get { return this.GetNode<Position2D>("Level/Map/Center");  } }
     
     public MusicPlayer MusicPlayer;
+    public SoundPlayer SoundPlayer;
     public Player Player; // Player gets set between waves and when entering shop
 
     public float TotalRunTime { get; private set; }
@@ -37,24 +41,30 @@ public class GameManager : Node2D
 
     private float initialMusicPitchScale;
     public bool AlarmTriggered;
+    public bool AlarmHalfTImeTriggered;
     public int Score;
     public int Money;
 
     [Signal]
     public delegate void AllEnemiesKilled();
+    [Signal]
+    public delegate void AlarmCountdownHalfTime();
 
     public override void _Ready()
     {
         AlarmCountdown = this.GetNode<Timer>("AlarmCountdown");
         WaveManager = this.GetNode<WaveManager>("Level/Objects/WaveManager");
-        AudioStreamPlayer = this.GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        MusicStreamPlayer = this.GetNode<AudioStreamPlayer>("MusicStreamPlayer");
+        SoundStreamPlayer = this.GetNode<AudioStreamPlayer>("SoundStreamPlayer");
+
         Level = this.GetNode<Node2D>("Level");
-        MusicPlayer = new MusicPlayer(AudioStreamPlayer, PATH_TO_MUSIC);
+        MusicPlayer = new MusicPlayer(MusicStreamPlayer, PATH_TO_MUSIC);
+        SoundPlayer = new SoundPlayer(SoundStreamPlayer, PATH_TO_SOUNDS);
 
         StartNewRun();
         StartNewLoop();
         
-        initialMusicPitchScale = AudioStreamPlayer.PitchScale;
+        initialMusicPitchScale = MusicStreamPlayer.PitchScale;
     }
     public override void _Process(float delta)
     {
@@ -63,6 +73,13 @@ public class GameManager : Node2D
         if (!AlarmTriggered) 
         {
             AdjustMusicAccordingToAlarmCountdown();
+            if ((AlarmCountdown.TimeLeft < ALARM_COUNTDOWN_MAX_START/2) && (!AlarmHalfTImeTriggered))
+            {
+                // Use this to trigger shop open - only trigger once per wave
+                GD.Print("ALARM HALT TIME EMIT");
+                EmitSignal(nameof(AlarmCountdownHalfTime));
+                AlarmHalfTImeTriggered = true;
+            }
         }
     }
 
@@ -87,6 +104,7 @@ public class GameManager : Node2D
     private void StartNewLoop()
     {
         AlarmTriggered = false;
+        AlarmHalfTImeTriggered = false;
         AlarmCountdown.Start(ALARM_COUNTDOWN_MAX_START);
         MusicPlayer.Play("calm_phase");
 
@@ -106,11 +124,11 @@ public class GameManager : Node2D
         if (adjustTo != 0)
         {
             // Increase speed and pitch exponentially as countdown gets closer to 0
-            AudioStreamPlayer.PitchScale = initialMusicPitchScale + (adjustTo / 25) * (adjustTo / 25);
+            MusicStreamPlayer.PitchScale = initialMusicPitchScale + (adjustTo / 25) * (adjustTo / 25);
         }
         else
         {
-            AudioStreamPlayer.PitchScale = initialMusicPitchScale;
+            MusicStreamPlayer.PitchScale = initialMusicPitchScale;
         }
     }
 

@@ -61,6 +61,8 @@ public class Master : Node
     }
     public void OnExitShop(Player player)
     {
+        // Close shop for current wave after exiting
+        GameManager.WaveManager.CloseShop();
         GameManager.Player = player;
         // if game is not paused, then go to shop
         if (currentState is OnShopScreen) currentState = (GameState)currentState.SwitchState(new Running(this));

@@ -29,7 +29,7 @@ namespace code.StateMachines.GameStates
         }
         protected override void ExitState()
         {
-            masterNode.GetNode<CanvasLayer>(Master.NODE_PATH_TO_SHOP_SCREEN).Free();
+            masterNode.GetNode<CanvasLayer>(Master.NODE_PATH_TO_SHOP_SCREEN).QueueFree();
             masterNode.GameManager.GetTree().Paused = false;
         }
     }
