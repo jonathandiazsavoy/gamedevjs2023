@@ -13,15 +13,6 @@ script = ExtResource( 3 )
 [node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( 1296, 944 )
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1088, 1024 )
-
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1400, 1144 )
-
-[node name="Enemy4" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1544, 968 )
-
 [node name="Enemy5" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( 1296, 568 )
 
