@@ -8,6 +8,7 @@
 
         public override BaseFSMState Update(float delta)
         {
+            if (enemy.Alerted) return this.SwitchState(new ChasingTarget(enemy));
             return this;
         }
 
