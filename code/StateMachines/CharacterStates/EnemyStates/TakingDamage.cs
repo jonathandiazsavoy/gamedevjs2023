@@ -1,6 +1,4 @@
-﻿using Godot;
-
-namespace code.StateMachines.CharacterStates.EnemyStates
+﻿namespace code.StateMachines.CharacterStates.EnemyStates
 {
     public class TakingDamage : EnemyState
     {
@@ -10,7 +8,7 @@ namespace code.StateMachines.CharacterStates.EnemyStates
 
         public override BaseFSMState Update(float delta)
         {
-            if (!enemy.AnimationPlayer.IsPlaying()) return this.SwitchState(new Idle(enemy));
+            if (!enemy.AnimationPlayer.IsPlaying()) return this.SwitchState(new ChasingTarget(enemy));
             enemy.MoveAndSlide(enemy.incomingAttackForce);
             return this;
         }

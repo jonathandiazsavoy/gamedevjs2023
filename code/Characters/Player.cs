@@ -6,6 +6,9 @@ using Godot;
 
 public class Player : Character, IHurtable, IObtainer
 {
+    [Signal]
+    public delegate void PlayerDied(Player player);
+
     private GameManager gameManager;
 
     protected override void InitNodes()
@@ -16,6 +19,7 @@ public class Player : Character, IHurtable, IObtainer
         SoundPlayer = new PositionalSoundPlayer(AudioPlayer, PATH_TO_SOUNDS);
 
         gameManager = this.GetNode<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER);
+        this.Connect("PlayerDied", gameManager, "OnPlayerDied");
     }
     protected override void InitState()
     {
@@ -33,7 +37,7 @@ public class Player : Character, IHurtable, IObtainer
 
     public void ApplyIncomingAttack(Node2D attacker, Attack attack)
     {
-        if (!Invulnerable)
+        if (!Invulnerable && !(attack.Owner is Player))
         {
             currentState = currentState.SwitchState(new TakingDamage(this));
             int damage = attack.Damage - this.CurrentStats.Defense;
@@ -52,6 +56,12 @@ public class Player : Character, IHurtable, IObtainer
             // When hp is depleted
             currentState = currentState.SwitchState(new Dying(this));
         }
+    }
+
+    public override void Die()
+    {
+        EmitSignal(nameof(PlayerDied), this);
+        this.QueueFree();
     }
 
     public void ObtainItem(Item item)

@@ -149,4 +149,9 @@ public class GameManager : Node2D
         }
         StartNewLoop();
     }
+    public void OnPlayerDied(Player player)
+    {
+        GD.Print("YOU DIED");
+        // TODO play game over popup
+    }
 }

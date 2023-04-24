@@ -19,7 +19,7 @@
         protected override void EnterState()
         {
             player.AnimationPlayer.Play("death");
-            player.SoundPlayer.Play("death");
+            player.SoundPlayer.Play("player_death");
         }
     }
 }

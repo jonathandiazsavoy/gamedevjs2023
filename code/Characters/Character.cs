@@ -15,6 +15,7 @@ public class Character : KinematicBody2D, IAttacker
     // Node members
     public AnimationPlayer AnimationPlayer { get; protected set; }
     public AudioStreamPlayer2D AudioPlayer { get; protected set; }
+    public Hitbox Hitbox { get { return this.GetNode<Hitbox>("Hitbox"); } }
     // Custom components
     [Export]
     public CharacterStats BaseStats { get; protected set; }
@@ -67,11 +68,20 @@ public class Character : KinematicBody2D, IAttacker
         }
     }
 
+    public virtual void Die()
+    {
+        //EmitSignal(nameof(EnemyDied), this);
+        this.QueueFree();
+    }
+
     public int GetPointValue()
     {
         return (int)(BaseStats.MaxHp + BaseStats.MaxMp + BaseStats.Strength + BaseStats.Defense + BaseStats.Speed);
     }
 
     public Attack Attack => currentAttack;
+    /// <summary>
+    /// The node adminstering the attack (just the parent object like the bullet or the parent of melee attack)
+    /// </summary>
     public Node2D Attacker => this;
 }

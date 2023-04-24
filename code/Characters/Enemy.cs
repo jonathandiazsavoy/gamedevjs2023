@@ -6,6 +6,9 @@ public class Enemy : Character, IHurtable
     [Signal]
     public delegate void EnemyDied(Enemy enemy);
 
+    [Export]
+    public float WaitAfterBumpingPlayer = 1f;
+
     public NavigationAgent2D NavigationAgent { get { return this.GetNode<NavigationAgent2D>("NavigationAgent2D"); } }
     public Character currentTarget;
 
@@ -21,7 +24,7 @@ public class Enemy : Character, IHurtable
 
     public void ApplyIncomingAttack(Node2D attacker, Attack attack)
     {
-        if (!Invulnerable)
+        if (!Invulnerable && !(attack.Owner is Enemy))
         {
             currentState = currentState.SwitchState(new TakingDamage(this));
             int damage = attack.Damage - this.CurrentStats.Defense;
@@ -31,8 +34,8 @@ public class Enemy : Character, IHurtable
                 Vector2 hitDirection = (this.GlobalPosition - attacker.GlobalPosition).Normalized();
                 this.incomingAttackForce = hitDirection * attack.PushForce;
             }
+            currentTarget = attack.Owner;
         }
-        currentTarget = attack.Owner;
     }
     public void TakeDamage(int hpAmount)
     {
@@ -43,9 +46,21 @@ public class Enemy : Character, IHurtable
         }
     }
 
-    public void Die()
+    public override void Die()
     {
         EmitSignal(nameof(EnemyDied), this);
         this.QueueFree();
+    }
+
+    // **************************************************
+    // Signal listeners
+    // **************************************************
+    public void OnPlayerBumped(Area2D area2d)
+    {
+        if (!(area2d is Hurtbox)) return; // Ignore anything not hurtbox 
+        if (area2d.GetParent() is Player)
+        {
+            this.currentState = currentState.SwitchState(new BumpedTarget(this));
+        }
     }
 }

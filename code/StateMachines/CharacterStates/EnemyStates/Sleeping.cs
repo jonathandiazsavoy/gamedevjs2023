@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace code.StateMachines.CharacterStates.EnemyStates
+﻿namespace code.StateMachines.CharacterStates.EnemyStates
 {
     public class Sleeping : EnemyState
     {
@@ -10,12 +8,12 @@ namespace code.StateMachines.CharacterStates.EnemyStates
 
         public override BaseFSMState Update(float delta)
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         protected override void EnterState()
         {
-            throw new NotImplementedException();
+            // TODO play sleeping animation
         }
     }
 }

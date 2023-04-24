@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
@@ -17,6 +17,11 @@
 [ext_resource path="res://assets/visuals/textures/tile_sets/middle_grass.png" type="Texture" id=15]
 [ext_resource path="res://assets/visuals/textures/tile_sets/outer_grass.png" type="Texture" id=16]
 [ext_resource path="res://assets/visuals/textures/backgrounds/GrassBackground.png" type="Texture" id=17]
+
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( 2560, 0, 2560, 1800, 0, 1800, 0, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 0, 0, 0, 1800, 2560, 1800, 2560, 0 ) ]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -99,6 +104,9 @@ one_shot = true
 [node name="Objects" type="YSort" parent="GameManager/Level"]
 z_index = 1
 
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="GameManager/Level/Objects"]
+navpoly = SubResource( 2 )
+
 [node name="Player" parent="GameManager/Level/Objects" instance=ExtResource( 2 )]
 position = Vector2( 1280, 900 )
 
@@ -144,6 +152,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 2560, 1800 )
 
 [node name="GoodBackground" type="Sprite" parent="GameManager/Level/Map"]
+visible = false
 scale = Vector2( 0.5, 0.5 )
 z_index = -1
 texture = ExtResource( 17 )

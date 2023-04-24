@@ -1,15 +1,10 @@
-﻿using Godot;
-
-namespace code.StateMachines.CharacterStates.EnemyStates
+﻿namespace code.StateMachines.CharacterStates.EnemyStates
 {
     public class Dying : EnemyState
     {
         public Dying(Enemy enemy) : base(enemy)
         {
         }
-
-        [Signal]
-        public delegate void EnemyDied(Enemy enemy);
 
         public override BaseFSMState Update(float delta)
         {

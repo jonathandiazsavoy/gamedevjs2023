@@ -13,7 +13,7 @@
 
         protected override void EnterState()
         {
-            //
+            // TODO play idle animation
         }
     }
 }
