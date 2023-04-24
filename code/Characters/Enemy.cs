@@ -15,7 +15,7 @@ public class Enemy : Character, IHurtable
 
     protected override void InitState()
     {
-        this.currentState = new Idle(this);
+        this.currentState = new Sleeping(this);
         Alerted= false;
     }
 

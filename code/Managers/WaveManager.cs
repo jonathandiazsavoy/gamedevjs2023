@@ -83,6 +83,7 @@ public class WaveManager : YSort
         //Wave.QueueFree();
         OpenPortal();
         this.gameManager.SoundPlayer.Play("victory");
+        this.gameManager.MusicPlayer.Play("calm_phase");
         allEnemiesKilled = true;
     }
     public void LoadWave(int waveNumber)
