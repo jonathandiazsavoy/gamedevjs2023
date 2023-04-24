@@ -77,7 +77,6 @@ public class GameManager : Node2D
             if ((AlarmCountdown.TimeLeft < ALARM_COUNTDOWN_MAX_START/2) && (!AlarmHalfTImeTriggered))
             {
                 // Use this to trigger shop open - only trigger once per wave
-                GD.Print("ALARM HALT TIME EMIT");
                 EmitSignal(nameof(AlarmCountdownHalfTime));
                 AlarmHalfTImeTriggered = true;
             }

@@ -1,4 +1,6 @@
-﻿namespace code.StateMachines.CharacterStates.PlayerStates
+﻿using Godot;
+
+namespace code.StateMachines.CharacterStates.PlayerStates
 {
     public class Attacking : PlayerState
     {
@@ -22,6 +24,7 @@
 
         protected override void EnterState()
         {
+            GD.Print("current orientation: " + player.RotationDegrees);
             player.AnimationPlayer.Play("Attack"); //TODO rename
             player.SoundPlayer.Play("melee_attack");
         }
