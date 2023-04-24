@@ -11,39 +11,39 @@ script = ExtResource( 3 )
 [node name="Enemies" type="YSort" parent="."]
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 840, 1280 )
+position = Vector2( 1232, 1112 )
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 632, 1360 )
+position = Vector2( 1024, 1192 )
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 944, 1480 )
+position = Vector2( 1336, 1312 )
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1088, 1304 )
+position = Vector2( 1480, 1136 )
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 840, 904 )
+position = Vector2( 1232, 736 )
 
 [node name="Items" type="YSort" parent="."]
 
 [node name="Plus3Seconds" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 976, 1408 )
+position = Vector2( 1368, 1240 )
 
 [node name="Plus1Seconds" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 808, 1416 )
+position = Vector2( 1200, 1248 )
 
 [node name="Plus1Seconds2" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 864, 1176 )
+position = Vector2( 1256, 1008 )
 
 [node name="Plus1Seconds3" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 864, 1064 )
+position = Vector2( 1256, 896 )
 
 [node name="Plus1Seconds4" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 752, 1304 )
+position = Vector2( 1144, 1136 )
 
 [node name="Plus1Seconds5" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 962, 955 )
+position = Vector2( 1354, 787 )
 
 [node name="Plus1Seconds6" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 864, 992 )
+position = Vector2( 1256, 824 )

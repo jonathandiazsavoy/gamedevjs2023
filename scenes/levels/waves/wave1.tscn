@@ -13,9 +13,6 @@ script = ExtResource( 3 )
 [node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( 1296, 944 )
 
-[node name="Enemy5" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1296, 568 )
-
 [node name="Items" type="YSort" parent="."]
 
 [node name="Plus3Seconds" parent="Items" instance=ExtResource( 4 )]

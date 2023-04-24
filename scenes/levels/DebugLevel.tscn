@@ -1,17 +1,14 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/waves/wave1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
-[ext_resource path="res://scenes/area_triggers/portals/ShopPortal.tscn" type="PackedScene" id=8]
 [ext_resource path="res://code/Managers/Master.cs" type="Script" id=9]
 [ext_resource path="res://code/Managers/WaveManager.cs" type="Script" id=10]
 [ext_resource path="res://assets/audio/music/calm_phase.wav" type="AudioStream" id=11]
-[ext_resource path="res://scenes/area_triggers/portals/NextWavePortal.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/audio/sounds/menu/pause.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/ui_elements/AppendableRichTextLabel.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/visuals/textures/tile_sets/middle_grass.png" type="Texture" id=15]
@@ -120,15 +117,6 @@ script = ExtResource( 10 )
 
 [node name="Wave" parent="GameManager/Level/Objects/WaveManager" instance=ExtResource( 3 )]
 
-[node name="NextWavePortal" parent="GameManager/Level/Objects" instance=ExtResource( 12 )]
-position = Vector2( 1203, 800 )
-
-[node name="ShopPortal" parent="GameManager/Level/Objects" instance=ExtResource( 8 )]
-position = Vector2( 1355, 800 )
-
-[node name="Enemy" parent="GameManager/Level/Objects" instance=ExtResource( 4 )]
-position = Vector2( 1184, 912 )
-
 [node name="Map" type="Node2D" parent="GameManager/Level"]
 z_index = -1
 
@@ -152,7 +140,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 2560, 1800 )
 
 [node name="GoodBackground" type="Sprite" parent="GameManager/Level/Map"]
-visible = false
 scale = Vector2( 0.5, 0.5 )
 z_index = -1
 texture = ExtResource( 17 )
@@ -219,14 +206,17 @@ drag_margin_bottom = 0.1
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource( 11 )
 volume_db = -3.0
 autoplay = true
 
+[node name="SoundStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
 
+[connection signal="AlarmCountdownHalfTime" from="GameManager" to="GameManager/Level/Objects/WaveManager" method="OnAlarmCountdownHalfTime"]
 [connection signal="AllEnemiesKilled" from="GameManager" to="GameManager/Level/Objects/WaveManager" method="OnAllEnemiesKilled"]
 [connection signal="timeout" from="GameManager/AlarmCountdown" to="GameManager" method="OnAlarmCountdownTimeout"]
 [connection signal="timeout" from="GameManager/AlarmCountdown" to="GameManager/Level/Objects/WaveManager" method="OnAlarmCountdownTimeout"]
