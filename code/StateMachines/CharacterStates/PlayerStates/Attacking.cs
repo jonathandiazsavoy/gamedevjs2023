@@ -51,7 +51,6 @@ namespace code.StateMachines.CharacterStates.PlayerStates
             }
 
             GD.Print("current orientation: " + player.RotationDegrees);
-            //player.AnimationPlayer.Play("Attack"); //TODO rename
             player.SoundPlayer.Play("melee_attack");
         }
     }

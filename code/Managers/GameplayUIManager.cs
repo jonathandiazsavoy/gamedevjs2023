@@ -13,8 +13,10 @@ public class GameplayUIManager : Control
     protected RichTextLabel Score { get; set; }
     protected RichTextLabel Money { get; set; }
     protected AnalogueClock WaveClock { get; set; }
-    protected AppendableRichTextLabel Hp { get; set; }
-    protected AppendableRichTextLabel Mp { get; set; }
+    
+    private ColorRect TimeBar;
+    private ColorRect HpBar;
+    private ColorRect MpBar;
 
     private string initialTotalRunTimeText;
     private string initialLoopTimeLeftText;
@@ -35,13 +37,15 @@ public class GameplayUIManager : Control
         initialScoreLeftText= Score.Text;
         initialMoneyLeftText= Money.Text;
 
+        TimeBar = this.GetNode<ColorRect>("MarginContainer/HBoxContainer/TimeBar/MarginContainer/Value");
+        HpBar = this.GetNode<ColorRect>("MarginContainer/HBoxContainer/HpBar/MarginContainer/Value");
+        MpBar = this.GetNode<ColorRect>("MarginContainer/HBoxContainer/MpBar/MarginContainer/Value");
+
         // TODO temp stuff
         TotalRunTime = this.GetNode<RichTextLabel>("TotalRunTime");
         LoopTimeLeft = this.GetNode<RichTextLabel>("LoopTimeLeft");
         initialTotalRunTimeText = TotalRunTime.Text;
         initialLoopTimeLeftText = LoopTimeLeft.Text;
-        Hp = this.GetNode<AppendableRichTextLabel>("Hp");
-        Mp = this.GetNode<AppendableRichTextLabel>("Mp");
     }
     public override void _Process(float delta)
     {
@@ -51,10 +55,12 @@ public class GameplayUIManager : Control
 
         WaveClock.TimeUnit = gameManager.CenterClockTotal * AnalogueClock.SECONDS_IN_MINUTE;
 
+        TimeBar.RectScale = new Vector2(1, gameManager.AlarmCountdown.TimeLeft/ GameManager.ALARM_COUNTDOWN_MAX_START);
+        HpBar.RectScale = new Vector2(1, ((float)player.CurrentStats.Hp / (float)player.CurrentStats.MaxHp));
+        MpBar.RectScale = new Vector2(1, ((float)player.CurrentStats.Mp / (float)player.CurrentStats.Mp));
+
         // TODO temp stuff
         TotalRunTime.Text = initialTotalRunTimeText + Math.Floor(gameManager.TotalRunTime).ToString();
         LoopTimeLeft.Text = initialLoopTimeLeftText + Math.Ceiling(gameManager.AlarmCountdown.TimeLeft).ToString();
-        Hp.AppendToInitialText(player.CurrentStats.Hp + " / " + player.CurrentStats.MaxHp);
-        Mp.AppendToInitialText(player.CurrentStats.Mp + " / " + player.CurrentStats.MaxMp);
     }
 }

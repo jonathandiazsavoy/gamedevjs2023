@@ -50,7 +50,7 @@ public class Character : KinematicBody2D, IAttacker
     protected virtual void InitDefaultProperties()
     {
         // For this game default mp and defense to 0 - attack will always be determined by stength
-        this.BaseStats = new CharacterStats(3, 0, 1, 0, 1.5f);
+        this.BaseStats = new CharacterStats(3, 3, 1, 0, 1.5f);
         this.CurrentStats = this.BaseStats;
 
         this.currentAttack = new Attack(this, CurrentStats.Strength, 50);

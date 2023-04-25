@@ -45,7 +45,14 @@ public class Player : Character, IHurtable, IObtainer
         {
             currentState = currentState.SwitchState(new TakingDamage(this));
             int damage = attack.Damage - this.CurrentStats.Defense;
-            this.TakeDamage(damage);
+            if (gameManager.AlarmTriggered)
+            {
+                this.TakeDamage(damage);
+            }
+            else
+            {
+                gameManager.AdjustAlarmCountdown(-damage);
+            }
             if (attack.PushForce > 0)
             {
                 Vector2 hitDirection = (this.GlobalPosition - attacker.GlobalPosition).Normalized();

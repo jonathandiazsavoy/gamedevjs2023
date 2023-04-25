@@ -27,7 +27,7 @@ public abstract class PlayerState : BaseFSMState
 
     protected override void ExitState()
     {
-        player.AnimationPlayer.Play("RESET");
+        //player.AnimationPlayer.Play("RESET");
     }
 
     protected float NormalizeRotationDegrees(float degrees)

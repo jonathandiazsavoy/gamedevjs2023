@@ -75,7 +75,7 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 
         protected override void EnterState()
         {
-            //previousRotationDegrees = -450; // Force animation update when entering
+            previousRotationDegrees = -450; // Force animation update when entering
         }
     }
 }
