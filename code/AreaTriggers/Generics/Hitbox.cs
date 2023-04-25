@@ -9,6 +9,11 @@ public class Hitbox : Area2D
         Parent = this.GetParentOrNull<IAttacker>();
         if (Parent == null) GD.PushWarning("HITBOX AT "+this.GlobalPosition+" COULD NOT GET PARENT THAT IS AN IATTACKER");
     }
+    public override void _Process(float delta)
+    {
+        // TODO 9 Lock hitbox rotation
+        //this.GlobalRotationDegrees = 0;
+    }
 
     public void OnHitboxAreaEntered(Area2D area2d)
     {

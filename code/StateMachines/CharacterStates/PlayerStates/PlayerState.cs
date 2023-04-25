@@ -1,10 +1,8 @@
-using code.StateMachines.CharacterStates.PlayerStates;
 using Godot;
 
 public abstract class PlayerState : BaseFSMState
 {
     protected Player player;
-    protected float previousRotationDegrees;
 
     public PlayerState(Player player)
     {
@@ -29,7 +27,7 @@ public abstract class PlayerState : BaseFSMState
 
     protected override void ExitState()
     {
-
+        player.AnimationPlayer.Play("RESET");
     }
 
     protected float NormalizeRotationDegrees(float degrees)

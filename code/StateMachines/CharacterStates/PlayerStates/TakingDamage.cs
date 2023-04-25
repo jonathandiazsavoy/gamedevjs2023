@@ -13,7 +13,7 @@
 
         public override BaseFSMState Update(float delta)
         {
-            if (!player.AnimationPlayer.IsPlaying()) return this.SwitchState(new Idle(player));
+            if (!player.AnimationPlayer.IsPlaying()) return this.SwitchState(new Idle(player, player.RotationDegrees));
             player.MoveAndSlide(player.incomingAttackForce);
             return this;
         }

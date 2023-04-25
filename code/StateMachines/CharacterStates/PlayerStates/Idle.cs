@@ -4,8 +4,11 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 {
     public class Idle : PlayerState
     {
-        public Idle(Player player) : base(player)
+        private float orientation;
+
+        public Idle(Player player, float orientation) : base(player)
         {
+            this.orientation = NormalizeRotationDegrees(orientation);
         }
 
         public override BaseFSMState HandleInput(float delta)
@@ -16,11 +19,11 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 
             if (Input.IsActionJustPressed("attack"))
             {
-                return this.SwitchState(new Attacking(player, this));
+                return this.SwitchState(new Attacking(player, this, player.RotationDegrees));
             }
             if (!moveDirection.Equals(Vector2.Zero))
             {
-                return this.SwitchState(new Moving(player));
+                return this.SwitchState(new Moving(player, player.RotationDegrees));
             }
             return this;
         }
@@ -32,8 +35,29 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 
         protected override void EnterState()
         {
-            player.AnimationPlayer.Play("RESET");
-            //player.AnimationPlayer.Play("ide");
+            // Handle setting of correct sprite animation according to orientation
+            float degrees = orientation;
+            if (degrees >= 225 && degrees < 315)
+            {
+                // Up
+                player.AnimationPlayer.Play("idle_up");
+            }
+            else if (degrees >= 135 && degrees < 225)
+            {
+                // Left
+                player.AnimationPlayer.Play("idle_left");
+
+            }
+            else if (degrees >= 45 && degrees < 135)
+            {
+                // Down
+                player.AnimationPlayer.Play("idle_down");
+            }
+            else
+            {
+                // Right
+                player.AnimationPlayer.Play("idle_right");
+            }
         }
     }
 }

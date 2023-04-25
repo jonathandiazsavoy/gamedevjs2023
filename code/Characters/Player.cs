@@ -23,7 +23,7 @@ public class Player : Character, IHurtable, IObtainer
     }
     protected override void InitState()
     {
-        this.currentState = new Idle(this);
+        this.currentState = new Idle(this, this.RotationDegrees);
     }
 
     public override void _Process(float delta)

@@ -4,8 +4,11 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 {
     public class Moving : PlayerState
     {
-        public Moving(Player player) : base(player)
+        private float previousRotationDegrees;
+
+        public Moving(Player player, float orientation) : base(player)
         {
+            previousRotationDegrees= NormalizeRotationDegrees(orientation);
         }
 
         public override BaseFSMState HandleInput(float delta)
@@ -17,11 +20,11 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 
             if (Input.IsActionJustPressed("attack"))
             {
-                return this.SwitchState(new Attacking(player, this));
+                return this.SwitchState(new Attacking(player, this, player.RotationDegrees));
             }
             if (player.currentMoveDirection.Equals(Vector2.Zero))
             {
-                return this.SwitchState(new Idle(player));
+                return this.SwitchState(new Idle(player, player.RotationDegrees));
             }
             return this;
         }
@@ -35,8 +38,9 @@ namespace code.StateMachines.CharacterStates.PlayerStates
             float degrees = NormalizeRotationDegrees(player.RotationDegrees);
             if (Mathf.Abs(previousRotationDegrees - degrees) > 45)
             {
-                if(degrees >= 225 && degrees < 315)
+                if(degrees >= 225 && degrees < 314)
                 {
+                    //TODO when ging from right to right up to up, the right animation will still play needs fix
                     // Up
                     player.AnimationPlayer.Play("move_up");
                     previousRotationDegrees = degrees;
@@ -44,6 +48,7 @@ namespace code.StateMachines.CharacterStates.PlayerStates
                 else if (degrees >= 135 && degrees < 225)
                 {
                     // Left
+                    GD.Print("left animation");
                     player.AnimationPlayer.Play("move_left");
                     previousRotationDegrees = degrees;
                     
@@ -57,6 +62,8 @@ namespace code.StateMachines.CharacterStates.PlayerStates
                 else
                 {
                     // Right
+                    GD.Print("right animation");
+                    GD.Print("the degrees: "+degrees);
                     player.AnimationPlayer.Play("move_right");
                     previousRotationDegrees = degrees;
                 }
@@ -68,7 +75,7 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 
         protected override void EnterState()
         {
-            //player.AnimationPlayer.Play("Run"); // TODO rename
+            //previousRotationDegrees = -450; // Force animation update when entering
         }
     }
 }
