@@ -103,5 +103,9 @@ public class WaveManager : YSort
         { 
             item.Connect("ItemUsed", gameManager, "OnCountDownModifierItemUsed");
         }
-    }   
+    }
+    public void UnLoadWave()
+    {
+        Wave.QueueFree();
+    }
 }

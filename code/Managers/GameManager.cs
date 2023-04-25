@@ -23,6 +23,7 @@ public class GameManager : Node2D
     public Player Player; // Player gets set between waves and when entering shop
 
     public float TotalRunTime { get; private set; }
+    public float TotalWaveTime { get; private set; }
     public float CenterClockTotal
     {
         get 
@@ -103,6 +104,7 @@ public class GameManager : Node2D
     }
     private void StartNewLoop()
     {
+        TotalWaveTime= 0;
         AlarmTriggered = false;
         AlarmHalfTImeTriggered = false;
         AlarmCountdown.Start(ALARM_COUNTDOWN_MAX_START);
