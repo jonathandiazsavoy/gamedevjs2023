@@ -16,7 +16,8 @@ public class Enemy : Character, IHurtable
     protected override void InitState()
     {
         this.currentState = new Sleeping(this);
-        Alerted= false;
+        this.currentState = this.currentState.SwitchState(new Sleeping(this));
+        Alerted = false;
     }
 
     public override void _PhysicsProcess(float delta)

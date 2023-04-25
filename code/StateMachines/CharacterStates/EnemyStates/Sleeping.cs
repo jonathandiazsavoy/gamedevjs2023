@@ -14,7 +14,7 @@
 
         protected override void EnterState()
         {
-            // TODO play sleeping animation
+            enemy.AnimationPlayer.Play("sleeping");
         }
     }
 }

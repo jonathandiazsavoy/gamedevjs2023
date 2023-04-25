@@ -36,7 +36,7 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 
             // Handle setting of correct sprite animation according to orientation
             float degrees = NormalizeRotationDegrees(player.RotationDegrees);
-            if (Mathf.Abs(previousRotationDegrees - degrees) > 45)
+            if ((Mathf.Abs(previousRotationDegrees - degrees) > 45) && (((degrees+90)%90)==0))
             {
                 if(degrees >= 225 && degrees < 314)
                 {
