@@ -10,6 +10,7 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 
         public override BaseFSMState HandleInput(float delta)
         {
+            // TODO move this to input handler
             float xMove = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
             float yMove = Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up");
             player.currentMoveDirection = new Vector2(xMove, yMove).Normalized();
@@ -29,17 +30,45 @@ namespace code.StateMachines.CharacterStates.PlayerStates
         {
             player.MoveAndCollide(player.currentMoveDirection * player.CurrentStats.Speed);
             player.SetCharacterOrientation(player.currentMoveDirection);
+
+            // Handle setting of correct sprite animation according to orientation
+            float degrees = NormalizeRotationDegrees(player.RotationDegrees);
+            if (Mathf.Abs(previousRotationDegrees - degrees) > 45)
+            {
+                if(degrees >= 225 && degrees < 315)
+                {
+                    // Up
+                    player.AnimationPlayer.Play("move_up");
+                    previousRotationDegrees = degrees;
+                }
+                else if (degrees >= 135 && degrees < 225)
+                {
+                    // Left
+                    player.AnimationPlayer.Play("move_left");
+                    previousRotationDegrees = degrees;
+                    
+                }
+                else if (degrees >= 45 && degrees < 135)
+                {
+                    // Down
+                    player.AnimationPlayer.Play("move_down");
+                    previousRotationDegrees = degrees;
+                }
+                else
+                {
+                    // Right
+                    player.AnimationPlayer.Play("move_right");
+                    previousRotationDegrees = degrees;
+                }
+
+            }
+
             return this;
         }
 
         protected override void EnterState()
         {
-            player.AnimationPlayer.Play("Run"); // TODO rename
-        }
-
-        protected override void ExitState()
-        {
-            //throw new NotImplementedException();
+            //player.AnimationPlayer.Play("Run"); // TODO rename
         }
     }
 }

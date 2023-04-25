@@ -21,5 +21,9 @@
             player.AnimationPlayer.Play("death");
             player.SoundPlayer.Play("player_death");
         }
+        protected override void ExitState()
+        {
+            // Do nothing after dying
+        }
     }
 }

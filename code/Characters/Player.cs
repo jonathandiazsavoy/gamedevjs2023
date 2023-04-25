@@ -29,6 +29,10 @@ public class Player : Character, IHurtable, IObtainer
     public override void _Process(float delta)
     {
         currentState = ((PlayerState)currentState).HandleInput(delta);
+
+        // TODO 9 lock sprites via hack code
+        //this.GetNode<Sprite>("MoveSprite").RotationDegrees = 0;
+        //this.GetNode<Sprite>("AttackSprite").RotationDegrees = 0;
     }
     public override void _PhysicsProcess(float delta)
 	{

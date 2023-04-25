@@ -33,6 +33,7 @@ namespace code.StateMachines.CharacterStates.PlayerStates
         protected override void EnterState()
         {
             player.AnimationPlayer.Play("RESET");
+            //player.AnimationPlayer.Play("ide");
         }
     }
 }

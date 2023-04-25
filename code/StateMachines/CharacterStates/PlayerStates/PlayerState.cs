@@ -4,6 +4,7 @@ using Godot;
 public abstract class PlayerState : BaseFSMState
 {
     protected Player player;
+    protected float previousRotationDegrees;
 
     public PlayerState(Player player)
     {
@@ -24,5 +25,22 @@ public abstract class PlayerState : BaseFSMState
     public BaseFSMState HandleInputAndUpdate(float delta) 
     {
         return this.HandleInput(delta).Update(delta);
+    }
+
+    protected override void ExitState()
+    {
+
+    }
+
+    protected float NormalizeRotationDegrees(float degrees)
+    {
+        if (degrees < 0)
+        {
+            return 360-Mathf.Abs(degrees);
+        }
+        else
+        {
+            return degrees;
+        }
     }
 }
