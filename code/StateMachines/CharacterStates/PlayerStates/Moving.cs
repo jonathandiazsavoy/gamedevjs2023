@@ -38,7 +38,7 @@ namespace code.StateMachines.CharacterStates.PlayerStates
             float degrees = NormalizeRotationDegrees(player.RotationDegrees);
             if ((Mathf.Abs(previousRotationDegrees - degrees) > 45) && (((degrees+90)%90)==0))
             {
-                if(degrees >= 225 && degrees < 314)
+                if(degrees >= 225 && degrees < 315)
                 {
                     //TODO when ging from right to right up to up, the right animation will still play needs fix
                     // Up

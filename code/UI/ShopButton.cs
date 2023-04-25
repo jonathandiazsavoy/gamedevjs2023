@@ -1,13 +1,14 @@
 using code.Items;
 using Godot;
-using System;
 
 public class ShopButton : Button
 {
     [Export]
-    public Item Item { get; set; }
+    public StreamTexture ItemImage { get; set; }
     [Export]
     public int BasePrice { get; set; }
+    [Export]
+    public string ItemName { get; set; }
     [Export]
     public bool PriceIncreasesWithNumberBought { get; set; }
 

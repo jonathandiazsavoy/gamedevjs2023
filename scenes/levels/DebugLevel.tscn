@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://scenes/static_objects/rocks.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scenes/static_objects/tree.tscn" type="PackedScene" id=22]
 [ext_resource path="res://scenes/characters/FlyingEnemy.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/characters/RangedEnemy.tscn" type="PackedScene" id=24]
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 19 )
@@ -240,6 +241,9 @@ z_index = 1
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="GameManager/Level/Objects"]
 navpoly = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Player" parent="GameManager/Level/Objects" instance=ExtResource( 2 )]
 position = Vector2( 1280, 900 )
@@ -388,15 +392,23 @@ scale = Vector2( 0.5, 0.5 )
 [node name="Enemy" parent="GameManager/Level/Objects" instance=ExtResource( 4 )]
 position = Vector2( 1080, 928 )
 
+[node name="RangedEnemy" parent="GameManager/Level/Objects/Enemy" instance=ExtResource( 24 )]
+position = Vector2( 24, 56 )
+
 [node name="FlyingEnemy" parent="GameManager/Level/Objects" instance=ExtResource( 23 )]
 position = Vector2( 1120, 835 )
-scale = Vector2( 3, 3 )
 
 [node name="Map" type="Node2D" parent="GameManager/Level"]
 z_index = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Center" type="Position2D" parent="GameManager/Level/Map"]
 position = Vector2( 1280, 900 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BackGround2" type="Sprite" parent="GameManager/Level/Map"]
 scale = Vector2( 0.5, 0.5 )
@@ -405,6 +417,9 @@ texture = ExtResource( 15 )
 offset = Vector2( 2560, 1800 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 5120, 3600 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BackGround1" type="Sprite" parent="GameManager/Level/Map"]
 scale = Vector2( 0.5, 0.5 )
@@ -413,21 +428,27 @@ texture = ExtResource( 16 )
 offset = Vector2( 2560, 1800 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 2560, 1800 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="GoodBackground" type="Sprite" parent="GameManager/Level/Map"]
-position = Vector2( 64, -8 )
 scale = Vector2( 0.5, 0.5 )
 z_index = -1
 texture = ExtResource( 17 )
 offset = Vector2( 2560, 1800 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 5120, 3600 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Obstacle" type="StaticBody2D" parent="GameManager/Level/Map"]
 position = Vector2( -10, 0 )
 scale = Vector2( 1, 1000 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level/Map/Obstacle"]
@@ -441,7 +462,8 @@ texture = ExtResource( 7 )
 position = Vector2( 2570, 0 )
 scale = Vector2( 1, 1000 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level/Map/Obstacle2"]
@@ -456,7 +478,8 @@ position = Vector2( 2000, -10 )
 rotation = 1.5708
 scale = Vector2( 1, 1000 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level/Map/Obstacle3"]
@@ -471,7 +494,8 @@ position = Vector2( 2000, 1810 )
 rotation = 1.5708
 scale = Vector2( 1, 1000 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Level/Map/Obstacle4"]

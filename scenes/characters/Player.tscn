@@ -221,10 +221,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -672,6 +672,7 @@ mix_rate = 48000
 stereo = true
 
 [node name="Player" type="KinematicBody2D"]
+rotation = 12.5664
 z_index = 1
 script = ExtResource( 6 )
 
@@ -713,7 +714,6 @@ position = Vector2( -1, 8 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 12 )
 hframes = 4
-frame = 3
 script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

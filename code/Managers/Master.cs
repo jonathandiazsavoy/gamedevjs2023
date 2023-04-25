@@ -3,7 +3,7 @@ using code.StateMachines.GameStates;
 using code.StateMachines.GameStates.GamePlay;
 using Godot;
 
-// TODO need to reorganize tree hierarchy entirely - the game game manager should be moved up to this master node later on
+// TODO 9 need to reorganize tree hierarchy entirely - the game game manager should be moved up to this master node later on
 // need to rethink tree structure is accordance what shoudl be paused when "Game" is paused
 public class Master : Node
 {
@@ -53,6 +53,17 @@ public class Master : Node
         currentState = (GameState)currentState.Update(delta);
     }
 
+    public void LoadScreen(string screenName)
+    {
+        PackedScene packedshop = GD.Load<PackedScene>(Master.PATH_TO_SCREENS + screenName + ".tscn");
+        this.AddChild(packedshop.Instance());
+    }
+    public void LoadMenu(string menuName)
+    {
+        PackedScene packedshop = GD.Load<PackedScene>(Master.PATH_TO_MENUS + menuName + ".tscn");
+        this.AddChild(packedshop.Instance());
+    }
+
     // **************************************************
     // Signal listeners
     // **************************************************
@@ -69,8 +80,8 @@ public class Master : Node
         GameManager.Player = player;
         // if game is not paused, then go to shop
         if (currentState is OnShopScreen) currentState = (GameState)currentState.SwitchState(new Running(this));
-        // TODO is bugged since exit uses same button as pasue - need a cooldown to prevent pausing
+        // TODO 2 is bugged since exit uses same button as pasue - need a cooldown to prevent pausing
 
     }
-    // TODO find a better way to get signals sent through state machines
+    // TODO 9 find a better way to get signals sent through state machines
 }
