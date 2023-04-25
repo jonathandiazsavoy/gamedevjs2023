@@ -5,16 +5,16 @@ public class ShopPortal : Area2D
     private Node master;
 
     [Signal]
-    public delegate void GoToShop(Player player);
+    public delegate void ShopEntered(Player player);
 
     public override void _Ready()
     {
         master = this.GetNode<Node>(Master.NODE_PATH_TO_MASTER);
-        this.Connect("GoToShop", master, "OnGoToShop");
+        this.Connect("ShopEntered", master, "OnShopEntered");
     }
 
     public void OnPortalEntered(Node body)
     {
-        if (body is Player player) EmitSignal(nameof(GoToShop), player);
+        if (body is Player player) EmitSignal(nameof(ShopEntered), player);
     }
 }

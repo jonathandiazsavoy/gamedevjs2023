@@ -67,7 +67,7 @@ public class Master : Node
     // **************************************************
     // Signal listeners
     // **************************************************
-    public void OnGoToShop(Player player)
+    public void OnShopEntered(Player player)
     {
         GameManager.Player = player;
         // if game is not paused, then go to shop

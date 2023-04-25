@@ -52,6 +52,12 @@ public class GameManager : Node2D
     public delegate void AllEnemiesKilled();
     [Signal]
     public delegate void AlarmCountdownHalfTime();
+    [Signal]
+    public delegate void GoToWaveCompletedScreen();
+    [Signal]
+    public delegate void GoToGameCompletedScreen();
+    [Signal]
+    public delegate void GoToGameOverScreen();
 
     public override void _Ready()
     {
@@ -161,23 +167,23 @@ public class GameManager : Node2D
         AlarmTriggered = true;
         MusicPlayer.Play("alert_phase");
     }
-    public void OnGoToNextWave(Player player)
+    public void OnNextWavePortalEntered(Player player)
     {
         WaveManager.UnLoadWave();
         this.Player = player;
+        // TODO pack player to load on new wave load
         CurrentWaveNumber++;
-        if (CurrentWaveNumber > FINAL_WAVE_NUMBER) { 
-            // TODO go to you win screen- final results
+        if (CurrentWaveNumber > FINAL_WAVE_NUMBER) {
+            EmitSignal(nameof(GoToGameCompletedScreen));
         }
         else
         {
-            //TODO go to wave results screen
+            EmitSignal(nameof(GoToWaveCompletedScreen));
         }
         StartNewWave(); // TODO this will be handled via menu trigger
     }
     public void OnPlayerDied(Player player)
     {
-        GD.Print("YOU DIED");
-        // TODO play game over popup
+        EmitSignal(nameof(GoToGameOverScreen));
     }
 }
