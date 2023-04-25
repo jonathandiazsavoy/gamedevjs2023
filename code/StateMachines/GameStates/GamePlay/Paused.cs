@@ -25,7 +25,7 @@ namespace code.StateMachines.GameStates.GamePlay
         protected override void EnterState()
         {
             GameManager gameManager = masterNode.GameManager;
-            masterNode.SoundPlayer.Play();
+            masterNode.SoundPlayer.Play("pause");
             gameManager.GetTree().Paused = true;
             PackedScene packed = GD.Load<PackedScene>(Master.PATH_TO_MENUS + "pause_menu" + ".tscn");
             masterNode.AddChild(packed.Instance());

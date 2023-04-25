@@ -5,6 +5,7 @@ using Godot;
 public class GameManager : Node2D
 {
     public const float ALARM_COUNTDOWN_MAX_START = 60;
+    public const int START_WAVE_NUMBER = 1;
     public const int FINAL_WAVE_NUMBER = 12;
 
     public const string NODE_PATH_TO_PLAYER = "Level/Objects/Player";
@@ -100,7 +101,7 @@ public class GameManager : Node2D
     private void StartNewRun()
     {
         TotalRunTime = 0;
-        CurrentWaveNumber = 1;
+        CurrentWaveNumber = START_WAVE_NUMBER;
     }
     private void StartNewWave()
     {

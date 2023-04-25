@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace code.StateMachines.GameStates.GamePlay
 {
-    internal class WaveWon
+    internal class WaveCompleted
     {
     }
 }

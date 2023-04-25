@@ -1,9 +1,8 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/waves/wave1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
@@ -236,14 +235,16 @@ one_shot = true
 
 [node name="Level" type="Node2D" parent="GameManager"]
 
-[node name="Objects" type="YSort" parent="GameManager/Level"]
-z_index = 1
+[node name="NavigationMesh" type="Node2D" parent="GameManager/Level"]
 
-[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="GameManager/Level/Objects"]
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="GameManager/Level/NavigationMesh"]
 navpoly = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Objects" type="YSort" parent="GameManager/Level"]
+z_index = 1
 
 [node name="Player" parent="GameManager/Level/Objects" instance=ExtResource( 2 )]
 position = Vector2( 1280, 900 )
@@ -389,11 +390,8 @@ scale = Vector2( 0.5, 0.5 )
 position = Vector2( 2208, 1112 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="Enemy" parent="GameManager/Level/Objects" instance=ExtResource( 4 )]
-position = Vector2( 1080, 928 )
-
-[node name="RangedEnemy" parent="GameManager/Level/Objects/Enemy" instance=ExtResource( 24 )]
-position = Vector2( 24, 56 )
+[node name="RangedEnemy" parent="GameManager/Level/Objects" instance=ExtResource( 24 )]
+position = Vector2( 1104, 984 )
 
 [node name="FlyingEnemy" parent="GameManager/Level/Objects" instance=ExtResource( 23 )]
 position = Vector2( 1120, 835 )
