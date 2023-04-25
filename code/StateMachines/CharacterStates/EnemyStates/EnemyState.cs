@@ -1,6 +1,4 @@
-﻿using Godot;
-
-namespace code.StateMachines.CharacterStates.EnemyStates
+﻿namespace code.StateMachines.CharacterStates.EnemyStates
 {
     public abstract class EnemyState : BaseFSMState
     {

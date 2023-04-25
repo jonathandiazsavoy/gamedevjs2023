@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/menus/shop_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menus/buttons/generic_button.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/audio/music/shop.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/audio/music/shop_music.wav" type="AudioStream" id=3]
 [ext_resource path="res://code/Managers/ShopManager.cs" type="Script" id=4]
 [ext_resource path="res://scenes/ui_elements/AppendableRichTextLabel.tscn" type="PackedScene" id=5]
 

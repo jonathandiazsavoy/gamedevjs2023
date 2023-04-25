@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://scenes/static_objects/stalagmites.tscn" type="PackedScene" id=20]
 [ext_resource path="res://scenes/static_objects/rocks.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scenes/static_objects/tree.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/characters/FlyingEnemy.tscn" type="PackedScene" id=23]
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 19 )
@@ -387,6 +388,10 @@ scale = Vector2( 0.5, 0.5 )
 [node name="Enemy" parent="GameManager/Level/Objects" instance=ExtResource( 4 )]
 position = Vector2( 1080, 928 )
 
+[node name="FlyingEnemy" parent="GameManager/Level/Objects" instance=ExtResource( 23 )]
+position = Vector2( 1120, 835 )
+scale = Vector2( 3, 3 )
+
 [node name="Map" type="Node2D" parent="GameManager/Level"]
 z_index = -1
 
@@ -410,6 +415,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 2560, 1800 )
 
 [node name="GoodBackground" type="Sprite" parent="GameManager/Level/Map"]
+position = Vector2( 64, -8 )
 scale = Vector2( 0.5, 0.5 )
 z_index = -1
 texture = ExtResource( 17 )
@@ -491,7 +497,7 @@ script = ExtResource( 14 )
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource( 11 )
-volume_db = -3.0
+volume_db = -1.0
 autoplay = true
 
 [node name="SoundStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]

@@ -64,7 +64,7 @@ public class GameManager : Node2D
         SoundPlayer = new SoundPlayer(SoundStreamPlayer, PATH_TO_SOUNDS);
 
         StartNewRun();
-        StartNewLoop();
+        StartNewWave();
         
         initialMusicPitchScale = MusicStreamPlayer.PitchScale;
     }
@@ -102,7 +102,7 @@ public class GameManager : Node2D
         TotalRunTime = 0;
         CurrentWaveNumber = 1;
     }
-    private void StartNewLoop()
+    private void StartNewWave()
     {
         TotalWaveTime= 0;
         AlarmTriggered = false;
@@ -162,12 +162,17 @@ public class GameManager : Node2D
     }
     public void OnGoToNextWave(Player player)
     {
+        WaveManager.UnLoadWave();
         this.Player = player;
         CurrentWaveNumber++;
         if (CurrentWaveNumber > FINAL_WAVE_NUMBER) { 
-            // TODO go to you win screen
+            // TODO go to you win screen- final results
         }
-        StartNewLoop();
+        else
+        {
+            //TODO go to wave results screen
+        }
+        StartNewWave(); // TODO this will be handled via menu trigger
     }
     public void OnPlayerDied(Player player)
     {

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://resources/styles/focus.tres" type="StyleBox" id=1]
+[ext_resource path="res://resources/styles/focused.tres" type="StyleBox" id=1]
 [ext_resource path="res://resources/styles/pressed.tres" type="StyleBox" id=2]
 [ext_resource path="res://resources/styles/disabled.tres" type="StyleBox" id=3]
 [ext_resource path="res://resources/styles/normal.tres" type="StyleBox" id=4]

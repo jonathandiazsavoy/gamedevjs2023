@@ -1,30 +1,21 @@
-using code.StateMachines.CharacterStates.EnemyStates;
+using code.StateMachines.CharacterStates.EnemyStates.FlyingEnemyStates;
 using Godot;
 
-public class Enemy : Character, IHurtable
+public class FlyingEnemy : Enemy
 {
-    [Signal]
-    public delegate void EnemyDied(Enemy enemy);
-
-    [Export]
-    public float WaitAfterBumpingPlayer = 1f;
-
-    public NavigationAgent2D NavigationAgent { get { return this.GetNode<NavigationAgent2D>("NavigationAgent2D"); } }
-    public Character currentTarget;
-    public bool Alerted;
-
     protected override void InitState()
     {
         this.currentState = new Sleeping(this);
-        Alerted= false;
+        this.currentState = this.currentState.SwitchState(new Sleeping(this));
+        Alerted = false;
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        currentState = (EnemyState)currentState.Update(delta);
+        currentState = (FlyingEnemyState)currentState.Update(delta);
     }
 
-    public virtual void ApplyIncomingAttack(Node2D attacker, Attack attack)
+    public override void ApplyIncomingAttack(Node2D attacker, Attack attack)
     {
         if (!Invulnerable && !(attack.Owner is Enemy))
         {
@@ -39,7 +30,7 @@ public class Enemy : Character, IHurtable
             currentTarget = attack.Owner;
         }
     }
-    public virtual void TakeDamage(int hpAmount)
+    public override void TakeDamage(int hpAmount)
     {
         if (this.CurrentStats.ApplyDamage(hpAmount))
         {
@@ -48,16 +39,10 @@ public class Enemy : Character, IHurtable
         }
     }
 
-    public override void Die()
-    {
-        EmitSignal(nameof(EnemyDied), this);
-        this.QueueFree();
-    }
-
     // **************************************************
     // Signal listeners
     // **************************************************
-    public void OnPlayerBumped(Area2D area2d)
+    public new void OnPlayerBumped(Area2D area2d)
     {
         if (!(area2d is Hurtbox)) return; // Ignore anything not hurtbox 
         if (area2d.GetParent() is Player)

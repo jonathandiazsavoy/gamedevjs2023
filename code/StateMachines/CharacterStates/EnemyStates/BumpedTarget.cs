@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace code.StateMachines.CharacterStates.EnemyStates
+﻿namespace code.StateMachines.CharacterStates.EnemyStates
 {
     public class BumpedTarget : EnemyState
     {

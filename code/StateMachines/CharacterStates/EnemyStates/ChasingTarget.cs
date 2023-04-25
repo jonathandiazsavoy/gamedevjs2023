@@ -21,7 +21,7 @@
         {
             enemy.NavigationAgent.SetTargetLocation(enemy.currentTarget.GlobalPosition); // TODO fix game crashing here once player dies
             enemy.Hitbox.Monitoring = true;
-            // TODO play moving animation
+            enemy.AnimationPlayer.Play("moving");
         }
     }
 }
