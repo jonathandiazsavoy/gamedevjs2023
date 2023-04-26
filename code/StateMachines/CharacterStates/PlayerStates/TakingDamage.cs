@@ -23,5 +23,9 @@
             player.AnimationPlayer.Play("take_damage");
             player.SoundPlayer.Play("take_damage");
         }
+        protected override void ExitState()
+        {
+            player.AnimationPlayer.Play("RESET");
+        }
     }
 }

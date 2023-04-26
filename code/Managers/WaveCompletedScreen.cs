@@ -20,7 +20,6 @@ public class WaveCompletedScreen : Control
         waveCompletionTime.AppendToInitialText(((int)(gameManager.TotalWaveTime)).ToString() + " sec");
         continueButton.GrabFocus();
         continuePressed = false;
-
     }
 
     public void OnContinue()

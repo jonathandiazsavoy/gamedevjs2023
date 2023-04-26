@@ -18,5 +18,9 @@
             enemy.AnimationPlayer.Play("take_damage");
             enemy.SoundPlayer.Play("take_damage");
         }
+        protected override void ExitState()
+        {
+            enemy.AnimationPlayer.Play("RESET");
+        }
     }
 }

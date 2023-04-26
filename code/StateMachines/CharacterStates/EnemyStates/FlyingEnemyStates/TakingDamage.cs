@@ -18,5 +18,9 @@
             flyingEnemy.AnimationPlayer.Play("take_damage");
             flyingEnemy.SoundPlayer.Play("take_damage");
         }
+        protected override void ExitState()
+        {
+            flyingEnemy.AnimationPlayer.Play("RESET");
+        }
     }
 }

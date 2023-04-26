@@ -11,10 +11,10 @@ public class ShopManager : Control
 
     public override void _Ready()
     {
-        gameManager = this.GetNode<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER);
-        shopper = gameManager.Player;
+        gameManager = this.GetNodeOrNull<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER);
         moneyLeft = this.GetNode<AppendableRichTextLabel>("MoneyLeft");
 
+        shopper = gameManager.Player;
         moneyLeft.AppendToInitialText(gameManager.Money.ToString());
 
         this.Connect("ExitShop", this.GetNode<Master>(Master.NODE_PATH_TO_MASTER), "OnExitShop");

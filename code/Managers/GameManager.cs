@@ -98,7 +98,7 @@ public class GameManager : Node2D
         if(adjustmentAmount > 0)
         {
             this.Money += adjustmentAmount;
-            this.Score += adjustmentAmount;
+            this.Score += adjustmentAmount*adjustmentAmount;
         }
         else
         {
@@ -120,7 +120,6 @@ public class GameManager : Node2D
         MusicPlayer.Play("calm_phase");
 
         WaveManager.LoadWave(CurrentWaveNumber);
-        //EnemyCount = WaveManager.EnemyCount;
     }
 
     public void AdjustAlarmCountdown(float adjustAmount)
@@ -153,7 +152,7 @@ public class GameManager : Node2D
     public void OnEnemyDied(Enemy enemy)
     {
         // Add enemy point value as money
-        AdjustMoney(enemy.GetPointValue());
+        AdjustMoney(enemy.GetPointValue()*enemy.GetPointValue());
         if (this.EnemyCount-1 > 0)
         {
             this.EnemyCount--;
@@ -171,10 +170,11 @@ public class GameManager : Node2D
     }
     public void OnNextWavePortalEntered(Player player)
     {
+        SoundPlayer.Play("enter_teleport");
         WaveManager.UnLoadWave();
         this.Player = player;
         //PackedPlayer
-        // TODO pack player to load on new wave load
+        // TODO 9 pack player to load on new wave load-not needed?
         CurrentWaveNumber++;
         if (CurrentWaveNumber > FINAL_WAVE_NUMBER) {
             EmitSignal(nameof(GoToGameCompletedScreen));
@@ -187,11 +187,11 @@ public class GameManager : Node2D
     }
     public void OnPlayerDied(Player player)
     {
+        SoundPlayer.Play("defeat");
         EmitSignal(nameof(GoToGameOverScreen));
     }
     public void OnLoadWaveCompleted()
     {
-        GD.Print(EnemyCount);
         EnemyCount = WaveManager.EnemyCount;
     }
 }

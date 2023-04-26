@@ -1,6 +1,4 @@
-﻿using Godot;
-
-namespace code.StateMachines.CharacterStates.PlayerStates
+﻿namespace code.StateMachines.CharacterStates.PlayerStates
 {
     public class Attacking : PlayerState
     {
@@ -50,7 +48,6 @@ namespace code.StateMachines.CharacterStates.PlayerStates
                 player.AnimationPlayer.Play("melee_attack_right");
             }
 
-            GD.Print("current orientation: " + player.RotationDegrees);
             player.SoundPlayer.Play("melee_attack");
         }
     }

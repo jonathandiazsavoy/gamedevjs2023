@@ -69,12 +69,14 @@ public class Master : Node
     // **************************************************
     public void OnShopEntered(Player player)
     {
+        SoundPlayer.Play("enter_shop");
         GameManager.Player = player;
         // if game is not paused, then go to shop
         if (currentState is Running) currentState = (GameState)currentState.SwitchState(new OnShopScreen(this, currentState));
     }
     public void OnExitShop(Player player)
     {
+        SoundPlayer.Play("exit_teleport");
         // Close shop for current wave after exiting
         GameManager.WaveManager.CloseShop();
         GameManager.Player = player;

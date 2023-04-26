@@ -91,7 +91,7 @@ public class Player : Character, IHurtable, IObtainer
         if (item is CountDownModifier countDownModifier)
         {
             // Add time item value as money
-            gameManager.AdjustMoney((int)countDownModifier.CountDownChange);
+            gameManager.AdjustMoney(((int)countDownModifier.CountDownChange*3));
         }
     }
 

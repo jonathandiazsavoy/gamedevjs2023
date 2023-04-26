@@ -4,29 +4,13 @@
 [ext_resource path="res://code/Models/Wave.cs" type="Script" id=3]
 [ext_resource path="res://scenes/items/countdown_modifiers/Plus1Seconds.tscn" type="PackedScene" id=6]
 
-[node name="Wave2" type="YSort"]
+[node name="Wave" type="YSort"]
 script = ExtResource( 3 )
 
 [node name="Enemies" type="YSort" parent="."]
 
-[node name="FlyingEnemy" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 984, 904 )
-Speed = 1.0
-
-[node name="FlyingEnemy2" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 1552, 900 )
-Speed = 1.0
-
 [node name="FlyingEnemy3" parent="Enemies" instance=ExtResource( 1 )]
 position = Vector2( 1280, 1080 )
-Speed = 1.0
-
-[node name="FlyingEnemy4" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 1280, 696 )
-Speed = 1.0
-
-[node name="FlyingEnemy5" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 1269, 157 )
 Speed = 1.0
 
 [node name="Items" type="YSort" parent="."]
