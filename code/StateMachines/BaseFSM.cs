@@ -1,4 +1,4 @@
-﻿using System.Runtime.Remoting.Messaging;
+﻿using Godot;
 
 public abstract class BaseFSMState
 {
@@ -15,8 +15,10 @@ public abstract class BaseFSMState
     /// </summary>
     /// <param name="newState">State to switch to.</param>
     /// <returns>Newly switched state.</returns>
-    protected BaseFSMState SwitchState(BaseFSMState newState)
+    public BaseFSMState SwitchState(BaseFSMState newState)
     {
+        //TODO debug
+        //GD.Print("switch state from: " + this+" to: " + newState);
         this.ExitState();
         newState.EnterState();
         return newState;

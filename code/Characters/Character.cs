@@ -1,39 +1,63 @@
+using code.Helpers;
+using code.StateMachines.CharacterStates.NPCStates;
 using Godot;
 
-public class Character : KinematicBody2D, IHurtable, IAttacker
+public class Character : KinematicBody2D, IAttacker
 {
-    const string ANIMATION_PLAYER_NAME = "AnimationPlayer";
+    public const string ANIMATION_PLAYER_NAME = "AnimationPlayer";
+    public const string AUDIO_STREAM_PLAYER_NAME = "AudioStreamPlayer2D";
+
+    public const string PATH_TO_SOUNDS = "res://assets/audio/sounds/character/";
 
     public Vector2 currentMoveDirection;
+    public Vector2 incomingAttackForce;
 
     // Node members
     public AnimationPlayer AnimationPlayer { get; protected set; }
+    public AudioStreamPlayer2D AudioPlayer { get; protected set; }
+    public Hitbox Hitbox { get { return this.GetNode<Hitbox>("Hitbox"); } }
     // Custom components
     [Export]
     public CharacterStats BaseStats { get; protected set; }
     [Export]
     public CharacterStats CurrentStats { get; protected set; }
+    public PositionalSoundPlayer SoundPlayer;
 
-    protected CharacterState currentState;
+    // Custom properties
+    [Export]
+    public bool Invulnerable { get; set; }
+
+    protected BaseFSMState currentState;
     protected Attack currentAttack;
 
     public override void _Ready()
     {
         this.InitNodes();
-
-        this.BaseStats = new CharacterStats(3, 0, 1, 0, 5);
-        this.CurrentStats = this.BaseStats;
-
-        this.currentState = new Idle(this);
-        this.currentAttack = new Attack(1, 0);
+        this.InitDefaultProperties();
+        this.InitState();
     }
 
     /// <summary>
     ///     Inits node members according to expected default names.
     /// </summary>
-    protected void InitNodes()
+    protected virtual void InitNodes()
     {
         this.AnimationPlayer = this.GetNode<AnimationPlayer>(ANIMATION_PLAYER_NAME);
+        this.AudioPlayer = this.GetNode<AudioStreamPlayer2D>(AUDIO_STREAM_PLAYER_NAME);
+
+        SoundPlayer = new PositionalSoundPlayer(AudioPlayer, PATH_TO_SOUNDS);
+    }
+    protected virtual void InitDefaultProperties()
+    {
+        // For this game default mp and defense to 0 - attack will always be determined by stength
+        this.BaseStats = new CharacterStats(3, 0, 1, 0, 1.3f);
+        this.CurrentStats = this.BaseStats;
+
+        this.currentAttack = new Attack(this, CurrentStats.Strength, 50);
+    }
+    protected virtual void InitState()
+    {
+        this.currentState = new Idle(this);
     }
 
     public void SetCharacterOrientation(Vector2 moveDirection)
@@ -44,16 +68,20 @@ public class Character : KinematicBody2D, IHurtable, IAttacker
         }
     }
 
-    public void ApplyIncomingAttack(Node2D attacker, Attack attack)
+    public virtual void Die()
     {
-        if (currentState is IHurtable hurtable) hurtable.ApplyIncomingAttack(attacker, attack);
+        //EmitSignal(nameof(EnemyDied), this);
+        this.QueueFree();
     }
 
-    public void TakeDamage(int hpAmount)
+    public int GetPointValue()
     {
-        if (currentState is IHurtable hurtable) hurtable.TakeDamage(hpAmount);
+        return (int)(BaseStats.MaxHp + BaseStats.MaxMp + BaseStats.Strength + BaseStats.Defense + BaseStats.Speed);
     }
 
     public Attack Attack => currentAttack;
+    /// <summary>
+    /// The node adminstering the attack (just the parent object like the bullet or the parent of melee attack)
+    /// </summary>
     public Node2D Attacker => this;
 }

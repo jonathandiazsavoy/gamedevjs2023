@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://resources/styles/focused.tres" type="StyleBox" id=1]
+[ext_resource path="res://resources/styles/pressed.tres" type="StyleBox" id=2]
+[ext_resource path="res://resources/styles/disabled.tres" type="StyleBox" id=3]
+[ext_resource path="res://resources/styles/normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://resources/styles/hover.tres" type="StyleBox" id=5]
+[ext_resource path="res://resources/fonts/Daydream.tres" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 6 )
+
+[node name="Button" type="Button"]
+margin_right = 200.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 1 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+action_mode = 0

@@ -1,16 +1,19 @@
-public class Idle : HurtableState
+﻿namespace code.StateMachines.CharacterStates.NPCStates
 {
-    public Idle(Character character) : base(character)
+    public class Idle : NPCState
     {
-    }
+        public Idle(Character character) : base(character)
+        {
+        }
 
-    public override BaseFSMState Update(float delta)
-    {
-        return this;
-    }
+        public override BaseFSMState Update(float delta)
+        {
+            return this;
+        }
 
-    protected override void EnterState()
-    {
-        //
+        protected override void EnterState()
+        {
+            //
+        }
     }
 }

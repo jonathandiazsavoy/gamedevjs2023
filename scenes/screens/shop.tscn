@@ -1,0 +1,137 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/menus/shop_button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/menus/buttons/generic_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/audio/music/shop_music.wav" type="AudioStream" id=3]
+[ext_resource path="res://code/Managers/ShopManager.cs" type="Script" id=4]
+[ext_resource path="res://scenes/ui_elements/AppendableRichTextLabel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/visuals/ui/shop.jpg" type="Texture" id=6]
+[ext_resource path="res://resources/fonts/VerminVibes1989.tres" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/visuals/ui/icons/watch.png" type="Texture" id=8]
+[ext_resource path="res://assets/visuals/ui/icons/hp_potion.png" type="Texture" id=9]
+[ext_resource path="res://assets/visuals/ui/icons/attack_up.png" type="Texture" id=10]
+[ext_resource path="res://resources/fonts/Daydream.tres" type="DynamicFontData" id=11]
+[ext_resource path="res://assets/visuals/ui/icons/speed_up_icon.png" type="Texture" id=12]
+[ext_resource path="res://assets/visuals/ui/icons/max_hp_up.png" type="Texture" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+outline_size = 5
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_size = 5
+font_data = ExtResource( 11 )
+
+[node name="ShopScreen" type="CanvasLayer"]
+pause_mode = 2
+
+[node name="Shop" type="Control" parent="."]
+margin_right = 1280.0
+margin_bottom = 900.0
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="Shop"]
+margin_right = 5760.0
+margin_bottom = 3840.0
+rect_scale = Vector2( 0.23, 0.24 )
+texture = ExtResource( 6 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Shop"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -400.0
+margin_top = 50.0
+margin_right = 400.0
+margin_bottom = 150.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 1 )
+text = "WELCOME TO THE SHOP"
+
+[node name="GridContainer" type="GridContainer" parent="Shop"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -590.0
+margin_top = -250.0
+margin_right = 210.0
+margin_bottom = 350.0
+custom_constants/vseparation = 30
+custom_constants/hseparation = 30
+columns = 2
+
+[node name="ShopButton2" parent="Shop/GridContainer" instance=ExtResource( 1 )]
+margin_right = 385.0
+margin_bottom = 180.0
+ItemImage = ExtResource( 8 )
+BasePrice = 50
+ItemName = "MORE TIME"
+
+[node name="ShopButton" parent="Shop/GridContainer" instance=ExtResource( 1 )]
+margin_left = 415.0
+margin_right = 800.0
+margin_bottom = 180.0
+ItemImage = ExtResource( 9 )
+BasePrice = 100
+ItemName = "RESTORE HP"
+
+[node name="ShopButton6" parent="Shop/GridContainer" instance=ExtResource( 1 )]
+margin_top = 210.0
+margin_right = 385.0
+margin_bottom = 390.0
+ItemImage = ExtResource( 13 )
+BasePrice = 250
+ItemName = "MAX HP UP"
+
+[node name="ShopButton4" parent="Shop/GridContainer" instance=ExtResource( 1 )]
+margin_left = 415.0
+margin_top = 210.0
+margin_right = 800.0
+margin_bottom = 390.0
+ItemImage = ExtResource( 10 )
+BasePrice = 400
+ItemName = "ATTACK UP"
+
+[node name="ShopButton5" parent="Shop/GridContainer" instance=ExtResource( 1 )]
+margin_top = 420.0
+margin_right = 385.0
+margin_bottom = 600.0
+ItemImage = ExtResource( 12 )
+BasePrice = 400
+ItemName = "SPEED UP"
+
+[node name="Button" parent="Shop" instance=ExtResource( 2 )]
+margin_left = 968.0
+margin_top = 744.0
+margin_right = 1168.0
+margin_bottom = 844.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "EXIT SHOP"
+
+[node name="MoneyLeft" parent="Shop" instance=ExtResource( 5 )]
+margin_left = 880.0
+margin_top = 200.0
+margin_right = 1320.0
+margin_bottom = 616.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_colors/selection_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 2 )
+text = "KRONOS LEFT: 
+"
+fit_content_height = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+
+[connection signal="pressed" from="Shop/Button" to="Shop" method="OnExitButtonPressed"]

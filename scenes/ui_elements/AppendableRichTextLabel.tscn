@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://code/UI/AppendableRichTextLabel.cs" type="Script" id=1]
+
+[node name="AppendableRichTextLabel" type="RichTextLabel"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
