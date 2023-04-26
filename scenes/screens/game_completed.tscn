@@ -4,7 +4,7 @@
 [ext_resource path="res://resources/fonts/VerminVibes1989.tres" type="DynamicFontData" id=2]
 [ext_resource path="res://code/UI/AppendableRichTextLabel.cs" type="Script" id=3]
 [ext_resource path="res://assets/visuals/ui/controls/buttons/generics/large_default.png" type="Texture" id=4]
-[ext_resource path="res://code/Managers/WaveCompletedScreen.cs" type="Script" id=5]
+[ext_resource path="res://code/Managers/GameCompletedScreen.cs" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
@@ -17,7 +17,7 @@ thickness = 10
 size = 70
 font_data = ExtResource( 2 )
 
-[node name="WaveCompleted" type="CanvasLayer"]
+[node name="GameCompleted" type="CanvasLayer"]
 pause_mode = 2
 
 [node name="Control" type="Control" parent="."]
@@ -66,7 +66,7 @@ custom_colors/selection_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/normal_font = SubResource( 1 )
-text = "CONMGRATS!!!
+text = "CONGRATS!!!
 GAME COMPLETED!"
 
 [node name="HSeparator" type="HSeparator" parent="Control/Results/MarginContainer/VBoxContainer"]

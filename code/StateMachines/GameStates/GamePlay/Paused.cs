@@ -14,6 +14,10 @@ namespace code.StateMachines.GameStates.GamePlay
             {
                 return this.SwitchState(new Running(masterNode));
             }
+            else if (masterNode.GetNode<PauseMenu>("/root/Master/PauseMenu").resume)
+            {
+                return this.SwitchState(new Running(masterNode));
+            }
             return this;
         }
 

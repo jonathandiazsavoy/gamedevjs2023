@@ -11,6 +11,7 @@ public class Master : Node
     public const string NODE_PATH_TO_GAME_MANAGER = "/root/Master/GameManager";
     public const string NODE_PATH_TO_SHOP_SCREEN = "/root/Master/ShopScreen";
     public const string NODE_PATH_TO_PAUSE_MENU = "/root/Master/PauseMenu";
+    public const string NODE_PATH_TO_GAME_OVER_MENU = "/root/Master/GameOverMenu";
     public const string NODE_PATH_TO_CAMERA = "/root/Master/Camera2D";
     public const string NODE_PATH_TO_PLAYER = "/root/Master/GameManager/Level/Objects/Player";
     public const string PATH_TO_SCREENS = "res://scenes/screens/";
@@ -105,7 +106,7 @@ public class Master : Node
     }
     public void OnGoToTitleScreen()
     {
-        //
+        currentState = (GameState)currentState.SwitchState(new OnTitleScreen(this));
     }
     // TODO 9 find a better way to get signals sent through state machines
 }

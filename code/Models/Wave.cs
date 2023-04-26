@@ -21,5 +21,6 @@ public class Wave : YSort
         {
             item.Connect("ItemUsed", this.GetNode<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER), "OnCountDownModifierItemUsed");
         }
+        this.GetNodeOrNull<AnimationPlayer>("AnimationPlayer")?.Play("intro");
     }
 }
