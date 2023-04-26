@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
@@ -39,6 +39,57 @@ polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ) ]
 outlines = [ PoolVector2Array( 0, 0, 0, 1800, 2560, 1800, 2560, 0, 1929.61, 0 ) ]
 
 [sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "map_overview"
+length = 5.0
+tracks/0/type = "method"
+tracks/0/path = NodePath("Camera2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "PlayZoomOutOnMapAnimation"
+}, {
+"args": [  ],
+"method": "FollowPlayer"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "zoom_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 0.5, 0.5 ) ]
+}
 
 [node name="Master" type="Node"]
 pause_mode = 2
@@ -250,11 +301,6 @@ z_index = 1
 [node name="Player" parent="GameManager/Level/Objects" instance=ExtResource( 2 )]
 position = Vector2( 1280, 900 )
 z_index = 0
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="GameManager/Level/Objects/Player"]
-remote_path = NodePath("../../../../../Camera2D")
-update_rotation = false
-update_scale = false
 
 [node name="WaveManager" type="YSort" parent="GameManager/Level/Objects"]
 script = ExtResource( 10 )
@@ -716,6 +762,7 @@ volume_db = -1.0
 autoplay = true
 
 [node name="SoundStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
+pause_mode = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
@@ -723,9 +770,9 @@ stream = ExtResource( 13 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1280, 900 )
 current = true
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 2, 2 )
 smoothing_enabled = true
-smoothing_speed = 10.0
+smoothing_speed = 3.0
 drag_margin_left = 0.1
 drag_margin_top = 0.1
 drag_margin_right = 0.1
@@ -733,6 +780,12 @@ drag_margin_bottom = 0.1
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 7 )
+anims/map_overview = SubResource( 6 )
+anims/zoom_in = SubResource( 8 )
 
 [connection signal="AlarmCountdownHalfTime" from="GameManager" to="GameManager/Level/Objects/WaveManager" method="OnAlarmCountdownHalfTime"]
 [connection signal="AllEnemiesKilled" from="GameManager" to="GameManager/Level/Objects/WaveManager" method="OnAllEnemiesKilled"]

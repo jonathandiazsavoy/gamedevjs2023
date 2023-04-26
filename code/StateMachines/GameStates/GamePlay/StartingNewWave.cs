@@ -4,35 +4,45 @@ namespace code.StateMachines.GameStates.GamePlay
 {
     public class StartingNewWave : InCutscene
     {
+        const float transitionTime = 5f;
+        private float timeWaited;
+
         public StartingNewWave(Master masterNode) : base(masterNode)
         {
         }
 
         public override BaseFSMState HandleInput(float delta)
         {
+            if (Input.IsActionJustPressed("ui_accept"))
+            {
+                // Can skip
+                //return this.SwitchState(new Running(masterNode));
+            }
             return this;
         }
 
         public override BaseFSMState Update(float delta)
         {
+            // Wait until transition time
+            timeWaited += delta;
+            if (timeWaited > transitionTime) return this.SwitchState(new Running(masterNode));
             return this;
         }
 
         protected override void EnterState()
         {
-            // do loading
-            // unpause
-            // play start new wave animation
+            masterNode.SoundPlayer.Play("transition");
             GameManager gameManager = masterNode.GameManager;
-            masterNode.SoundPlayer.Play("pause");
+            gameManager.StartNewWave();
             gameManager.GetTree().Paused = true;
-            PackedScene packed = GD.Load<PackedScene>(Master.PATH_TO_MENUS + "pause_menu" + ".tscn");
-            masterNode.AddChild(packed.Instance());
+            masterNode.Camera2D.ZoomOutOnMap();
         }
 
         protected override void ExitState()
         {
+            masterNode.Camera2D.FollowPlayer();
             masterNode.GameManager.GetTree().Paused = false;
+            masterNode.GameManager.MusicPlayer.Play("calm_phase");
         }
     }
 }

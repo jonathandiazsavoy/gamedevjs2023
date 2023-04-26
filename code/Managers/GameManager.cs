@@ -111,13 +111,12 @@ public class GameManager : Node2D
         TotalRunTime = 0;
         CurrentWaveNumber = START_WAVE_NUMBER;
     }
-    private void StartNewWave()
+    public void StartNewWave()
     {
         TotalWaveTime= 0;
         AlarmTriggered = false;
         AlarmHalfTImeTriggered = false;
         AlarmCountdown.Start(ALARM_COUNTDOWN_MAX_START);
-        MusicPlayer.Play("calm_phase");
 
         WaveManager.LoadWave(CurrentWaveNumber);
     }
@@ -183,7 +182,6 @@ public class GameManager : Node2D
         {
             EmitSignal(nameof(GoToWaveCompletedScreen));
         }
-        StartNewWave(); // TODO this will be handled via menu trigger
     }
     public void OnPlayerDied(Player player)
     {

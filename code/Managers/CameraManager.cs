@@ -7,10 +7,9 @@ public class CameraManager : Camera2D
     private GameManager gameManager;
     private Player player;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        
+        FollowPlayer();
     }
     public override void _Process(float delta)
     {
@@ -18,16 +17,16 @@ public class CameraManager : Camera2D
         this.GlobalPosition = cameraTarget.GlobalPosition;
     }
 
-    public void PlayZoomOutOnMapAnimation()
+    public void ZoomOutOnMap()
     {
         gameManager = this.GetNode<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER);
         this.Zoom = new Vector2(2, 2);
-        cameraTarget = gameManager;
+        cameraTarget = gameManager.MapCenter;
     }
     public void FollowPlayer() 
     {
         player = this.GetNode<Player>(Master.NODE_PATH_TO_PLAYER);
-        this.Zoom = new Vector2(.5f, .5f);
         cameraTarget = player;
+        this.GetNode<AnimationPlayer>("AnimationPlayer").Play("zoom_in");
     }
 }

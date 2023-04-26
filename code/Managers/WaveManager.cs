@@ -23,7 +23,7 @@ public class WaveManager : YSort
     { get 
         {
             return this.GetNodeOrNull<Wave>("Wave");
-            /* TODO to be removed
+            /* TODO 9 to be removed
             foreach (Node child in this.GetChildren())
             {
                 if (child is Wave wave) return wave;

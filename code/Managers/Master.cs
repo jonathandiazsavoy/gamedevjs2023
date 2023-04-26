@@ -11,6 +11,7 @@ public class Master : Node
     public const string NODE_PATH_TO_GAME_MANAGER = "/root/Master/GameManager";
     public const string NODE_PATH_TO_SHOP_SCREEN = "/root/Master/ShopScreen";
     public const string NODE_PATH_TO_PAUSE_MENU = "/root/Master/PauseMenu";
+    public const string NODE_PATH_TO_CAMERA = "/root/Master/Camera2D";
     public const string NODE_PATH_TO_PLAYER = "/root/Master/GameManager/Level/Objects/Player";
     public const string PATH_TO_SCREENS = "res://scenes/screens/";
     public const string PATH_TO_MENUS = "res://scenes/menus/";
@@ -20,12 +21,14 @@ public class Master : Node
     public SoundPlayer SoundPlayer;
 
     public GameManager GameManager;
+    public CameraManager Camera2D;
     private GameState currentState;
 
     public override void _Ready()
     {
         GameManager = this.GetNode<GameManager>(NODE_PATH_TO_GAME_MANAGER);
         AudioStreamPlayer = this.GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        Camera2D = this.GetNode<CameraManager>(NODE_PATH_TO_CAMERA);
         SoundPlayer = new SoundPlayer(AudioStreamPlayer, PATH_TO_SOUNDS);
         currentState = new Running(this);
     }
@@ -46,6 +49,10 @@ public class Master : Node
         if (Input.IsActionJustPressed("test3"))
         {
             GameManager.AdjustMoney(100);
+        }
+        if (Input.IsActionJustPressed("test4"))
+        {
+            this.GetNode<CameraManager>(NODE_PATH_TO_CAMERA).ZoomOutOnMap();
         }
     }
     public override void _PhysicsProcess(float delta)
@@ -95,6 +102,10 @@ public class Master : Node
     public void OnGoToGameOverScreen()
     {
         currentState = (GameState)currentState.SwitchState(new GameOver(this));
+    }
+    public void OnGoToTitleScreen()
+    {
+        //
     }
     // TODO 9 find a better way to get signals sent through state machines
 }

@@ -16,7 +16,7 @@ namespace code.StateMachines.GameStates.GamePlay
         public override BaseFSMState Update(float delta)
         {
             //if (masterNode.GetNodeOrNull<WaveCompletedScreen>("WaveCompleted/Control") == null) return this;
-            if (masterNode.GetNode<WaveCompletedScreen>("/root/Master/WaveCompleted/Control").continuePressed) return this.SwitchState(new Running(masterNode));
+            if (masterNode.GetNode<WaveCompletedScreen>("/root/Master/WaveCompleted/Control").continuePressed) return this.SwitchState(new StartingNewWave(masterNode));
             return this;
         }
 
