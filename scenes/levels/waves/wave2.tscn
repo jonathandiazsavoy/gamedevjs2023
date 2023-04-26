@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/characters/FlyingEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://code/Models/Wave.cs" type="Script" id=3]
-[ext_resource path="res://scenes/items/countdown_modifiers/Plus3Seconds.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/items/countdown_modifiers/Plus1Seconds.tscn" type="PackedScene" id=6]
 
 [node name="Wave" type="YSort"]
@@ -11,30 +10,43 @@ script = ExtResource( 3 )
 [node name="Enemies" type="YSort" parent="."]
 
 [node name="FlyingEnemy" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 1344, 944 )
+position = Vector2( 1776, 1210 )
+Speed = 1.0
 
 [node name="FlyingEnemy2" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 1336, 568 )
+position = Vector2( 1720, 1578 )
+
+[node name="FlyingEnemy3" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 2168, 1712 )
+
+[node name="FlyingEnemy4" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 2072, 1400 )
+
+[node name="FlyingEnemy5" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 2376, 1024 )
+
+[node name="FlyingEnemy6" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 2456, 1304 )
+
+[node name="FlyingEnemy7" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 2432, 1608 )
+
+[node name="FlyingEnemy8" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 1739, 1752 )
 
 [node name="Items" type="YSort" parent="."]
 
-[node name="Plus3Seconds" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 1432, 1072 )
-
 [node name="Plus1Seconds" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 1264, 1080 )
+position = Vector2( 1432, 1016 )
 
 [node name="Plus1Seconds2" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 1320, 840 )
+position = Vector2( 1649, 1136 )
 
 [node name="Plus1Seconds3" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 1320, 728 )
+position = Vector2( 1904, 1400 )
 
 [node name="Plus1Seconds4" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 1208, 968 )
+position = Vector2( 2136, 1215 )
 
 [node name="Plus1Seconds5" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 1418, 619 )
-
-[node name="Plus1Seconds6" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 1320, 656 )
+position = Vector2( 1616, 1704 )

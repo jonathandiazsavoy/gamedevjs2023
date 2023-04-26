@@ -3,11 +3,18 @@ using Godot;
 
 public class Enemy : Character, IHurtable
 {
-    [Signal]
-    public delegate void EnemyDied(Enemy enemy);
+    [Export]
+    public int MaxHp=3;
+    [Export]
+    public int Strength=1;
+    [Export]
+    public float Speed=1.3f;
 
     [Export]
     public float WaitAfterBumpingPlayer = 1f;
+
+    [Signal]
+    public delegate void EnemyDied(Enemy enemy);
 
     public NavigationAgent2D NavigationAgent { get { return this.GetNode<NavigationAgent2D>("NavigationAgent2D"); } }
     public Character currentTarget;
@@ -18,6 +25,14 @@ public class Enemy : Character, IHurtable
         this.currentState = new Sleeping(this);
         this.currentState = this.currentState.SwitchState(new Sleeping(this));
         Alerted = false;
+    }
+    protected override void InitDefaultProperties()
+    {
+        // For this game default mp and defense to 0 - attack will always be determined by stength
+        this.BaseStats = new CharacterStats(this.MaxHp, 0, this.Strength, 0 , this.Speed);
+        this.CurrentStats = this.BaseStats;
+
+        this.currentAttack = new Attack(this, CurrentStats.Strength, 50);
     }
 
     public override void _PhysicsProcess(float delta)

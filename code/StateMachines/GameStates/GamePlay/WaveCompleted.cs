@@ -15,7 +15,8 @@ namespace code.StateMachines.GameStates.GamePlay
 
         public override BaseFSMState Update(float delta)
         {
-            if (masterNode.GetNode<WaveCompletedScreen>("WaveCompleted/Control").continuePressed) return this.SwitchState(new Running(masterNode));
+            //if (masterNode.GetNodeOrNull<WaveCompletedScreen>("WaveCompleted/Control") == null) return this;
+            if (masterNode.GetNode<WaveCompletedScreen>("/root/Master/WaveCompleted/Control").continuePressed) return this.SwitchState(new Running(masterNode));
             return this;
         }
 
@@ -24,6 +25,7 @@ namespace code.StateMachines.GameStates.GamePlay
             GameManager gameManager = masterNode.GameManager;
             gameManager.GetTree().Paused = true;
             masterNode.LoadScreen("wave_completed");
+            gameManager.MusicPlayer.Stop();
         }
         protected override void ExitState()
         {

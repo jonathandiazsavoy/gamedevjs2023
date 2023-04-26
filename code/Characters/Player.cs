@@ -9,6 +9,7 @@ public class Player : Character, IHurtable, IObtainer
     [Signal]
     public delegate void PlayerDied(Player player);
 
+    public CharacterStats PlayerStatsOnGameStart => new CharacterStats(3, 3, 2, 0, 1.3f);
     private GameManager gameManager;
 
     protected override void InitNodes()
@@ -24,6 +25,14 @@ public class Player : Character, IHurtable, IObtainer
     protected override void InitState()
     {
         this.currentState = new Idle(this, this.RotationDegrees);
+    }
+    protected override void InitDefaultProperties()
+    {
+        // For this game default mp and defense to 0 - attack will always be determined by stength
+        this.BaseStats = PlayerStatsOnGameStart;
+        this.CurrentStats = this.BaseStats;
+
+        this.currentAttack = new Attack(this, CurrentStats.Strength, 50);
     }
 
     public override void _Process(float delta)
@@ -72,7 +81,7 @@ public class Player : Character, IHurtable, IObtainer
     public override void Die()
     {
         EmitSignal(nameof(PlayerDied), this);
-        this.QueueFree();
+        this.Visible= false; // Player will always exist in scene - it will just be reset
     }
 
     public void ObtainItem(Item item)

@@ -251,6 +251,7 @@ region_filter_clip = true
 script = ExtResource( 9 )
 
 [node name="Sleeping" type="Sprite" parent="."]
+visible = false
 scale = Vector2( 0.225, 0.225 )
 texture = ExtResource( 8 )
 

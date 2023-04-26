@@ -36,7 +36,7 @@ namespace code.StateMachines.CharacterStates.PlayerStates
 
             // Handle setting of correct sprite animation according to orientation
             float degrees = NormalizeRotationDegrees(player.RotationDegrees);
-            if ((Mathf.Abs(previousRotationDegrees - degrees) > 45) && (((degrees+90)%90)==0))
+            if ((Mathf.Abs(previousRotationDegrees - degrees) > 45) || (((degrees+90)%90)==0))
             {
                 if(degrees >= 225 && degrees < 315)
                 {
@@ -48,7 +48,6 @@ namespace code.StateMachines.CharacterStates.PlayerStates
                 else if (degrees >= 135 && degrees < 225)
                 {
                     // Left
-                    GD.Print("left animation");
                     player.AnimationPlayer.Play("move_left");
                     previousRotationDegrees = degrees;
                     
@@ -62,8 +61,6 @@ namespace code.StateMachines.CharacterStates.PlayerStates
                 else
                 {
                     // Right
-                    GD.Print("right animation");
-                    GD.Print("the degrees: "+degrees);
                     player.AnimationPlayer.Play("move_right");
                     previousRotationDegrees = degrees;
                 }
