@@ -108,5 +108,7 @@ public class Master : Node
     {
         currentState = (GameState)currentState.SwitchState(new OnTitleScreen(this));
     }
+
+    // On restart go the starting new wave state and reset the player object stuff - restore hp and reset coords
     // TODO 9 find a better way to get signals sent through state machines
 }

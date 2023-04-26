@@ -26,20 +26,20 @@ public class CharacterStats : Resource
     }
 
     [Export]
-    public int MaxHp { get; private set; }
+    public int MaxHp { get; set; }
     [Export]
     public int MaxMp { get; private set; }
     [Export]
-    public int Strength { get; private set; }
+    public int Strength { get; set; }
     [Export]
     public int Defense { get; private set; }
     [Export]
-    public float Speed { get; private set; }
+    public float Speed { get; set; }
 
     [Export]
-    public int Hp { get; private set; }
+    public int Hp { get; set; }
     [Export]
-    public int Mp { get; private set; }
+    public int Mp { get; set; }
 
     public bool ApplyDamage(int hpDamage)
     {
