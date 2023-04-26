@@ -1,13 +1,11 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ui_elements/EnemyIcon.tscn" type="PackedScene" id=3]
-[ext_resource path="res://code/Models/Wave.cs" type="Script" id=4]
 [ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
-[ext_resource path="res://scenes/items/countdown_modifiers/Plus1Seconds.tscn" type="PackedScene" id=8]
 [ext_resource path="res://code/Managers/Master.cs" type="Script" id=9]
 [ext_resource path="res://code/Managers/WaveManager.cs" type="Script" id=10]
 [ext_resource path="res://assets/audio/music/calm_phase.wav" type="AudioStream" id=11]
@@ -22,7 +20,6 @@
 [ext_resource path="res://scenes/static_objects/stalagmites.tscn" type="PackedScene" id=20]
 [ext_resource path="res://scenes/static_objects/rocks.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scenes/static_objects/tree.tscn" type="PackedScene" id=22]
-[ext_resource path="res://scenes/characters/FlyingEnemy.tscn" type="PackedScene" id=23]
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 19 )
@@ -200,7 +197,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 12 )
 expand = true
-stretch_mode = 5
+stretch_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="GameManager/CanvasLayer/GameplayUI/MarginContainer/HBoxContainer/TimeBar"]
 margin_right = 48.0
@@ -231,7 +228,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 12 )
 expand = true
-stretch_mode = 5
+stretch_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="GameManager/CanvasLayer/GameplayUI/MarginContainer/HBoxContainer/HpBar"]
 margin_right = 48.0
@@ -305,219 +302,6 @@ z_index = 0
 
 [node name="WaveManager" type="YSort" parent="GameManager/Level/Objects"]
 script = ExtResource( 10 )
-
-[node name="Wave3" type="YSort" parent="GameManager/Level/Objects/WaveManager"]
-script = ExtResource( 4 )
-
-[node name="Enemies" type="YSort" parent="GameManager/Level/Objects/WaveManager/Wave3"]
-
-[node name="FlyingEnemy" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1832, 157 )
-
-[node name="FlyingEnemy2" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 2284, 608 )
-
-[node name="FlyingEnemy6" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 2064, 875 )
-
-[node name="FlyingEnemy7" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1776, 1105 )
-
-[node name="FlyingEnemy8" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1244, 1240 )
-
-[node name="FlyingEnemy9" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1285, 1504 )
-
-[node name="FlyingEnemy10" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 752, 1520 )
-
-[node name="FlyingEnemy11" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 328, 1272 )
-
-[node name="FlyingEnemy12" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 184, 912 )
-
-[node name="FlyingEnemy13" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 256, 552 )
-
-[node name="FlyingEnemy14" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 664, 338 )
-
-[node name="FlyingEnemy3" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 2224, 400 )
-
-[node name="FlyingEnemy4" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1280, 696 )
-
-[node name="FlyingEnemy5" parent="GameManager/Level/Objects/WaveManager/Wave3/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1269, 157 )
-
-[node name="Items" type="YSort" parent="GameManager/Level/Objects/WaveManager/Wave3"]
-
-[node name="Plus1Seconds" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 1285, 779 )
-
-[node name="Plus1Seconds3" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 1280, 568 )
-
-[node name="Plus1Seconds4" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 1275, 410 )
-
-[node name="Plus1Seconds5" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 1275, 264 )
-
-[node name="Plus1Seconds6" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 1608, 157 )
-
-[node name="Plus1Seconds7" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 2000, 320 )
-
-[node name="Plus1Seconds8" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 2160, 696 )
-
-[node name="Plus1Seconds9" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 1896, 1000 )
-
-[node name="Plus1Seconds10" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 1520, 1200 )
-
-[node name="Plus1Seconds11" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 1104, 1416 )
-
-[node name="Plus1Seconds12" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 544, 1377 )
-
-[node name="Plus1Seconds13" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 208, 1032 )
-
-[node name="Plus1Seconds14" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 232, 691 )
-
-[node name="Plus1Seconds15" parent="GameManager/Level/Objects/WaveManager/Wave3/Items" instance=ExtResource( 8 )]
-position = Vector2( 504, 410 )
-
-[node name="Wave5" type="YSort" parent="GameManager/Level/Objects/WaveManager"]
-visible = false
-script = ExtResource( 4 )
-
-[node name="Enemies" type="YSort" parent="GameManager/Level/Objects/WaveManager/Wave5"]
-
-[node name="FlyingEnemy" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1832, 157 )
-
-[node name="FlyingEnemy2" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 2284, 608 )
-
-[node name="FlyingEnemy6" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 2064, 875 )
-
-[node name="FlyingEnemy7" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1776, 1105 )
-
-[node name="FlyingEnemy8" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1244, 1240 )
-
-[node name="FlyingEnemy9" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1285, 1504 )
-
-[node name="FlyingEnemy10" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 752, 1520 )
-
-[node name="FlyingEnemy11" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 328, 1272 )
-
-[node name="FlyingEnemy12" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 184, 912 )
-
-[node name="FlyingEnemy13" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 256, 552 )
-
-[node name="FlyingEnemy14" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 664, 338 )
-
-[node name="FlyingEnemy15" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 664, 418 )
-
-[node name="FlyingEnemy16" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 792, 365 )
-
-[node name="FlyingEnemy17" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 760, 266 )
-
-[node name="FlyingEnemy18" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 656, 248 )
-
-[node name="FlyingEnemy19" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 544, 295 )
-
-[node name="FlyingEnemy20" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 424, 392 )
-
-[node name="FlyingEnemy3" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 2224, 400 )
-
-[node name="FlyingEnemy4" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1280, 696 )
-
-[node name="FlyingEnemy5" parent="GameManager/Level/Objects/WaveManager/Wave5/Enemies" instance=ExtResource( 23 )]
-position = Vector2( 1269, 157 )
-
-[node name="Items" type="YSort" parent="GameManager/Level/Objects/WaveManager/Wave5"]
-
-[node name="Plus1Seconds" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 1285, 779 )
-
-[node name="Plus1Seconds3" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 1280, 568 )
-
-[node name="Plus1Seconds4" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 1275, 410 )
-
-[node name="Plus1Seconds5" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 1275, 264 )
-
-[node name="Plus1Seconds6" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 1608, 157 )
-
-[node name="Plus1Seconds7" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 2000, 320 )
-
-[node name="Plus1Seconds8" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 2160, 696 )
-
-[node name="Plus1Seconds9" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 1896, 1000 )
-
-[node name="Plus1Seconds10" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 1520, 1200 )
-
-[node name="Plus1Seconds11" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 1104, 1416 )
-
-[node name="Plus1Seconds12" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 544, 1377 )
-
-[node name="Plus1Seconds13" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 208, 1032 )
-
-[node name="Plus1Seconds14" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 232, 691 )
-
-[node name="Plus1Seconds15" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 504, 410 )
-
-[node name="Plus1Seconds16" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 1160, 784 )
-
-[node name="Plus1Seconds17" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 992, 633 )
-
-[node name="Plus1Seconds18" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 904, 563 )
-
-[node name="Plus1Seconds19" parent="GameManager/Level/Objects/WaveManager/Wave5/Items" instance=ExtResource( 8 )]
-position = Vector2( 816, 480 )
 
 [node name="Map" type="YSort" parent="GameManager/Level/Objects"]
 

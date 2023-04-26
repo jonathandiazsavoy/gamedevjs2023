@@ -6,7 +6,7 @@ public class GameManager : Node2D
 {
     public const float ALARM_COUNTDOWN_MAX_START = 60;
     public const int START_WAVE_NUMBER = 1;
-    public const int FINAL_WAVE_NUMBER = 12;
+    public const int FINAL_WAVE_NUMBER = 8;
 
     public const string NODE_PATH_TO_PLAYER = "Level/Objects/Player";
     public const string PATH_TO_MUSIC = "res://assets/audio/music/";

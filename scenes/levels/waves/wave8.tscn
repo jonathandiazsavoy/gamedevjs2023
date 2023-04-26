@@ -1,49 +1,319 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://scenes/characters/FlyingEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/characters/RangedEnemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://code/Models/Wave.cs" type="Script" id=3]
-[ext_resource path="res://scenes/items/countdown_modifiers/Plus3Seconds.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/items/countdown_modifiers/Plus1Seconds.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/items/countdown_modifiers/Minus3Seconds.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/fonts/VerminVibes1989.tres" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+outline_size = 3
+font_data = ExtResource( 5 )
 
 [node name="Wave" type="YSort"]
 script = ExtResource( 3 )
 
 [node name="Enemies" type="YSort" parent="."]
 
-[node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 840, 1280 )
+[node name="FlyingEnemy" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 960, 1479 )
+MaxHp = 5
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 632, 1360 )
+[node name="FlyingEnemy2" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 400, 845 )
+MaxHp = 5
 
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 944, 1480 )
+[node name="FlyingEnemy6" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 784, 1331 )
+MaxHp = 5
 
-[node name="Enemy4" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 1088, 1304 )
+[node name="FlyingEnemy7" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 632, 608 )
+MaxHp = 5
 
-[node name="Enemy5" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( 840, 904 )
+[node name="FlyingEnemy8" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 394, 536 )
+MaxHp = 5
+
+[node name="FlyingEnemy3" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 1800, 1156 )
+MaxHp = 5
+
+[node name="FlyingEnemy5" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 1269, 157 )
+MaxHp = 5
+
+[node name="RangedEnemy" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 1256, 1264 )
+MaxHp = 6
+Strength = 2
+
+[node name="RangedEnemy3" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 1324, 1448 )
+MaxHp = 6
+Strength = 2
+
+[node name="RangedEnemy5" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 768, 1640 )
+MaxHp = 6
+Strength = 2
+
+[node name="RangedEnemy10" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 509, 1027 )
+MaxHp = 6
+Strength = 2
+
+[node name="RangedEnemy12" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 1603, 1080 )
+MaxHp = 6
+Strength = 2
+
+[node name="RangedEnemy13" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 784, 1067 )
+MaxHp = 6
+Strength = 2
+
+[node name="RangedEnemy7" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 176, 1372 )
+MaxHp = 6
+Strength = 2
+
+[node name="RangedEnemy8" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 536, 1490 )
+MaxHp = 6
+Strength = 2
+
+[node name="RangedEnemy9" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 408, 1350 )
+MaxHp = 6
+Strength = 2
 
 [node name="Items" type="YSort" parent="."]
 
-[node name="Plus3Seconds" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 976, 1408 )
+[node name="Minus3Seconds" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1209, 945 )
 
-[node name="Plus1Seconds" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 808, 1416 )
+[node name="Minus3Seconds2" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1285, 1024 )
 
-[node name="Plus1Seconds2" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 864, 1176 )
+[node name="Minus3Seconds3" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1336, 1009 )
 
-[node name="Plus1Seconds3" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 864, 1064 )
+[node name="Minus3Seconds4" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1376, 986 )
 
-[node name="Plus1Seconds4" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 752, 1304 )
+[node name="Minus3Seconds5" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1408, 960 )
 
-[node name="Plus1Seconds5" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 962, 955 )
+[node name="Minus3Seconds6" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1408, 920 )
 
-[node name="Plus1Seconds6" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 864, 992 )
+[node name="Minus3Seconds7" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1408, 877 )
+
+[node name="Minus3Seconds8" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1408, 850 )
+
+[node name="Minus3Seconds9" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1408, 831 )
+
+[node name="Minus3Seconds10" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1408, 808 )
+
+[node name="Minus3Seconds11" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1376, 808 )
+
+[node name="Minus3Seconds12" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1336, 808 )
+
+[node name="Minus3Seconds13" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1297, 808 )
+
+[node name="Minus3Seconds14" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1269, 808 )
+
+[node name="Minus3Seconds15" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1248, 808 )
+
+[node name="Minus3Seconds16" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1224, 808 )
+
+[node name="Minus3Seconds17" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1192, 808 )
+
+[node name="Minus3Seconds18" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1184, 840 )
+
+[node name="Minus3Seconds19" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1168, 877 )
+
+[node name="Minus3Seconds20" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1168, 900 )
+
+[node name="Minus3Seconds21" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1184, 926 )
+
+[node name="Minus3Seconds22" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1206, 977 )
+
+[node name="Minus3Seconds23" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1229, 995 )
+
+[node name="Minus3Seconds24" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1248, 1024 )
+
+[node name="Minus3Seconds25" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1215, 1024 )
+
+[node name="Minus3Seconds26" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1200, 1009 )
+
+[node name="Minus3Seconds27" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1183, 984 )
+
+[node name="Minus3Seconds28" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1183, 954 )
+
+[node name="Minus3Seconds29" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1152, 936 )
+
+[node name="Minus3Seconds30" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1143, 896 )
+
+[node name="Minus3Seconds31" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1143, 859 )
+
+[node name="Minus3Seconds32" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1159, 831 )
+
+[node name="Minus3Seconds33" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1168, 792 )
+
+[node name="Minus3Seconds34" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1201, 779 )
+
+[node name="Minus3Seconds35" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1248, 776 )
+
+[node name="Minus3Seconds36" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1272, 774 )
+
+[node name="Minus3Seconds37" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1319, 770 )
+
+[node name="Minus3Seconds38" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1297, 783 )
+
+[node name="Minus3Seconds39" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1336, 785 )
+
+[node name="Minus3Seconds40" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1367, 784 )
+
+[node name="Minus3Seconds41" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1384, 832 )
+
+[node name="Minus3Seconds42" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1385, 856 )
+
+[node name="Minus3Seconds43" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1376, 904 )
+
+[node name="Minus3Seconds44" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1385, 944 )
+
+[node name="Minus3Seconds45" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1353, 984 )
+
+[node name="Minus3Seconds46" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1306, 1000 )
+
+[node name="Minus3Seconds47" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1319, 1027 )
+
+[node name="Minus3Seconds48" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1358, 1016 )
+
+[node name="Minus3Seconds49" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1400, 1000 )
+
+[node name="Minus3Seconds50" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1424, 977 )
+
+[node name="Minus3Seconds51" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1432, 936 )
+
+[node name="Minus3Seconds52" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1440, 909 )
+
+[node name="Minus3Seconds53" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1440, 882 )
+
+[node name="Minus3Seconds54" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1441, 856 )
+
+[node name="Minus3Seconds55" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1440, 831 )
+
+[node name="Minus3Seconds56" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1431, 808 )
+
+[node name="Minus3Seconds57" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1423, 779 )
+
+[node name="Minus3Seconds58" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1399, 783 )
+
+[node name="Minus3Seconds59" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1375, 761 )
+
+[node name="Minus3Seconds60" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1349, 760 )
+
+[node name="Minus3Seconds61" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1297, 760 )
+
+[node name="Minus3Seconds62" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1224, 779 )
+
+[node name="Minus3Seconds63" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1177, 770 )
+
+[node name="Minus3Seconds64" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1144, 808 )
+
+[node name="Minus3Seconds65" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1128, 831 )
+
+[node name="Minus3Seconds66" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1120, 865 )
+
+[node name="Minus3Seconds67" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1119, 891 )
+
+[node name="Minus3Seconds68" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1129, 918 )
+
+[node name="Minus3Seconds69" parent="Items" instance=ExtResource( 4 )]
+position = Vector2( 1153, 968 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 390.0
+margin_top = 350.0
+margin_right = 890.0
+margin_bottom = 550.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "WAVE 8:
+Time to die
+"
+align = 1
+valign = 1

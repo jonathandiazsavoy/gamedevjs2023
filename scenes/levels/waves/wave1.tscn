@@ -26,7 +26,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "intro"
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Label:rect_position")
@@ -64,6 +63,22 @@ script = ExtResource( 3 )
 position = Vector2( 1280, 1080 )
 Speed = 1.0
 
+[node name="FlyingEnemy4" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 1288, 760 )
+Speed = 1.0
+
+[node name="FlyingEnemy5" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 1280, 176 )
+Speed = 1.0
+
+[node name="FlyingEnemy6" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 1032, 896 )
+Speed = 1.0
+
+[node name="FlyingEnemy7" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 1480, 904 )
+Speed = 1.0
+
 [node name="Items" type="YSort" parent="."]
 
 [node name="Plus1Seconds" parent="Items" instance=ExtResource( 6 )]
@@ -88,10 +103,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 390.0
-margin_top = 350.0
-margin_right = 890.0
-margin_bottom = 550.0
+margin_left = -250.0
+margin_top = -100.0
+margin_right = 250.0
+margin_bottom = 100.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )

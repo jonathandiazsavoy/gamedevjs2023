@@ -48,24 +48,6 @@ position = Vector2( 256, 552 )
 [node name="FlyingEnemy14" parent="Enemies" instance=ExtResource( 1 )]
 position = Vector2( 664, 338 )
 
-[node name="FlyingEnemy15" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 664, 418 )
-
-[node name="FlyingEnemy16" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 792, 365 )
-
-[node name="FlyingEnemy17" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 760, 266 )
-
-[node name="FlyingEnemy18" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 656, 248 )
-
-[node name="FlyingEnemy19" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 544, 295 )
-
-[node name="FlyingEnemy20" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 424, 392 )
-
 [node name="FlyingEnemy3" parent="Enemies" instance=ExtResource( 1 )]
 position = Vector2( 2224, 400 )
 
@@ -119,18 +101,6 @@ position = Vector2( 232, 691 )
 [node name="Plus1Seconds15" parent="Items" instance=ExtResource( 6 )]
 position = Vector2( 504, 410 )
 
-[node name="Plus1Seconds16" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 1160, 784 )
-
-[node name="Plus1Seconds17" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 992, 633 )
-
-[node name="Plus1Seconds18" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 904, 563 )
-
-[node name="Plus1Seconds19" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 816, 480 )
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
@@ -145,8 +115,8 @@ margin_bottom = 550.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "WAVE 6:
-Spiral 2
+text = "WAVE 3:
+Spiral
 "
 align = 1
 valign = 1
