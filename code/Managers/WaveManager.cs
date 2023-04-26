@@ -11,13 +11,18 @@ public class WaveManager : YSort
 
     public const string SHOP_PORTAL_NODE_NAME = "ShopPortal";
 
+    public bool WaveLoaded;
+
     private GameManager gameManager;
     private bool allEnemiesKilled = false;
+
+    [Signal]
+    public delegate void LoadWaveCompleted();
 
     public Wave Wave 
     { get 
         {
-            return this.GetNode<Wave>("Wave");
+            return this.GetNodeOrNull<Wave>("Wave");
             /* TODO to be removed
             foreach (Node child in this.GetChildren())
             {
@@ -80,29 +85,26 @@ public class WaveManager : YSort
     {
         Node shopNode = Wave.GetNodeOrNull(SHOP_PORTAL_NODE_NAME);
         if (shopNode != null) shopNode.Free();
-        //Wave.QueueFree();
         OpenPortal();
         this.gameManager.SoundPlayer.Play("victory");
         this.gameManager.MusicPlayer.Play("calm_phase");
         allEnemiesKilled = true;
     }
-    public void LoadWave(int waveNumber)
+    public async void LoadWave(int waveNumber)
     {
-        allEnemiesKilled=false;
+        WaveLoaded = false;
+        allEnemiesKilled =false;
         PackedScene packedWave = GD.Load<PackedScene>(PATH_TO_WAVES + WAVE_FILE_NAME_PREFIX + waveNumber + ".tscn");
-        Wave.Free();
-        //this.CallDeferred("AddChild", packedWave.Instance<Wave>());
-        this.AddChild(packedWave.Instance<Wave>()); // TODO 9 loading this way throws errors
-        foreach (Enemy enemy in Wave.Enemies.GetChildren())
+        if(Wave != null)
         {
-            // Load enemies in as unalerted
-            enemy.Alerted = false;
-            enemy.Connect("EnemyDied", gameManager, "OnEnemyDied");
+            // Handle in case there is a lingering wave node
+            Wave.QueueFree();
+            await ToSignal(Wave, "tree_exited");
         }
-        foreach (Item item in Wave.Items.GetChildren())
-        { 
-            item.Connect("ItemUsed", gameManager, "OnCountDownModifierItemUsed");
-        }
+        Wave loadingWave = packedWave.Instance<Wave>();
+        this.CallDeferred("add_child", loadingWave);
+        await ToSignal(loadingWave, "ready");
+        EmitSignal("LoadWaveCompleted");
     }
     public void UnLoadWave()
     {

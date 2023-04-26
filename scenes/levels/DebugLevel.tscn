@@ -2,11 +2,10 @@
 
 [ext_resource path="res://code/Managers/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/levels/waves/wave1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/ui_elements/EnemyIcon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://code/Managers/GameplayUIManager.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui_elements/AnalogueClock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://temp_assets/visuals/dev_graphics/blackSquare1-1.png" type="Texture" id=7]
-[ext_resource path="res://assets/visuals/ui/icons/skull.png" type="Texture" id=8]
 [ext_resource path="res://code/Managers/Master.cs" type="Script" id=9]
 [ext_resource path="res://code/Managers/WaveManager.cs" type="Script" id=10]
 [ext_resource path="res://assets/audio/music/calm_phase.wav" type="AudioStream" id=11]
@@ -37,6 +36,11 @@ font_data = ExtResource( 19 )
 vertices = PoolVector2Array( 1929.61, 0, 2560, 0, 2560, 1800, 0, 1800, 0, 0 )
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ) ]
 outlines = [ PoolVector2Array( 0, 0, 0, 1800, 2560, 1800, 2560, 0, 1929.61, 0 ) ]
+
+[sub_resource type="NavigationPolygon" id=6]
+vertices = PoolVector2Array( 1304, 104, 1352, 104, 1328, 168, 1264, 112, 1528, 680, 1464, 800, 1208, 808, 1032, 664, 1040, 520, 1176, 536, 1568, 592, 1464, 528, 1352, 528, 1184, 488, 1336, 344, 1336, 264, 1184, 144, 1232, 96 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7, 8, 9, 10 ), PoolIntArray( 11, 10, 9, 12 ), PoolIntArray( 12, 9, 13, 14 ), PoolIntArray( 2, 15, 14, 13, 16, 17, 3 ) ]
+outlines = [ PoolVector2Array( 1208, 808, 1032, 664, 1040, 520, 1176, 536, 1184, 488, 1184, 144, 1232, 96, 1264, 112, 1304, 104, 1352, 104, 1328, 168, 1336, 264, 1336, 344, 1352, 528, 1464, 528, 1568, 592, 1528, 680, 1464, 800 ) ]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -73,16 +77,20 @@ margin_bottom = 140.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 4 )
-text = "ENEMIES LEFT: "
+text = "ENEMIES LEFT:             X "
 
-[node name="EnemyIcon" type="TextureRect" parent="GameManager/CanvasLayer/GameplayUI"]
-margin_left = 50.0
-margin_top = 130.0
-margin_right = 92.0
-margin_bottom = 173.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 8 )
+[node name="EnemyIcon" parent="GameManager/CanvasLayer/GameplayUI" instance=ExtResource( 3 )]
+margin_left = 256.0
+margin_top = 79.0
+margin_right = 298.0
+margin_bottom = 122.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stretch_mode = 4
+
+[node name="AnalogueClock" parent="GameManager/CanvasLayer/GameplayUI" instance=ExtResource( 6 )]
+position = Vector2( 640, 80 )
+scale = Vector2( 1.5, 1.5 )
 
 [node name="Money" type="RichTextLabel" parent="GameManager/CanvasLayer/GameplayUI"]
 anchor_left = 1.0
@@ -112,9 +120,6 @@ margin_right = 805.0
 margin_bottom = 105.0
 custom_colors/default_color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
 text = "LOOP TIME LEFT: "
-
-[node name="AnalogueClock" parent="GameManager/CanvasLayer/GameplayUI" instance=ExtResource( 6 )]
-position = Vector2( 640, 80 )
 
 [node name="MarginContainer" type="MarginContainer" parent="GameManager/CanvasLayer/GameplayUI"]
 anchor_top = 1.0
@@ -243,6 +248,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="NavigationPolygonInstance2" type="NavigationPolygonInstance" parent="GameManager/Level/NavigationMesh"]
+navpoly = SubResource( 6 )
+
 [node name="Objects" type="YSort" parent="GameManager/Level"]
 z_index = 1
 
@@ -257,8 +265,6 @@ update_scale = false
 
 [node name="WaveManager" type="YSort" parent="GameManager/Level/Objects"]
 script = ExtResource( 10 )
-
-[node name="Wave" parent="GameManager/Level/Objects/WaveManager" instance=ExtResource( 3 )]
 
 [node name="Map" type="YSort" parent="GameManager/Level/Objects"]
 
@@ -529,5 +535,9 @@ stream = ExtResource( 13 )
 
 [connection signal="AlarmCountdownHalfTime" from="GameManager" to="GameManager/Level/Objects/WaveManager" method="OnAlarmCountdownHalfTime"]
 [connection signal="AllEnemiesKilled" from="GameManager" to="GameManager/Level/Objects/WaveManager" method="OnAllEnemiesKilled"]
+[connection signal="GoToGameCompletedScreen" from="GameManager" to="." method="OnGoToGameCompletedScreen"]
+[connection signal="GoToGameOverScreen" from="GameManager" to="." method="OnGoToGameOverScreen"]
+[connection signal="GoToWaveCompletedScreen" from="GameManager" to="." method="OnGoToWaveCompletedScreen"]
 [connection signal="timeout" from="GameManager/AlarmCountdown" to="GameManager" method="OnAlarmCountdownTimeout"]
 [connection signal="timeout" from="GameManager/AlarmCountdown" to="GameManager/Level/Objects/WaveManager" method="OnAlarmCountdownTimeout"]
+[connection signal="LoadWaveCompleted" from="GameManager/Level/Objects/WaveManager" to="GameManager" method="OnLoadWaveCompleted"]

@@ -22,6 +22,7 @@ public class GameManager : Node2D
     public MusicPlayer MusicPlayer;
     public SoundPlayer SoundPlayer;
     public Player Player; // Player gets set between waves and when entering shop
+    public PackedScene PackedPlayer;
 
     public float TotalRunTime { get; private set; }
     public float TotalWaveTime { get; private set; }
@@ -77,7 +78,8 @@ public class GameManager : Node2D
     }
     public override void _Process(float delta)
     {
-        TotalRunTime += delta;
+        TotalRunTime+= delta;
+        TotalWaveTime+= delta;
 
         if (!AlarmTriggered) 
         {
@@ -118,7 +120,7 @@ public class GameManager : Node2D
         MusicPlayer.Play("calm_phase");
 
         WaveManager.LoadWave(CurrentWaveNumber);
-        EnemyCount = WaveManager.EnemyCount;
+        //EnemyCount = WaveManager.EnemyCount;
     }
 
     public void AdjustAlarmCountdown(float adjustAmount)
@@ -171,6 +173,7 @@ public class GameManager : Node2D
     {
         WaveManager.UnLoadWave();
         this.Player = player;
+        //PackedPlayer
         // TODO pack player to load on new wave load
         CurrentWaveNumber++;
         if (CurrentWaveNumber > FINAL_WAVE_NUMBER) {
@@ -185,5 +188,10 @@ public class GameManager : Node2D
     public void OnPlayerDied(Player player)
     {
         EmitSignal(nameof(GoToGameOverScreen));
+    }
+    public void OnLoadWaveCompleted()
+    {
+        GD.Print(EnemyCount);
+        EnemyCount = WaveManager.EnemyCount;
     }
 }

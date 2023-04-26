@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/visuals/ui/icons/skull.png" type="Texture" id=1]
+
+[node name="EnemyIcon" type="TextureRect"]
+margin_right = 42.0
+margin_bottom = 43.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 1 )

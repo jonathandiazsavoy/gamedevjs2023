@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace code.StateMachines.GameStates.GamePlay
+﻿namespace code.StateMachines.GameStates.GamePlay
 {
     public class InCutscene : GamePlay
     {
@@ -10,17 +8,17 @@ namespace code.StateMachines.GameStates.GamePlay
 
         public override BaseFSMState HandleInput(float delta)
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public override BaseFSMState Update(float delta)
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         protected override void EnterState()
         {
-            throw new NotImplementedException();
+            //
         }
     }
 }

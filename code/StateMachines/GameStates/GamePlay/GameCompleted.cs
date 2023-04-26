@@ -1,8 +1,8 @@
 ﻿namespace code.StateMachines.GameStates.GamePlay
 {
-    public class GameOver : GamePlay
+    public class GameCompleted : GamePlay
     {
-        public GameOver(Master masterNode) : base(masterNode)
+        public GameCompleted(Master masterNode) : base(masterNode)
         {
         }
 
@@ -13,7 +13,7 @@
 
         public override BaseFSMState Update(float delta)
         {
-            return this;
+            return this; 
         }
 
         protected override void EnterState()

@@ -32,5 +32,11 @@ namespace code.Helpers
         {
             audioPlayer.Play();
         }
+
+        public void Stop()
+        {
+            audioPlayer.Stop();
+            currentlyPlaying= null;
+        }
     }
 }

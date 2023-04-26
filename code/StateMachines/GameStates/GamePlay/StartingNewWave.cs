@@ -1,10 +1,15 @@
 ﻿using Godot;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace code.StateMachines.GameStates.GamePlay
 {
-    public class WaveCompleted : GamePlay
+    public class StartingNewWave : InCutscene
     {
-        public WaveCompleted(Master masterNode) : base(masterNode)
+        public StartingNewWave(Master masterNode) : base(masterNode)
         {
         }
 
@@ -15,19 +20,23 @@ namespace code.StateMachines.GameStates.GamePlay
 
         public override BaseFSMState Update(float delta)
         {
-            if (masterNode.GetNode<WaveCompletedScreen>("WaveCompleted/Control").continuePressed) return this.SwitchState(new Running(masterNode));
             return this;
         }
 
         protected override void EnterState()
         {
+            // do loading
+            // unpause
+            // play start new wave animation
             GameManager gameManager = masterNode.GameManager;
+            masterNode.SoundPlayer.Play("pause");
             gameManager.GetTree().Paused = true;
-            masterNode.LoadScreen("wave_completed");
+            PackedScene packed = GD.Load<PackedScene>(Master.PATH_TO_MENUS + "pause_menu" + ".tscn");
+            masterNode.AddChild(packed.Instance());
         }
+
         protected override void ExitState()
         {
-            masterNode.GetNode<CanvasLayer>("WaveCompleted").QueueFree();
             masterNode.GameManager.GetTree().Paused = false;
         }
     }

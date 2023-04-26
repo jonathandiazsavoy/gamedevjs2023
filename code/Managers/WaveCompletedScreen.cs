@@ -2,18 +2,29 @@ using Godot;
 
 public class WaveCompletedScreen : Control
 {
+    public bool continuePressed = false;
+
     private GameManager gameManager;
-    private AppendableRichTextLabel CurrentScore;
-    private AppendableRichTextLabel WaveCompletionTime;
+    private AppendableRichTextLabel currentScore;
+    private AppendableRichTextLabel waveCompletionTime;
+    private Button continueButton;
 
     public override void _Ready()
     {
         gameManager = this.GetNode<GameManager>(Master.NODE_PATH_TO_GAME_MANAGER);
-        CurrentScore = this.GetNode<AppendableRichTextLabel>("Control/Results/MarginContainer/VBoxContainer/CurrentScore");
-        WaveCompletionTime = this.GetNode<AppendableRichTextLabel>("Control/Results/MarginContainer/VBoxContainer/WaveCompletionTime");
+        currentScore = this.GetNode<AppendableRichTextLabel>("Results/MarginContainer/VBoxContainer/CurrentScore");
+        waveCompletionTime = this.GetNode<AppendableRichTextLabel>("Results/MarginContainer/VBoxContainer/WaveCompletionTime");
+        continueButton = this.GetNode<Button>("Advance/Button"); 
 
-        CurrentScore.AppendToInitialText(gameManager.Score.ToString());
-        WaveCompletionTime.AppendToInitialText(gameManager.TotalWaveTime.ToString());
+        currentScore.AppendToInitialText(gameManager.Score.ToString());
+        waveCompletionTime.AppendToInitialText(((int)(gameManager.TotalWaveTime)).ToString() + " sec");
+        continueButton.GrabFocus();
+        continuePressed = false;
+
     }
 
+    public void OnContinue()
+    {
+        continuePressed = true;
+    }
 }

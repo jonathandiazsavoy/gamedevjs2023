@@ -81,7 +81,18 @@ public class Master : Node
         // if game is not paused, then go to shop
         if (currentState is OnShopScreen) currentState = (GameState)currentState.SwitchState(new Running(this));
         // TODO 2 is bugged since exit uses same button as pasue - need a cooldown to prevent pausing
-
+    }
+    public void OnGoToWaveCompletedScreen()
+    {
+        currentState = (GameState)currentState.SwitchState(new WaveCompleted(this));
+    }
+    public void OnGoToGameCompletedScreen()
+    {
+        currentState = (GameState)currentState.SwitchState(new GameCompleted(this));
+    }
+    public void OnGoToGameOverScreen()
+    {
+        currentState = (GameState)currentState.SwitchState(new GameOver(this));
     }
     // TODO 9 find a better way to get signals sent through state machines
 }

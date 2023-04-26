@@ -13,7 +13,8 @@ public class GameplayUIManager : Control
     protected RichTextLabel Score { get; set; }
     protected RichTextLabel Money { get; set; }
     protected AnalogueClock WaveClock { get; set; }
-    
+    protected GridContainer EnemiesLeftGrid { get; set; }
+
     private ColorRect TimeBar;
     private ColorRect HpBar;
     private ColorRect MpBar;
